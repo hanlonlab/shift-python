@@ -1,0 +1,11 @@
+# Personal folders
+.vscode/
+build*/
+
+# setup.py
+dist/
+shift.egg-info/
+
+# PyCharm
+.idea
+*.pyc
