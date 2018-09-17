@@ -66,22 +66,22 @@ win32 {
     Release:PRE_TARGETDEPS += $$(QuickFIX_VS2017)/lib/quickfix.lib
 
     # LibMiscUtils
-    DEPENDPATH += $$PWD/../LibMiscUtils/include
-    INCLUDEPATH += $$PWD/../LibMiscUtils/include
+    DEPENDPATH += $$PWD/../shift/LibMiscUtils/include
+    INCLUDEPATH += $$PWD/../shift/LibMiscUtils/include
 
-    Debug:LIBS += -L$$PWD/../LibMiscUtils/build/Debug/ -lshift_miscutils-d
-    Debug:PRE_TARGETDEPS += $$PWD/../LibMiscUtils/build/Debug/shift_miscutils-d.lib
+    Debug:LIBS += -L$$PWD/../shift/LibMiscUtils/build/Debug/ -lshift_miscutils-d
+    Debug:PRE_TARGETDEPS += $$PWD/../shift/LibMiscUtils/build/Debug/shift_miscutils-d.lib
 
-    Release:LIBS += -L$$PWD/../LibMiscUtils/build/Release/ -lshift_miscutils
-    Release:PRE_TARGETDEPS += $$PWD/../LibMiscUtils/build/Release/shift_miscutils.lib
+    Release:LIBS += -L$$PWD/../shift/LibMiscUtils/build/Release/ -lshift_miscutils
+    Release:PRE_TARGETDEPS += $$PWD/../shift/LibMiscUtils/build/Release/shift_miscutils.lib
 
     # LibCoreClient
-    DEPENDPATH += $$PWD/../LibCoreClient/include
-    INCLUDEPATH += $$PWD/../LibCoreClient/include
+    DEPENDPATH += $$PWD/../shift/LibCoreClient/include
+    INCLUDEPATH += $$PWD/../shift/LibCoreClient/include
 
-    Debug:LIBS += -L$$PWD/../LibCoreClient/build/Debug/ -lshift_coreclient-d
-    Debug:PRE_TARGETDEPS += $$PWD/../LibCoreClient/build/Debug/shift_coreclient-d.lib
+    Debug:LIBS += -L$$PWD/../shift/LibCoreClient/build/Debug/ -lshift_coreclient-d
+    Debug:PRE_TARGETDEPS += $$PWD/../shift/LibCoreClient/build/Debug/shift_coreclient-d.lib
 
-    Release:LIBS += -L$$PWD/../LibCoreClient/build/Release/ -lshift_coreclient
-    Release:PRE_TARGETDEPS += $$PWD/../LibCoreClient/build/Release/shift_coreclient.lib
+    Release:LIBS += -L$$PWD/../shift/LibCoreClient/build/Release/ -lshift_coreclient
+    Release:PRE_TARGETDEPS += $$PWD/../shift/LibCoreClient/build/Release/shift_coreclient.lib
 }
