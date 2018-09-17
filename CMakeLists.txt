@@ -168,4 +168,5 @@ else(WIN32)   # Windows
                           PRIVATE ${LIBCORECLIENT} ${CURL_LIBRARY}  ${QUICKFIX}  ${LIBMISCUTILS})
 endif(NOT WIN32)
 
+
 ###############################################################################
