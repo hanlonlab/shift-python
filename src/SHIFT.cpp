@@ -12,6 +12,9 @@ PYBIND11_MODULE(shift, m)
 {
     m.doc() = "Python SHIFT plugin";
 
+    py::register_exception<shift::IncorrectPassword>(m, "IncorrectPassword");
+    py::register_exception<shift::ConnectionTimeout>(m, "ConnectionTimeout");
+
     BestPrice::bindPython(m);
     Order::bindPython(m);
     OrderBookEntry::bindPython(m);
