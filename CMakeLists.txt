@@ -48,7 +48,7 @@ if(NOT WIN32)
     set(CMAKE_CXX_EXTENSIONS OFF)
 
     # Common Flags
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -pedantic-errors  /NODEFAULTLIB:library ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -pedantic-errors")
 
     # Debug Flags
     set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
@@ -167,6 +167,5 @@ else(WIN32)   # Windows
     target_link_libraries(${LIB_NAME}
                           PRIVATE ${LIBCORECLIENT} ${CURL_LIBRARY}  ${QUICKFIX}  ${LIBMISCUTILS})
 endif(NOT WIN32)
-
 
 ###############################################################################
