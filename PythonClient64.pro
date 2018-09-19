@@ -35,7 +35,7 @@ unix {
     INCLUDEPATH += /usr/include/python3.6m \
         /usr/local/include/python3.6 \
         /home/han/.local/include/python3.6m
-    INCLUDEPATH += /home/han/Documents/Repos/pybind11/build/mock_install/include
+    INCLUDEPATH += ./pybind11/build/mock_install/include
 }
 
 win32 {
