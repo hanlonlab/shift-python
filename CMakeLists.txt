@@ -48,7 +48,7 @@ if(NOT WIN32)
     set(CMAKE_CXX_EXTENSIONS OFF)
 
     # Common Flags
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -pedantic-errors")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -pedantic-errors  /NODEFAULTLIB:library ")
 
     # Debug Flags
     set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
@@ -71,10 +71,10 @@ add_definitions(-DCURL_STATICLIB)
     add_subdirectory(pybind11)
 
     include_directories(${PROJECT_SOURCE_DIR}/include)
-    include_directories(${PROJECT_SOURCE_DIR}/../LibCoreClient/include)
-    include_directories(${PROJECT_SOURCE_DIR}/../LibMiscUtils/include)
+    include_directories(${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/include)
+    include_directories(${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/include)
     include_directories(C:/quickfix/include)    
-    include_directories("C:/pybind11/include")
+    include_directories("./pybind11/build/mock_install/include")
     include_directories("C:/Program Files (x86)/Python37-32/include")
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -fexceptions -pedantic-errors")

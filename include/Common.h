@@ -3,14 +3,14 @@
 #include <iostream>
 #include <string>
 
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
 #ifdef _WIN32
-#include <pybind11/include/pybind11/pybind11.h>
 #include <CoreClient.h>
 #include <Exceptions.h>
 #include <FIXInitiator.h>
 #else
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
 #include <shift/coreclient/CoreClient.h>
 #include <shift/coreclient/Exceptions.h>
 #include <shift/coreclient/FIXInitiator.h>
