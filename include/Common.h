@@ -6,15 +6,10 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
-#ifdef _WIN32
 #include <CoreClient.h>
 #include <Exceptions.h>
 #include <FIXInitiator.h>
-#else
-#include <shift/coreclient/CoreClient.h>
-#include <shift/coreclient/Exceptions.h>
-#include <shift/coreclient/FIXInitiator.h>
-#endif
+
 
 namespace py = pybind11;
 
