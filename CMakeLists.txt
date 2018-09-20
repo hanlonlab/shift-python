@@ -67,7 +67,7 @@ endif(NOT WIN32)
 
 # Visual C++ (Visual Studio 2017)
 if(WIN32)
-add_definitions(-DCURL_STATICLIB)
+	add_definitions(-DCURL_STATICLIB)
     add_subdirectory(pybind11)
 
     include_directories(${PROJECT_SOURCE_DIR}/include)
@@ -89,29 +89,12 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 ### Build Configuration #######################################################
 
-# UNIX only
-if(NOT WIN32)
+
+if(NOT WIN32) # UNIX only
     find_package(pybind11 REQUIRED)
 endif(NOT WIN32)
 
-# Always enforce search for SHIFT LibCoreClient
-# (necessary when using the same name for Debug and Release)
-set (LIBCORECLIENT "LIBCORECLIENT-NOTFOUND")
-if(NOT WIN32) # UNIX
-    if(CMAKE_BUILD_TYPE MATCHES Debug)
-        find_library(LIBCORECLIENT shift_coreclient-d)
-    endif(CMAKE_BUILD_TYPE MATCHES Debug)
-    if(CMAKE_BUILD_TYPE MATCHES Release)
-        find_library(LIBCORECLIENT shift_coreclient)
-    endif(CMAKE_BUILD_TYPE MATCHES Release)
-else(WIN32)   # Windows
-    if(CMAKE_BUILD_TYPE MATCHES Debug)
-        find_library(LIBCORECLIENT shift_coreclient-d PATHS ${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/build/Debug)
-    endif(CMAKE_BUILD_TYPE MATCHES Debug)
-    if(CMAKE_BUILD_TYPE MATCHES Release)
-        find_library(LIBCORECLIENT shift_coreclient PATHS ${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/build/Release)
-    endif(CMAKE_BUILD_TYPE MATCHES Release) 
-
+if(WIN32)   # Windows
 	if(CMAKE_BUILD_TYPE MATCHES Debug)
         find_library(QUICKFIX quickfix
                     PATHS C:/quickfix/lib/debug)
@@ -135,6 +118,17 @@ else(WIN32)   # Windows
     endif(CURL_FOUND)
 endif(NOT WIN32)
 
+# Always enforce search for SHIFT LibCoreClient
+# (necessary when using the same name for Debug and Release)
+set (LIBCORECLIENT "LIBCORECLIENT-NOTFOUND")
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    find_library(LIBCORECLIENT shift_coreclient-d 
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/build/Debug)
+endif(CMAKE_BUILD_TYPE MATCHES Debug)
+if(CMAKE_BUILD_TYPE MATCHES Release)
+    find_library(LIBCORECLIENT shift_coreclient 
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/build/Release)
+endif(CMAKE_BUILD_TYPE MATCHES Release) 
 if(NOT LIBCORECLIENT)
     message(FATAL_ERROR "SHIFT LibCoreClient was not found.")
 endif(NOT LIBCORECLIENT)
@@ -144,11 +138,11 @@ endif(NOT LIBCORECLIENT)
 set (LIBMISCUTILS "LIBMISCUTILS-NOTFOUND")
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     find_library(LIBMISCUTILS shift_miscutils-d
-                 PATHS ${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/build/Debug)
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/build/Debug)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 if(CMAKE_BUILD_TYPE MATCHES Release)
     find_library(LIBMISCUTILS shift_miscutils
-                 PATHS ${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/build/Release)
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/build/Release)
 endif(CMAKE_BUILD_TYPE MATCHES Release)
 if(NOT LIBMISCUTILS)
     message(FATAL_ERROR "SHIFT LibMiscUtils was not found.")
