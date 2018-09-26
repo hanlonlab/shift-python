@@ -22,7 +22,8 @@ HEADERS += \
     include/BestPrice.h \
     include/OrderBookEntry.h
 INCLUDEPATH += \
-    include/
+    include/ \
+    ./pybind11/build/mock_install/include
 unix {
     target.path = ./
     INSTALLS += target
@@ -35,7 +36,6 @@ unix {
     INCLUDEPATH += /usr/include/python3.6m \
         /usr/local/include/python3.6 \
         /home/han/.local/include/python3.6m
-    INCLUDEPATH += /home/han/Documents/Repos/pybind11/build/mock_install/include
 }
 
 win32 {
@@ -65,23 +65,24 @@ win32 {
     Release:LIBS += -L$$(QuickFIX_VS2017)/lib -lquickfix
     Release:PRE_TARGETDEPS += $$(QuickFIX_VS2017)/lib/quickfix.lib
 
-    # LibMiscUtils
-    DEPENDPATH += $$PWD/../shift/LibMiscUtils/include
-    INCLUDEPATH += $$PWD/../shift/LibMiscUtils/include
-
-    Debug:LIBS += -L$$PWD/../shift/LibMiscUtils/build/Debug/ -lshift_miscutils-d
-    Debug:PRE_TARGETDEPS += $$PWD/../shift/LibMiscUtils/build/Debug/shift_miscutils-d.lib
-
-    Release:LIBS += -L$$PWD/../shift/LibMiscUtils/build/Release/ -lshift_miscutils
-    Release:PRE_TARGETDEPS += $$PWD/../shift/LibMiscUtils/build/Release/shift_miscutils.lib
-
     # LibCoreClient
-    DEPENDPATH += $$PWD/../shift/LibCoreClient/include
-    INCLUDEPATH += $$PWD/../shift/LibCoreClient/include
+    DEPENDPATH += $$PWD/../shift-main/LibCoreClient/include
+    INCLUDEPATH += $$PWD/../shift-main/LibCoreClient/include
 
-    Debug:LIBS += -L$$PWD/../shift/LibCoreClient/build/Debug/ -lshift_coreclient-d
-    Debug:PRE_TARGETDEPS += $$PWD/../shift/LibCoreClient/build/Debug/shift_coreclient-d.lib
+    Debug:LIBS += -L$$PWD/../shift-main/LibCoreClient/build/Debug/ -lshift_coreclient-d
+    Debug:PRE_TARGETDEPS += $$PWD/../shift-main/LibCoreClient/build/Debug/shift_coreclient-d.lib
 
-    Release:LIBS += -L$$PWD/../shift/LibCoreClient/build/Release/ -lshift_coreclient
-    Release:PRE_TARGETDEPS += $$PWD/../shift/LibCoreClient/build/Release/shift_coreclient.lib
+    Release:LIBS += -L$$PWD/../shift-main/LibCoreClient/build/Release/ -lshift_coreclient
+    Release:PRE_TARGETDEPS += $$PWD/../shift-main/LibCoreClient/build/Release/shift_coreclient.lib
+
+    # LibMiscUtils
+    DEPENDPATH += $$PWD/../shift-main/LibMiscUtils/include
+    INCLUDEPATH += $$PWD/../shift-main/LibMiscUtils/include
+
+    Debug:LIBS += -L$$PWD/../shift-main/LibMiscUtils/build/Debug/ -lshift_miscutils-d
+    Debug:PRE_TARGETDEPS += $$PWD/../shift-main/LibMiscUtils/build/Debug/shift_miscutils-d.lib
+
+    Release:LIBS += -L$$PWD/../shift-main/LibMiscUtils/build/Release/ -lshift_miscutils
+    Release:PRE_TARGETDEPS += $$PWD/../shift-main/LibMiscUtils/build/Release/shift_miscutils.lib
+
 }

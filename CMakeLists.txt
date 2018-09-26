@@ -34,7 +34,7 @@ set(SRC
 set(OTHER
     ${PROJECT_SOURCE_DIR}/mingw64-build.sh
     ${PROJECT_SOURCE_DIR}/setup.py
-    ${PROJECT_SOURCE_DIR}/win-build.sh
+    ${PROJECT_SOURCE_DIR}/win-build-clientx86.sh
 )
 
 ### Compiler Flags ############################################################
@@ -71,8 +71,8 @@ if(WIN32)
     add_subdirectory(pybind11)
 
     include_directories(${PROJECT_SOURCE_DIR}/include)
-    include_directories(${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/include)
-    include_directories(${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/include)
+    include_directories(${PROJECT_SOURCE_DIR}/../shift-main/LibCoreClient/include)
+    include_directories(${PROJECT_SOURCE_DIR}/../shift-main/LibMiscUtils/include)
     include_directories(C:/quickfix/include)    
     include_directories("./pybind11/build/mock_install/include")
     include_directories("C:/Program Files (x86)/Python37-32/include")
@@ -123,11 +123,11 @@ endif(NOT WIN32)
 set (LIBCORECLIENT "LIBCORECLIENT-NOTFOUND")
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     find_library(LIBCORECLIENT shift_coreclient-d 
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/build/Debug)
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibCoreClient/build/Debug)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 if(CMAKE_BUILD_TYPE MATCHES Release)
     find_library(LIBCORECLIENT shift_coreclient 
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibCoreClient/build/Release)
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibCoreClient/build/Release)
 endif(CMAKE_BUILD_TYPE MATCHES Release) 
 if(NOT LIBCORECLIENT)
     message(FATAL_ERROR "SHIFT LibCoreClient was not found.")
@@ -138,11 +138,11 @@ endif(NOT LIBCORECLIENT)
 set (LIBMISCUTILS "LIBMISCUTILS-NOTFOUND")
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     find_library(LIBMISCUTILS shift_miscutils-d
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/build/Debug)
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibMiscUtils/build/Debug)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 if(CMAKE_BUILD_TYPE MATCHES Release)
     find_library(LIBMISCUTILS shift_miscutils
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift/LibMiscUtils/build/Release)
+    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibMiscUtils/build/Release)
 endif(CMAKE_BUILD_TYPE MATCHES Release)
 if(NOT LIBMISCUTILS)
     message(FATAL_ERROR "SHIFT LibMiscUtils was not found.")
