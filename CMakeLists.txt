@@ -116,7 +116,7 @@ if(WIN32)   # Windows
     else(CURL_FOUND)
         message(FATAL_ERROR "Could not find the CURL library")
     endif(CURL_FOUND)
-endif(NOT WIN32)
+endif(WIN32)
 
 # Always enforce search for SHIFT LibCoreClient
 # (necessary when using the same name for Debug and Release)
