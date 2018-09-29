@@ -36,8 +36,8 @@ public:
             .def("getLastPriceBySymbol", &Trader::getLastPriceBySymbol, py::arg("symbol"))
             .def("getClosePriceBySymbol", &Trader::getClosePriceBySymbol, py::arg("symbol"), py::arg("buy"), py::arg("size"))
             .def("getBestPriceBySymbol", &Trader::getBestPriceBySymbol, py::arg("symbol"))
-            .def("getOrderBookBySymbolAndType", &Trader::getOrderBookBySymbolAndType, py::arg("symbol"), py::arg("type"))
-            .def("getOrderBookWithDestBySymbolAndType", &Trader::getOrderBookWithDestBySymbolAndType, py::arg("symbol"), py::arg("type"))
+            .def("getOrderBookBySymbolAndType", &Trader::getOrderBook, py::arg("symbol"), py::arg("type"))
+            .def("getOrderBookWithDestBySymbolAndType", &Trader::getOrderBookWithDestination, py::arg("symbol"), py::arg("type"))
             .def("getStockList", &Trader::getStockList)
             .def("requestCompanyNames", &Trader::requestCompanyNames)
             .def("getCompanyNames", &Trader::getCompanyNames)
@@ -86,8 +86,8 @@ public:
 
     // Order book methods
     shift::BestPrice getBestPriceBySymbol(const std::string& symbol);
-    std::vector<shift::OrderBookEntry> getOrderBookBySymbolAndType(const std::string& symbol, char type);
-    std::vector<shift::OrderBookEntry> getOrderBookWithDestBySymbolAndType(const std::string& symbol, char type);
+    std::vector<shift::OrderBookEntry> getOrderBook(const std::string& symbol, char type);
+    std::vector<shift::OrderBookEntry> getOrderBookWithDestination(const std::string& symbol, char type);
 
     // Symbols list and company names
     std::vector<std::string> getStockList();
