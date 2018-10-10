@@ -36,13 +36,13 @@ public:
             .def("getLastPriceBySymbol", &Trader::getLastPriceBySymbol, py::arg("symbol"))
             .def("getClosePriceBySymbol", &Trader::getClosePriceBySymbol, py::arg("symbol"), py::arg("buy"), py::arg("size"))
             .def("getBestPriceBySymbol", &Trader::getBestPriceBySymbol, py::arg("symbol"))
-            .def("getOrderBookBySymbolAndType", &Trader::getOrderBook, py::arg("symbol"), py::arg("type"))
-            .def("getOrderBookWithDestBySymbolAndType", &Trader::getOrderBookWithDestination, py::arg("symbol"), py::arg("type"))
+            .def("getOrderBookBySymbolAndType", &Trader::getOrderBook, py::arg("symbols"), py::arg("type"))
+            .def("getOrderBookWithDestBySymbolAndType", &Trader::getOrderBookWithDestination, py::arg("symbols"), py::arg("type"))
             .def("getStockList", &Trader::getStockList)
             .def("requestCompanyNames", &Trader::requestCompanyNames)
             .def("getCompanyNames", &Trader::getCompanyNames)
             .def("getCompanyNameBySymbol", &Trader::getCompanyNameBySymbol, py::arg("symbol"))
-            .def("requestSamplePrices", &Trader::requestSamplePrices, py::arg("symbol"), py::arg("samplingFrequency") = 1, py::arg("samplingWindow") = 31)
+            .def("requestSamplePrices", &Trader::requestSamplePrices, py::arg("symbols"), py::arg("samplingFrequency") = 1, py::arg("samplingWindow") = 31)
             .def("cancelSamplePricesRequest", &Trader::cancelSamplePricesRequest, py::arg("symbols"))
             .def("cancelAllSamplePricesRequests", &Trader::cancelAllSamplePricesRequests)
             .def("getSamplePricesSizeBySymbol", &Trader::getSamplePricesSizeBySymbol, py::arg("symbol"))
@@ -86,8 +86,8 @@ public:
 
     // Order book methods
     shift::BestPrice getBestPriceBySymbol(const std::string& symbol);
-    std::vector<shift::OrderBookEntry> getOrderBook(const std::string& symbol, char type);
-    std::vector<shift::OrderBookEntry> getOrderBookWithDestination(const std::string& symbol, char type);
+    std::vector<shift::OrderBookEntry> getOrderBook(const std::string& symbol, shift::OrderBook::Type type);
+    std::vector<shift::OrderBookEntry> getOrderBookWithDestination(const std::string& symbol, shift::OrderBook::Type type);
 
     // Symbols list and company names
     std::vector<std::string> getStockList();

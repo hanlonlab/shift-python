@@ -136,12 +136,12 @@ shift::BestPrice Trader::getBestPriceBySymbol(const std::string& symbol)
     return m_client->getBestPriceBySymbol(symbol);
 }
 
-std::vector<shift::OrderBookEntry> Trader::getOrderBook(const std::string& symbol, char type)
+std::vector<shift::OrderBookEntry> Trader::getOrderBook(const std::string& symbol, shift::OrderBook::Type type)
 {
     return m_client->getOrderBook(symbol, type);
 }
 
-std::vector<shift::OrderBookEntry> Trader::getOrderBookWithDestination(const std::string& symbol, char type)
+std::vector<shift::OrderBookEntry> Trader::getOrderBookWithDestination(const std::string& symbol, shift::OrderBook::Type type)
 {
     return m_client->getOrderBookWithDestination(symbol, type);
 }
