@@ -32,7 +32,6 @@ public:
             .def("getWaitingListSize", &Trader::getWaitingListSize)
             .def("getWaitingList", &Trader::getWaitingList)
             .def("cancelAllPendingOrders", &Trader::cancelAllPendingOrders)
-            .def("getOpenPriceBySymbol", &Trader::getOpenPriceBySymbol, py::arg("symbol"))
             .def("getLastPriceBySymbol", &Trader::getLastPriceBySymbol, py::arg("symbol"))
             .def("getClosePriceBySymbol", &Trader::getClosePriceBySymbol, py::arg("symbol"), py::arg("buy"), py::arg("size"))
             .def("getBestPriceBySymbol", &Trader::getBestPriceBySymbol, py::arg("symbol"))
@@ -80,7 +79,6 @@ public:
     void cancelAllPendingOrders();
 
     // Price methods
-    double getOpenPriceBySymbol(const std::string& symbol);
     double getLastPriceBySymbol(const std::string& symbol);
     double getClosePriceBySymbol(const std::string& symbol, bool buy, int size);
 
