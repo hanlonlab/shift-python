@@ -116,12 +116,6 @@ void Trader::cancelAllPendingOrders()
     return m_client->cancelAllPendingOrders();
 }
 
-double Trader::getOpenPriceBySymbol(const std::string& symbol)
-{
-    std::cout << symbol << ": "<< m_client->getOpenPriceBySymbol(symbol) << std::endl;
-    return m_client->getOpenPriceBySymbol(symbol);
-}
-
 double Trader::getLastPriceBySymbol(const std::string& symbol)
 {
     return m_client->getLastPriceBySymbol(symbol);
