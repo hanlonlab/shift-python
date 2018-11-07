@@ -4,6 +4,11 @@ import time
 
 
 def demo01(trader):
+    """
+    This method submits a limit buy order by indicating symbol, limit price, limit size and order type
+    :param trader:
+    :return:
+    """
 
     limitBuy = shift.Order("AAPL", 1.00, 1, shift.Order.LIMIT_BUY)
     trader.submitOrder(limitBuy)
@@ -12,6 +17,11 @@ def demo01(trader):
 
 
 def demo02(trader):
+    """
+    This method submits 2 limit buy orders by indicating symbol, limit price, limit size and order type
+    :param trader:
+    :return:
+    """
 
     aaplLimitBuy = shift.Order("AAPL", 1.00, 10, shift.Order.LIMIT_BUY)
     trader.submitOrder(aaplLimitBuy)
@@ -23,16 +33,27 @@ def demo02(trader):
 
 
 def demo03(trader):
+    """
+    This method prints all current waiting orders information
+    :param trader:
+    :return:
+    """
 
     print("Symbol\tPrice\tSize\tType\t\t\t\tID")
     for order in trader.getWaitingList():
         print("%s\t%5.2f\t%4d\t%s\t%s" %
               (order.symbol, order.price, order.size, order.type, order.id))
+        #print(order.symbol, order.price, order.size, order.id)
 
     return
 
 
 def demo04(trader):
+    """
+    This method cancels all the orders in the waiting list
+    :param trader:
+    :return:
+    """
 
     print("Symbol\tPrice\tSize\tType\t\t\t\tID")
     for order in trader.getWaitingList():
@@ -65,6 +86,11 @@ def demo04(trader):
 
 
 def demo05(trader):
+    """
+    This method shows how to submit market buy orders
+    :param trader:
+    :return:
+    """
 
     aaplMarketBuy = shift.Order("AAPL", 0.00, 1, shift.Order.MARKET_BUY)
     trader.submitOrder(aaplMarketBuy)
@@ -76,6 +102,23 @@ def demo05(trader):
 
 
 def demo06(trader):
+    """
+    This method provides information on the structure of PortfolioSummary and PortfolioItem objects:
+     getPortfolioSummary() returns a PortfolioSummary object with the following data:
+     1. Open Buying Power (openBP)
+     2. Total Buying Power (totalBP)
+     3. Total Shares (totalShares)
+     4. Total Profit and Loss (totalPL)
+     5. Total Realized Profit and Loss (totalRealizedPL)
+
+     getPortfolioItems() returns a dictionary with "symbol" as keys and PortfolioItem as values, with each providing the following information:
+     1. Symbol (getSymbol())
+     2. Shares (getShares())
+     3. Price (getPrice())
+     4. Profit/Loss (getPL())
+    :param trader:
+    :return:
+    """
 
     print("Buying Power\tTotal Shares\tTotal P&L")
     print("%12.2f\t%12d\t%9.2f" % (trader.getPortfolioSummary().totalBP,
@@ -93,6 +136,11 @@ def demo06(trader):
 
 
 def demo07(trader):
+    """
+    This method shows how to submit market sell orders
+    :param trader:
+    :return:
+    """
 
     aaplMarketSell = shift.Order("AAPL", 0.00, 1, shift.Order.MARKET_SELL)
     trader.submitOrder(aaplMarketSell)
@@ -101,6 +149,55 @@ def demo07(trader):
     trader.submitOrder(msftMarketSell)
 
     return
+
+
+def demo08(trader):
+    """
+    This method prints all submitted orders information
+    :param trader:
+    :return:
+    """
+
+    print("Symbol\tPrice\tSize\tType\t\t\t\tID")
+    for order in trader.getSubmittedOrders():
+        print("%s\t%5.2f\t%4d\t%s\t%s" %
+              (order.symbol, order.price, order.size, order.type, order.id))
+        #print(order.symbol, order.price, order.size, order.id)
+
+    return
+
+
+def demo09(trader):
+    """
+    This method prints the order book for a corresponding symbol and type:
+     - "A" for Global Ask
+     - "B" for Global Bid
+     - "a" for Local Ask
+     - "b" for Local Bid
+    :param trader:
+    :return:
+    """
+    print("price\tdestination\ttype\tsize\t\t\t\tsymbol\ttime")
+    for order in trader.getOrderBook('AAPL', "B"):
+        print("%f\t%s\t%s\t%4d\t%s\t%f" %
+              (order.price, order.destination, order.type, order.size, order.symbol, order.time))
+
+
+def demo10(trader):
+    """
+    This method prints the order book for a corresponding symbol and type, with routing (destination) information:
+     - "A" for Global Ask
+     - "B" for Global Bid
+     - "a" for Local Ask
+     - "b" for Local Bid
+    :param trader:
+    :return:
+    """
+
+    print("price\tdestination\ttype\tsize\t\t\t\tsymbol\ttime")
+    for order in trader.getOrderBookWithDestination('AAPL', "B"):
+        print("%f\t%s\t%s\t%4d\t%s\t%f" %
+              (order.price, order.destination, order.type, order.size, order.symbol, order.time))
 
 
 def main(argv):
@@ -123,6 +220,9 @@ def main(argv):
     # demo05(trader)
     # demo06(trader)
     # demo07(trader)
+    # demo08(trader)
+    # demo09(trader)
+    # demo10(trader)
 
     # disconnect
     trader.disconnect()

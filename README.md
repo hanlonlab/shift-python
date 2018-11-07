@@ -3,7 +3,7 @@ title: SHIFT PythonClient Guide
 ---
 
 [header]: # "To generate a html version of this document:"
-[pandoc]: # "pandoc README.md -c ../Templates/github.css -o README.html -s --self-contained"
+[pandoc]: # "pandoc README.md -c ../shift-main/Templates/github.css -o README.html -s --self-contained"
 
 # Ubuntu and macOS
 
@@ -24,6 +24,7 @@ Choose a location to keep the pybind11 source files (for debugging purposes), e.
 ``` bash
 git clone https://github.com/pybind/pybind11.git
 cd pybind11
+git checkout stable
 mkdir build
 cd build
 cmake ..
