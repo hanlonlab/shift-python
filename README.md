@@ -1,6 +1,5 @@
----
-title: SHIFT PythonClient Guide
----
+# SHIFT PythonClient Guide
+
 
 [header]: # "To generate a html version of this document:"
 [pandoc]: # "pandoc README.md -c ../shift-main/Templates/github.css -o README.html -s --self-contained"
