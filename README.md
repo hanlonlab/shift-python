@@ -4,19 +4,19 @@
 [header]: # "To generate a html version of this document:"
 [pandoc]: # "pandoc README.md -c ../shift-main/Templates/github.css -o README.html -s --self-contained"
 
-# Ubuntu and macOS
+## Ubuntu and macOS
 
-## Required Libraries
+### Required Libraries
 
 **Please refer to the other required libraries in the SHIFT Developer Guide.**
 
-### SHIFT Core Client
+#### SHIFT Core Client
 
 Use the installer in the root folder of the SHIFT project:
 
 - In the Terminal: `sudo ./install -m LC`
 
-### pybind11:
+#### pybind11:
 
 Choose a location to keep the pybind11 source files (for debugging purposes), e.g. a "C++" folder in your home directory, and then:
 
@@ -32,7 +32,7 @@ sudo make install
 
 ---
 
-## SHIFT PythonClient Installation
+### SHIFT PythonClient Installation
 
 **Depending on how python was installed in your system, you may need to use `sudo` in the commands below.**
 
@@ -50,12 +50,12 @@ To clean the build directories:
 
 ---
 
-# Windows
+## Windows
 
-## [TODO] Required Libraries
+### [TODO] Required Libraries
 
 ---
 
-## [TODO] SHIFT PythonClient Installation
+### [TODO] SHIFT PythonClient Installation
 
 ---
