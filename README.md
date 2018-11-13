@@ -38,15 +38,15 @@ sudo make install
 
 To install the PythonClient:
 
-- In the Terminal: `[sudo] python3 setup.py install`
+- In the Terminal: `# python3 setup.py install`
 
 To uninstall the PythonClient:
 
-- In the Terminal: `[sudo] pip3 uninstall shift`
+- In the Terminal: `# pip3 uninstall shift`
 
 To clean the build directories:
 
-- In the Terminal: `[sudo] python3 setup.py install`
+- In the Terminal: `# python3 setup.py install`
 
 ---
 
