@@ -2,6 +2,8 @@
 
 #include "Common.h"
 
+#include <pybind11/functional.h>
+
 #include <map>
 #include <string>
 #include <unordered_map>
@@ -52,7 +54,9 @@ public:
             .def("unsubOrderBook", &Trader::unsubOrderBook, py::arg("symbol"))
             .def("subAllOrderBook", &Trader::subAllOrderBook)
             .def("unsubAllOrderBook", &Trader::unsubAllOrderBook)
-            .def("getSubscribedOrderBookList", &Trader::getSubscribedOrderBookList);
+            .def("getSubscribedOrderBookList", &Trader::getSubscribedOrderBookList)
+            .def("bindAdd", &Trader::bindAdd, py::arg("func"), py::arg("a"), py::arg("b"));
+
     }
 
     Trader();
@@ -109,7 +113,14 @@ public:
     bool unsubAllOrderBook();
     std::vector<std::string> getSubscribedOrderBookList();
 
+    // Test Callback
+    int bindAdd(const std::function<int(int, int)> &f, const int a, const int b) {
+        add = f;
+        return add(a, b);
+    }
+
 private:
     shift::FIXInitiator& m_initiator;
     shift::CoreClient* m_client;
+    std::function<int(int, int)> add;
 };
