@@ -1,5 +1,5 @@
 ---
-name: General issue template
+name: General
 about: General issue
 labels: 
 
