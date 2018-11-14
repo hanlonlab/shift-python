@@ -1,14 +1,50 @@
 #include "Trader.h"
 
+PythonClient::PythonClient()
+    : shift::CoreClient()
+{
+
+}
+
+PythonClient::PythonClient(const std::string &username)
+    : shift::CoreClient(username)
+{
+
+}
+
+void PythonClient::receiveCandlestickData(const std::string &symbol, double open, double high, double low, double close, const std::string &timestamp)
+{
+    if(candleDataUpdatedCb)
+        candleDataUpdatedCb(symbol, open, high, low, close, timestamp);
+}
+
+void PythonClient::receiveLastPrice(const std::string &symbol)
+{
+    if(lastPriceUpdatedCb)
+        lastPriceUpdatedCb(symbol);
+}
+
+void PythonClient::receivePortfolio(const std::string &symbol)
+{
+    if(portfolioUpdatedCb)
+        portfolioUpdatedCb(symbol);
+}
+
+void PythonClient::receiveWaitingList()
+{
+    if(waitingListUpdatedCb)
+        waitingListUpdatedCb();
+}
+
 Trader::Trader()
     : m_initiator(shift::FIXInitiator::getInstance())
-    , m_client(new shift::CoreClient())
+    , m_client(new PythonClient())
 {
 }
 
 Trader::Trader(const std::string& username)
     : m_initiator(shift::FIXInitiator::getInstance())
-    , m_client(new shift::CoreClient(username))
+    , m_client(new PythonClient(username))
 {
 }
 
@@ -220,3 +256,25 @@ std::vector<std::string> Trader::getSubscribedOrderBookList()
 {
     return m_client->getSubscribedOrderBookList();
 }
+
+void Trader::setCandleDataUpdatedCb(const std::function<void (const std::string &, double, double, double, double, const std::string &)> &cb)
+{
+    m_client->candleDataUpdatedCb = cb;
+}
+
+void Trader::setLastPriceUpdatedCb(const std::function<void (const std::string &)> &cb)
+{
+    m_client->lastPriceUpdatedCb = cb;
+}
+
+void Trader::setPortfolioUpdatedCb(const std::function<void (const std::string &)> &cb)
+{
+    m_client->portfolioUpdatedCb = cb;
+}
+
+void Trader::setWaitingListUpdatedCb(const std::function<void ()> &cb)
+{
+    m_client->waitingListUpdatedCb = cb;
+}
+
+

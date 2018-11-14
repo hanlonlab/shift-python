@@ -9,7 +9,30 @@
 #include <unordered_map>
 #include <vector>
 
+class PythonClient;
 class Trader;
+
+class PythonClient
+        : public shift::CoreClient
+{
+public:
+    PythonClient();
+    PythonClient(const std::string& username);
+
+    std::function<void(const std::string &, double, double, double , double, const std::string &)> candleDataUpdatedCb;
+    std::function<void(const std::string &)> lastPriceUpdatedCb;
+    std::function<void(const std::string &)> portfolioUpdatedCb;
+    std::function<void(void)> waitingListUpdatedCb;
+
+protected:
+    virtual void receiveCandlestickData(const std::string& symbol, double open, double high, double low, double close, const std::string& timestamp);
+    virtual void receiveLastPrice(const std::string& symbol);
+    virtual void receivePortfolio(const std::string& symbol);
+    virtual void receiveWaitingList();
+
+private:
+
+};
 
 class Trader {
 public:
@@ -55,14 +78,18 @@ public:
             .def("subAllOrderBook", &Trader::subAllOrderBook)
             .def("unsubAllOrderBook", &Trader::unsubAllOrderBook)
             .def("getSubscribedOrderBookList", &Trader::getSubscribedOrderBookList)
+            .def("setCandleDataUpdatedCb", &Trader::setCandleDataUpdatedCb)
+            .def("setLastPriceUpdatedCb", &Trader::setLastPriceUpdatedCb)
+            .def("setPortfolioUpdatedCb", &Trader::setPortfolioUpdatedCb)
+            .def("setWaitingListUpdatedCb", &Trader::setWaitingListUpdatedCb)
             .def("bindAdd", &Trader::bindAdd, py::arg("func"), py::arg("a"), py::arg("b"));
-
     }
 
     Trader();
     Trader(const std::string& username);
     ~Trader();
 
+private:
     std::string getUsername();
     void setUsername(const std::string& username);
 
@@ -113,6 +140,11 @@ public:
     bool unsubAllOrderBook();
     std::vector<std::string> getSubscribedOrderBookList();
 
+    void setCandleDataUpdatedCb(const std::function<void(const std::string &, double, double, double , double, const std::string &)>& cb);
+    void setLastPriceUpdatedCb(const std::function<void(const std::string &)>& cb);
+    void setPortfolioUpdatedCb(const std::function<void(const std::string &)>& cb);
+    void setWaitingListUpdatedCb(const std::function<void(void)>& cb);
+
     // Test Callback
     int bindAdd(const std::function<int(int, int)> &f, const int a, const int b) {
         add = f;
@@ -121,6 +153,7 @@ public:
 
 private:
     shift::FIXInitiator& m_initiator;
-    shift::CoreClient* m_client;
+    PythonClient* m_client;
+
     std::function<int(int, int)> add;
 };
