@@ -16,13 +16,15 @@ class PythonClient
         : public shift::CoreClient
 {
 public:
-    PythonClient();
-    PythonClient(const std::string& username);
+    PythonClient(Trader *t);
+    PythonClient(const std::string& username, Trader *t);
 
-    std::function<void(const std::string &, double, double, double , double, const std::string &)> candleDataUpdatedCb;
-    std::function<void(const std::string &)> lastPriceUpdatedCb;
-    std::function<void(const std::string &)> portfolioUpdatedCb;
-    std::function<void(void)> waitingListUpdatedCb;
+    std::function<void(Trader*, const std::string &, double, double, double , double, const std::string &)> candleDataUpdatedCb;
+    std::function<void(Trader*, const std::string &)> lastPriceUpdatedCb;
+    std::function<void(Trader*, const std::string &)> portfolioUpdatedCb;
+    std::function<void(Trader*)> waitingListUpdatedCb;
+
+    Trader* trader;
 
 protected:
     virtual void receiveCandlestickData(const std::string& symbol, double open, double high, double low, double close, const std::string& timestamp);
@@ -140,10 +142,10 @@ private:
     bool unsubAllOrderBook();
     std::vector<std::string> getSubscribedOrderBookList();
 
-    void setCandleDataUpdatedCb(const std::function<void(const std::string &, double, double, double , double, const std::string &)>& cb);
-    void setLastPriceUpdatedCb(const std::function<void(const std::string &)>& cb);
-    void setPortfolioUpdatedCb(const std::function<void(const std::string &)>& cb);
-    void setWaitingListUpdatedCb(const std::function<void(void)>& cb);
+    void setCandleDataUpdatedCb(const std::function<void(Trader*, const std::string &, double, double, double , double, const std::string &)>& cb);
+    void setLastPriceUpdatedCb(const std::function<void(Trader*, const std::string &)>& cb);
+    void setPortfolioUpdatedCb(const std::function<void(Trader*, const std::string &)>& cb);
+    void setWaitingListUpdatedCb(const std::function<void(Trader*)>& cb);
 
     // Test Callback
     int bindAdd(const std::function<int(int, int)> &f, const int a, const int b) {

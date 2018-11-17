@@ -1,50 +1,52 @@
 #include "Trader.h"
 
-PythonClient::PythonClient()
+PythonClient::PythonClient(Trader* t)
     : shift::CoreClient()
+    , trader(t)
 {
 
 }
 
-PythonClient::PythonClient(const std::string &username)
+PythonClient::PythonClient(const std::string &username, Trader* t)
     : shift::CoreClient(username)
+    , trader(t)
 {
 
 }
 
 void PythonClient::receiveCandlestickData(const std::string &symbol, double open, double high, double low, double close, const std::string &timestamp)
 {
-    if(candleDataUpdatedCb)
-        candleDataUpdatedCb(symbol, open, high, low, close, timestamp);
+    if(candleDataUpdatedCb )
+        candleDataUpdatedCb(trader, symbol, open, high, low, close, timestamp);
 }
 
 void PythonClient::receiveLastPrice(const std::string &symbol)
 {
     if(lastPriceUpdatedCb)
-        lastPriceUpdatedCb(symbol);
+        lastPriceUpdatedCb(trader, symbol);
 }
 
 void PythonClient::receivePortfolio(const std::string &symbol)
 {
     if(portfolioUpdatedCb)
-        portfolioUpdatedCb(symbol);
+        portfolioUpdatedCb(trader, symbol);
 }
 
 void PythonClient::receiveWaitingList()
 {
     if(waitingListUpdatedCb)
-        waitingListUpdatedCb();
+        waitingListUpdatedCb(trader);
 }
 
 Trader::Trader()
     : m_initiator(shift::FIXInitiator::getInstance())
-    , m_client(new PythonClient())
+    , m_client(new PythonClient(this))
 {
 }
 
 Trader::Trader(const std::string& username)
     : m_initiator(shift::FIXInitiator::getInstance())
-    , m_client(new PythonClient(username))
+    , m_client(new PythonClient(username, this))
 {
 }
 
@@ -257,22 +259,22 @@ std::vector<std::string> Trader::getSubscribedOrderBookList()
     return m_client->getSubscribedOrderBookList();
 }
 
-void Trader::setCandleDataUpdatedCb(const std::function<void (const std::string &, double, double, double, double, const std::string &)> &cb)
+void Trader::setCandleDataUpdatedCb(const std::function<void (Trader *, const std::string &, double, double, double, double, const std::string &)> &cb)
 {
     m_client->candleDataUpdatedCb = cb;
 }
 
-void Trader::setLastPriceUpdatedCb(const std::function<void (const std::string &)> &cb)
+void Trader::setLastPriceUpdatedCb(const std::function<void(Trader*, const std::string&)>& cb)
 {
     m_client->lastPriceUpdatedCb = cb;
 }
 
-void Trader::setPortfolioUpdatedCb(const std::function<void (const std::string &)> &cb)
+void Trader::setPortfolioUpdatedCb(const std::function<void(Trader*, const std::string &)> &cb)
 {
     m_client->portfolioUpdatedCb = cb;
 }
 
-void Trader::setWaitingListUpdatedCb(const std::function<void ()> &cb)
+void Trader::setWaitingListUpdatedCb(const std::function<void(Trader *)> &cb)
 {
     m_client->waitingListUpdatedCb = cb;
 }
