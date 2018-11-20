@@ -259,22 +259,22 @@ std::vector<std::string> Trader::getSubscribedOrderBookList()
     return m_client->getSubscribedOrderBookList();
 }
 
-void Trader::setCandleDataUpdatedCb(const std::function<void (Trader *, const std::string &, double, double, double, double, const std::string &)> &cb)
+void Trader::onSetCandleDataUpdated(const std::function<void (Trader *, const std::string &, double, double, double, double, const std::string &)> &cb)
 {
     m_client->candleDataUpdatedCb = cb;
 }
 
-void Trader::setLastPriceUpdatedCb(const std::function<void(Trader*, const std::string&)>& cb)
+void Trader::onSetLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb)
 {
     m_client->lastPriceUpdatedCb = cb;
 }
 
-void Trader::setPortfolioUpdatedCb(const std::function<void(Trader*, const std::string &)> &cb)
+void Trader::onSetPortfolioUpdated(const std::function<void(Trader*, const std::string &)> &cb)
 {
     m_client->portfolioUpdatedCb = cb;
 }
 
-void Trader::setWaitingListUpdatedCb(const std::function<void(Trader *)> &cb)
+void Trader::onSetWaitingListUpdated(const std::function<void(Trader *)> &cb)
 {
     m_client->waitingListUpdatedCb = cb;
 }
