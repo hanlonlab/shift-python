@@ -80,10 +80,10 @@ public:
             .def("subAllOrderBook", &Trader::subAllOrderBook)
             .def("unsubAllOrderBook", &Trader::unsubAllOrderBook)
             .def("getSubscribedOrderBookList", &Trader::getSubscribedOrderBookList)
-            .def("setCandleDataUpdatedCb", &Trader::setCandleDataUpdatedCb)
-            .def("setLastPriceUpdatedCb", &Trader::setLastPriceUpdatedCb)
-            .def("setPortfolioUpdatedCb", &Trader::setPortfolioUpdatedCb)
-            .def("setWaitingListUpdatedCb", &Trader::setWaitingListUpdatedCb)
+            .def("onSetCandleDataUpdated", &Trader::onSetCandleDataUpdated)
+            .def("onSetLastPriceUpdated", &Trader::onSetLastPriceUpdated)
+            .def("onSetPortfolioUpdated", &Trader::onSetPortfolioUpdated)
+            .def("onSetWaitingListUpdated", &Trader::onSetWaitingListUpdated)
             .def("bindAdd", &Trader::bindAdd, py::arg("func"), py::arg("a"), py::arg("b"));
     }
 
@@ -142,10 +142,10 @@ private:
     bool unsubAllOrderBook();
     std::vector<std::string> getSubscribedOrderBookList();
 
-    void setCandleDataUpdatedCb(const std::function<void(Trader*, const std::string &, double, double, double , double, const std::string &)>& cb);
-    void setLastPriceUpdatedCb(const std::function<void(Trader*, const std::string &)>& cb);
-    void setPortfolioUpdatedCb(const std::function<void(Trader*, const std::string &)>& cb);
-    void setWaitingListUpdatedCb(const std::function<void(Trader*)>& cb);
+    void onSetCandleDataUpdated(const std::function<void(Trader*, const std::string &, double, double, double , double, const std::string &)>& cb);
+    void onSetLastPriceUpdated(const std::function<void(Trader*, const std::string &)>& cb);
+    void onSetPortfolioUpdated(const std::function<void(Trader*, const std::string &)>& cb);
+    void onSetWaitingListUpdated(const std::function<void(Trader*)>& cb);
 
     // Test Callback
     int bindAdd(const std::function<int(int, int)> &f, const int a, const int b) {
