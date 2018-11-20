@@ -124,7 +124,7 @@ std::map<std::string, shift::PortfolioItem> Trader::getPortfolioItems()
     return m_client->getPortfolioItems();
 }
 
-shift::PortfolioItem Trader::getPortfolioItemBySymbol(const std::string& symbol)
+shift::PortfolioItem Trader::getPortfolioItem(const std::string& symbol)
 {
     return m_client->getPortfolioItemBySymbol(symbol);
 }
@@ -154,17 +154,17 @@ void Trader::cancelAllPendingOrders()
     return m_client->cancelAllPendingOrders();
 }
 
-double Trader::getLastPriceBySymbol(const std::string& symbol)
+double Trader::getLastPrice(const std::string& symbol)
 {
     return m_client->getLastPriceBySymbol(symbol);
 }
 
-double Trader::getClosePriceBySymbol(const std::string& symbol, bool buy, int size)
+double Trader::getClosePrice(const std::string& symbol, bool buy, int size)
 {
     return m_client->getClosePriceBySymbol(symbol, buy, size);
 }
 
-shift::BestPrice Trader::getBestPriceBySymbol(const std::string& symbol)
+shift::BestPrice Trader::getBestPrice(const std::string& symbol)
 {
     return m_client->getBestPriceBySymbol(symbol);
 }
@@ -194,7 +194,7 @@ std::map<std::string, std::string> Trader::getCompanyNames()
     return m_client->getCompanyNames();
 }
 
-std::string Trader::getCompanyNameBySymbol(const std::string& symbol)
+std::string Trader::getCompanyName(const std::string& symbol)
 {
     return m_client->getCompanyNameBySymbol(symbol);
 }
@@ -214,22 +214,22 @@ bool Trader::cancelAllSamplePricesRequests()
     return m_client->cancelAllSamplePricesRequests();
 }
 
-int Trader::getSamplePricesSizeBySymbol(const std::string& symbol)
+int Trader::getSamplePricesSize(const std::string& symbol)
 {
     return m_client->getSamplePricesSizeBySymbol(symbol);
 }
 
-std::list<double> Trader::getSamplePricesBySymbol(const std::string& symbol, bool midPrices)
+std::list<double> Trader::getSamplePrices(const std::string& symbol, bool midPrices)
 {
     return m_client->getSamplePricesBySymbol(symbol, midPrices);
 }
 
-int Trader::getLogReturnsSizeBySymbol(const std::string& symbol)
+int Trader::getLogReturnsSize(const std::string& symbol)
 {
     return m_client->getLogReturnsSizeBySymbol(symbol);
 }
 
-std::list<double> Trader::getLogReturnsBySymbol(const std::string& symbol, bool midPrices)
+std::list<double> Trader::getLogReturns(const std::string& symbol, bool midPrices)
 {
     return m_client->getLogReturnsBySymbol(symbol, midPrices);
 }

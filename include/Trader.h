@@ -53,28 +53,28 @@ public:
             .def("submitOrder", &Trader::submitOrder, py::arg("order"))
             .def("getPortfolioSummary", &Trader::getPortfolioSummary)
             .def("getPortfolioItems", &Trader::getPortfolioItems)
-            .def("getPortfolioItemBySymbol", &Trader::getPortfolioItemBySymbol, py::arg("symbol"))
+            .def("getPortfolioItem", &Trader::getPortfolioItem, py::arg("symbol"))
             .def("getSubmittedOrdersSize", &Trader::getSubmittedOrdersSize)
             .def("getSubmittedOrders", &Trader::getSubmittedOrders)
             .def("getWaitingListSize", &Trader::getWaitingListSize)
             .def("getWaitingList", &Trader::getWaitingList)
             .def("cancelAllPendingOrders", &Trader::cancelAllPendingOrders)
-            .def("getLastPriceBySymbol", &Trader::getLastPriceBySymbol, py::arg("symbol"))
-            .def("getClosePriceBySymbol", &Trader::getClosePriceBySymbol, py::arg("symbol"), py::arg("buy"), py::arg("size"))
-            .def("getBestPriceBySymbol", &Trader::getBestPriceBySymbol, py::arg("symbol"))
+            .def("getLastPrice", &Trader::getLastPrice, py::arg("symbol"))
+            .def("getClosePrice", &Trader::getClosePrice, py::arg("symbol"), py::arg("buy"), py::arg("size"))
+            .def("getBestPrice", &Trader::getBestPrice, py::arg("symbol"))
             .def("getOrderBook", &Trader::getOrderBook, py::arg("symbols"), py::arg("type"))
             .def("getOrderBookWithDestination", &Trader::getOrderBookWithDestination, py::arg("symbols"), py::arg("type"))
             .def("getStockList", &Trader::getStockList)
             .def("requestCompanyNames", &Trader::requestCompanyNames)
             .def("getCompanyNames", &Trader::getCompanyNames)
-            .def("getCompanyNameBySymbol", &Trader::getCompanyNameBySymbol, py::arg("symbol"))
+            .def("getCompanyName", &Trader::getCompanyName, py::arg("symbol"))
             .def("requestSamplePrices", &Trader::requestSamplePrices, py::arg("symbols"), py::arg("samplingFrequency") = 1, py::arg("samplingWindow") = 31)
             .def("cancelSamplePricesRequest", &Trader::cancelSamplePricesRequest, py::arg("symbols"))
             .def("cancelAllSamplePricesRequests", &Trader::cancelAllSamplePricesRequests)
-            .def("getSamplePricesSizeBySymbol", &Trader::getSamplePricesSizeBySymbol, py::arg("symbol"))
-            .def("getSamplePricesBySymbol", &Trader::getSamplePricesBySymbol, py::arg("symbol"), py::arg("midPrices") = false)
-            .def("getLogReturnsSizeBySymbol", &Trader::getLogReturnsSizeBySymbol, py::arg("symbol"))
-            .def("getLogReturnsBySymbol", &Trader::getLogReturnsBySymbol, py::arg("symbol"), py::arg("midPrices") = false)
+            .def("getSamplePricesSize", &Trader::getSamplePricesSize, py::arg("symbol"))
+            .def("getSamplePrices", &Trader::getSamplePrices, py::arg("symbol"), py::arg("midPrices") = false)
+            .def("getLogReturnsSize", &Trader::getLogReturnsSize, py::arg("symbol"))
+            .def("getLogReturns", &Trader::getLogReturns, py::arg("symbol"), py::arg("midPrices") = false)
             .def("subOrderBook", &Trader::subOrderBook, py::arg("symbol"))
             .def("unsubOrderBook", &Trader::unsubOrderBook, py::arg("symbol"))
             .def("subAllOrderBook", &Trader::subAllOrderBook)
@@ -104,7 +104,7 @@ private:
     // Portfolio methods
     shift::PortfolioSummary getPortfolioSummary();
     std::map<std::string, shift::PortfolioItem> getPortfolioItems();
-    shift::PortfolioItem getPortfolioItemBySymbol(const std::string& symbol);
+    shift::PortfolioItem getPortfolioItem(const std::string& symbol);
     int getSubmittedOrdersSize();
     std::vector<shift::Order> getSubmittedOrders();
     int getWaitingListSize();
@@ -112,11 +112,11 @@ private:
     void cancelAllPendingOrders();
 
     // Price methods
-    double getLastPriceBySymbol(const std::string& symbol);
-    double getClosePriceBySymbol(const std::string& symbol, bool buy, int size);
+    double getLastPrice(const std::string& symbol);
+    double getClosePrice(const std::string& symbol, bool buy, int size);
 
     // Order book methods
-    shift::BestPrice getBestPriceBySymbol(const std::string& symbol);
+    shift::BestPrice getBestPrice(const std::string& symbol);
     std::vector<shift::OrderBookEntry> getOrderBook(const std::string& symbol, shift::OrderBook::Type type);
     std::vector<shift::OrderBookEntry> getOrderBookWithDestination(const std::string& symbol, shift::OrderBook::Type type);
 
@@ -124,16 +124,16 @@ private:
     std::vector<std::string> getStockList();
     void requestCompanyNames();
     std::map<std::string, std::string> getCompanyNames();
-    std::string getCompanyNameBySymbol(const std::string& symbol);
+    std::string getCompanyName(const std::string& symbol);
 
     // Sample prices
     bool requestSamplePrices(std::vector<std::string> symbols, double samplingFrequency, unsigned int samplingWindow);
     bool cancelSamplePricesRequest(const std::vector<std::string>& symbols);
     bool cancelAllSamplePricesRequests();
-    int getSamplePricesSizeBySymbol(const std::string& symbol);
-    std::list<double> getSamplePricesBySymbol(const std::string& symbol, bool midPrices);
-    int getLogReturnsSizeBySymbol(const std::string& symbol);
-    std::list<double> getLogReturnsBySymbol(const std::string& symbol, bool midPrices);
+    int getSamplePricesSize(const std::string& symbol);
+    std::list<double> getSamplePrices(const std::string& symbol, bool midPrices);
+    int getLogReturnsSize(const std::string& symbol);
+    std::list<double> getLogReturns(const std::string& symbol, bool midPrices);
 
     // Subscription methods
     bool subOrderBook(const std::string& symbol);
