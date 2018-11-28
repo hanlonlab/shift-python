@@ -126,7 +126,7 @@ std::map<std::string, shift::PortfolioItem> Trader::getPortfolioItems()
 
 shift::PortfolioItem Trader::getPortfolioItem(const std::string& symbol)
 {
-    return m_client->getPortfolioItemBySymbol(symbol);
+    return m_client->getPortfolioItem(symbol);
 }
 
 int Trader::getSubmittedOrdersSize()
@@ -156,17 +156,17 @@ void Trader::cancelAllPendingOrders()
 
 double Trader::getLastPrice(const std::string& symbol)
 {
-    return m_client->getLastPriceBySymbol(symbol);
+    return m_client->getLastPrice(symbol);
 }
 
 double Trader::getClosePrice(const std::string& symbol, bool buy, int size)
 {
-    return m_client->getClosePriceBySymbol(symbol, buy, size);
+    return m_client->getClosePrice(symbol, buy, size);
 }
 
 shift::BestPrice Trader::getBestPrice(const std::string& symbol)
 {
-    return m_client->getBestPriceBySymbol(symbol);
+    return m_client->getBestPrice(symbol);
 }
 
 std::vector<shift::OrderBookEntry> Trader::getOrderBook(const std::string& symbol, shift::OrderBook::Type type)
@@ -196,7 +196,7 @@ std::map<std::string, std::string> Trader::getCompanyNames()
 
 std::string Trader::getCompanyName(const std::string& symbol)
 {
-    return m_client->getCompanyNameBySymbol(symbol);
+    return m_client->getCompanyName(symbol);
 }
 
 bool Trader::requestSamplePrices(std::vector<std::string> symbols, double samplingFrequency, unsigned int samplingWindow)
@@ -216,22 +216,22 @@ bool Trader::cancelAllSamplePricesRequests()
 
 int Trader::getSamplePricesSize(const std::string& symbol)
 {
-    return m_client->getSamplePricesSizeBySymbol(symbol);
+    return m_client->getSamplePricesSize(symbol);
 }
 
 std::list<double> Trader::getSamplePrices(const std::string& symbol, bool midPrices)
 {
-    return m_client->getSamplePricesBySymbol(symbol, midPrices);
+    return m_client->getSamplePrices(symbol, midPrices);
 }
 
 int Trader::getLogReturnsSize(const std::string& symbol)
 {
-    return m_client->getLogReturnsSizeBySymbol(symbol);
+    return m_client->getLogReturnsSize(symbol);
 }
 
 std::list<double> Trader::getLogReturns(const std::string& symbol, bool midPrices)
 {
-    return m_client->getLogReturnsBySymbol(symbol, midPrices);
+    return m_client->getLogReturns(symbol, midPrices);
 }
 
 bool Trader::subOrderBook(const std::string& symbol)
