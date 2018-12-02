@@ -13,27 +13,23 @@ class PythonClient;
 class Trader;
 
 class PythonClient
-        : public shift::CoreClient
-{
+    : public shift::CoreClient {
 public:
-    PythonClient(Trader *t);
-    PythonClient(const std::string& username, Trader *t);
+    PythonClient(Trader* t);
+    PythonClient(const std::string& username, Trader* t);
 
-    std::function<void(Trader*, const std::string &, double, double, double, double, const std::string &)> candleDataUpdatedCb;
-    std::function<void(Trader*, const std::string &)> lastPriceUpdatedCb;
-    std::function<void(Trader*, const std::string &)> portfolioUpdatedCb;
+    std::function<void(Trader*, const std::string&)> lastPriceUpdatedCb;
+    std::function<void(Trader*, const std::string&)> portfolioUpdatedCb;
     std::function<void(Trader*)> waitingListUpdatedCb;
 
     Trader* trader;
 
 protected:
-    virtual void receiveCandlestickData(const std::string& symbol, double open, double high, double low, double close, const std::string& timestamp);
     virtual void receiveLastPrice(const std::string& symbol);
     virtual void receivePortfolio(const std::string& symbol);
     virtual void receiveWaitingList();
 
 private:
-
 };
 
 class Trader {
@@ -80,7 +76,6 @@ public:
             .def("subAllOrderBook", &Trader::subAllOrderBook)
             .def("unsubAllOrderBook", &Trader::unsubAllOrderBook)
             .def("getSubscribedOrderBookList", &Trader::getSubscribedOrderBookList)
-            .def("onSetCandleDataUpdated", &Trader::onSetCandleDataUpdated)
             .def("onSetLastPriceUpdated", &Trader::onSetLastPriceUpdated)
             .def("onSetPortfolioUpdated", &Trader::onSetPortfolioUpdated)
             .def("onSetWaitingListUpdated", &Trader::onSetWaitingListUpdated);
@@ -141,9 +136,9 @@ private:
     bool unsubAllOrderBook();
     std::vector<std::string> getSubscribedOrderBookList();
 
-    void onSetCandleDataUpdated(const std::function<void(Trader*, const std::string &, double, double, double , double, const std::string &)>& cb);
-    void onSetLastPriceUpdated(const std::function<void(Trader*, const std::string &)>& cb);
-    void onSetPortfolioUpdated(const std::function<void(Trader*, const std::string &)>& cb);
+    // Callback methods
+    void onSetLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb);
+    void onSetPortfolioUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onSetWaitingListUpdated(const std::function<void(Trader*)>& cb);
 
 private:

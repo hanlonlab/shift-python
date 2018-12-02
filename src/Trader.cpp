@@ -4,37 +4,29 @@ PythonClient::PythonClient(Trader* t)
     : shift::CoreClient()
     , trader(t)
 {
-
 }
 
-PythonClient::PythonClient(const std::string &username, Trader* t)
+PythonClient::PythonClient(const std::string& username, Trader* t)
     : shift::CoreClient(username)
     , trader(t)
 {
-
 }
 
-void PythonClient::receiveCandlestickData(const std::string &symbol, double open, double high, double low, double close, const std::string &timestamp)
+void PythonClient::receiveLastPrice(const std::string& symbol)
 {
-    if(candleDataUpdatedCb )
-        candleDataUpdatedCb(trader, symbol, open, high, low, close, timestamp);
-}
-
-void PythonClient::receiveLastPrice(const std::string &symbol)
-{
-    if(lastPriceUpdatedCb)
+    if (lastPriceUpdatedCb)
         lastPriceUpdatedCb(trader, symbol);
 }
 
-void PythonClient::receivePortfolio(const std::string &symbol)
+void PythonClient::receivePortfolio(const std::string& symbol)
 {
-    if(portfolioUpdatedCb)
+    if (portfolioUpdatedCb)
         portfolioUpdatedCb(trader, symbol);
 }
 
 void PythonClient::receiveWaitingList()
 {
-    if(waitingListUpdatedCb)
+    if (waitingListUpdatedCb)
         waitingListUpdatedCb(trader);
 }
 
@@ -259,24 +251,17 @@ std::vector<std::string> Trader::getSubscribedOrderBookList()
     return m_client->getSubscribedOrderBookList();
 }
 
-void Trader::onSetCandleDataUpdated(const std::function<void (Trader *, const std::string &, double, double, double, double, const std::string &)> &cb)
-{
-    m_client->candleDataUpdatedCb = cb;
-}
-
 void Trader::onSetLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb)
 {
     m_client->lastPriceUpdatedCb = cb;
 }
 
-void Trader::onSetPortfolioUpdated(const std::function<void(Trader*, const std::string &)> &cb)
+void Trader::onSetPortfolioUpdated(const std::function<void(Trader*, const std::string&)>& cb)
 {
     m_client->portfolioUpdatedCb = cb;
 }
 
-void Trader::onSetWaitingListUpdated(const std::function<void(Trader *)> &cb)
+void Trader::onSetWaitingListUpdated(const std::function<void(Trader*)>& cb)
 {
     m_client->waitingListUpdatedCb = cb;
 }
-
-
