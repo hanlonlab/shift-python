@@ -45,7 +45,7 @@ To uninstall the PythonClient:
 
 To clean the build directories:
 
-- In the Terminal: `# python3 setup.py install`
+- In the Terminal: `# python3 setup.py clean`
 
 ---
 
