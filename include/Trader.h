@@ -19,7 +19,7 @@ public:
     PythonClient(Trader *t);
     PythonClient(const std::string& username, Trader *t);
 
-    std::function<void(Trader*, const std::string &, double, double, double , double, const std::string &)> candleDataUpdatedCb;
+    std::function<void(Trader*, const std::string &, double, double, double, double, const std::string &)> candleDataUpdatedCb;
     std::function<void(Trader*, const std::string &)> lastPriceUpdatedCb;
     std::function<void(Trader*, const std::string &)> portfolioUpdatedCb;
     std::function<void(Trader*)> waitingListUpdatedCb;
@@ -83,8 +83,7 @@ public:
             .def("onSetCandleDataUpdated", &Trader::onSetCandleDataUpdated)
             .def("onSetLastPriceUpdated", &Trader::onSetLastPriceUpdated)
             .def("onSetPortfolioUpdated", &Trader::onSetPortfolioUpdated)
-            .def("onSetWaitingListUpdated", &Trader::onSetWaitingListUpdated)
-            .def("bindAdd", &Trader::bindAdd, py::arg("func"), py::arg("a"), py::arg("b"));
+            .def("onSetWaitingListUpdated", &Trader::onSetWaitingListUpdated);
     }
 
     Trader();
@@ -147,15 +146,7 @@ private:
     void onSetPortfolioUpdated(const std::function<void(Trader*, const std::string &)>& cb);
     void onSetWaitingListUpdated(const std::function<void(Trader*)>& cb);
 
-    // Test Callback
-    int bindAdd(const std::function<int(int, int)> &f, const int a, const int b) {
-        add = f;
-        return add(a, b);
-    }
-
 private:
     shift::FIXInitiator& m_initiator;
     PythonClient* m_client;
-
-    std::function<int(int, int)> add;
 };

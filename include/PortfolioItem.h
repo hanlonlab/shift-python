@@ -17,7 +17,7 @@ void bindPython(py::module& m)
         .def("getSymbol", &shift::PortfolioItem::getSymbol)
         .def("getShares", &shift::PortfolioItem::getShares)
         .def("getPrice", &shift::PortfolioItem::getPrice)
-        .def("getPL", &shift::PortfolioItem::getPL);
+        .def("getRealizedPL", &shift::PortfolioItem::getRealizedPL);
 }
 
 } // PortfolioItem
