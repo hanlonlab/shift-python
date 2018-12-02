@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>SHIFT PythonClient Guide</title>
+  <title>README</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -659,18 +659,16 @@ border-bottom-color: #eee;
   <![endif]-->
 </head>
 <body>
-<header>
-<h1 class="title">SHIFT PythonClient Guide</h1>
-</header>
-<h1 id="ubuntu-and-macos">Ubuntu and macOS</h1>
-<h2 id="required-libraries">Required Libraries</h2>
+<h1 id="shift-pythonclient-guide">SHIFT PythonClient Guide</h1>
+<h2 id="ubuntu-and-macos">Ubuntu and macOS</h2>
+<h3 id="required-libraries">Required Libraries</h3>
 <p><strong>Please refer to the other required libraries in the SHIFT Developer Guide.</strong></p>
-<h3 id="shift-core-client">SHIFT Core Client</h3>
+<h4 id="shift-core-client">SHIFT Core Client</h4>
 <p>Use the installer in the root folder of the SHIFT project:</p>
 <ul>
 <li>In the Terminal: <code>sudo ./install -m LC</code></li>
 </ul>
-<h3 id="pybind11">pybind11:</h3>
+<h4 id="pybind11">pybind11:</h4>
 <p>Choose a location to keep the pybind11 source files (for debugging purposes), e.g. a “C++” folder in your home directory, and then:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">git</span> clone https://github.com/pybind/pybind11.git</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="bu">cd</span> pybind11</a>
@@ -680,25 +678,25 @@ border-bottom-color: #eee;
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">cmake</span> ..</a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="fu">sudo</span> make install</a></code></pre></div>
 <hr />
-<h2 id="shift-pythonclient-installation">SHIFT PythonClient Installation</h2>
+<h3 id="shift-pythonclient-installation">SHIFT PythonClient Installation</h3>
 <p><strong>Depending on how python was installed in your system, you may need to use <code>sudo</code> in the commands below.</strong></p>
 <p>To install the PythonClient:</p>
 <ul>
-<li>In the Terminal: <code>[sudo] python3 setup.py install</code></li>
+<li>In the Terminal: <code># python3 setup.py install</code></li>
 </ul>
 <p>To uninstall the PythonClient:</p>
 <ul>
-<li>In the Terminal: <code>[sudo] pip3 uninstall shift</code></li>
+<li>In the Terminal: <code># pip3 uninstall shift</code></li>
 </ul>
 <p>To clean the build directories:</p>
 <ul>
-<li>In the Terminal: <code>[sudo] python3 setup.py install</code></li>
+<li>In the Terminal: <code># python3 setup.py install</code></li>
 </ul>
 <hr />
-<h1 id="windows">Windows</h1>
-<h2 id="todo-required-libraries">[TODO] Required Libraries</h2>
+<h2 id="windows">Windows</h2>
+<h3 id="todo-required-libraries">[TODO] Required Libraries</h3>
 <hr />
-<h2 id="todo-shift-pythonclient-installation">[TODO] SHIFT PythonClient Installation</h2>
+<h3 id="todo-shift-pythonclient-installation">[TODO] SHIFT PythonClient Installation</h3>
 <hr />
 </body>
 </html>
