@@ -20,6 +20,7 @@ public:
 
     std::function<void(Trader*, const std::string&)> lastPriceUpdatedCb;
     std::function<void(Trader*, const std::string&)> portfolioItemUpdatedCb;
+    std::function<void(Trader*)> portfolioSummaryUpdatedCb;
     std::function<void(Trader*)> waitingListUpdatedCb;
 
     Trader* trader;
@@ -27,6 +28,7 @@ public:
 protected:
     virtual void receiveLastPrice(const std::string& symbol) override;
     virtual void receivePortfolioItem(const std::string& symbol) override;
+    virtual void receivePortfolioSummary() override;
     virtual void receiveWaitingList() override;
 
 private:
@@ -78,6 +80,7 @@ public:
             .def("getSubscribedOrderBookList", &Trader::getSubscribedOrderBookList)
             .def("onLastPriceUpdated", &Trader::onLastPriceUpdated)
             .def("onPortfolioItemUpdated", &Trader::onPortfolioItemUpdated)
+            .def("onPortfolioSummaryUpdated", &Trader::onPortfolioSummaryUpdated)
             .def("onWaitingListUpdated", &Trader::onWaitingListUpdated);
     }
 
@@ -139,6 +142,7 @@ private:
     // Callback methods
     void onLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb);
+    void onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb);
     void onWaitingListUpdated(const std::function<void(Trader*)>& cb);
 
 private:
