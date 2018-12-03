@@ -1,5 +1,6 @@
 #include "BestPrice.h"
 #include "Order.h"
+#include "OrderBook.h"
 #include "OrderBookEntry.h"
 #include "PortfolioItem.h"
 #include "PortfolioSummary.h"
@@ -17,6 +18,7 @@ PYBIND11_MODULE(shift, m)
 
     BestPrice::bindPython(m);
     Order::bindPython(m);
+    OrderBook::bindPython(m);
     OrderBookEntry::bindPython(m);
     PortfolioItem::bindPython(m);
     PortfolioSummary::bindPython(m);
