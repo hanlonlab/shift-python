@@ -19,15 +19,15 @@ public:
     PythonClient(const std::string& username, Trader* t);
 
     std::function<void(Trader*, const std::string&)> lastPriceUpdatedCb;
-    std::function<void(Trader*, const std::string&)> portfolioUpdatedCb;
+    std::function<void(Trader*, const std::string&)> portfolioItemUpdatedCb;
     std::function<void(Trader*)> waitingListUpdatedCb;
 
     Trader* trader;
 
 protected:
-    virtual void receiveLastPrice(const std::string& symbol);
-    virtual void receivePortfolio(const std::string& symbol);
-    virtual void receiveWaitingList();
+    virtual void receiveLastPrice(const std::string& symbol) override;
+    virtual void receivePortfolioItem(const std::string& symbol) override;
+    virtual void receiveWaitingList() override;
 
 private:
 };
@@ -58,7 +58,7 @@ public:
             .def("getLastPrice", &Trader::getLastPrice, py::arg("symbol"))
             .def("getClosePrice", &Trader::getClosePrice, py::arg("symbol"), py::arg("buy"), py::arg("size"))
             .def("getBestPrice", &Trader::getBestPrice, py::arg("symbol"))
-            .def("getOrderBook", &Trader::getOrderBook, py::arg("symbols"), py::arg("type"))
+            .def("getOrderBook", &Trader::getOrderBook, py::arg("symbols"), py::arg("type"), py::arg("maxLevel") = 99 )
             .def("getOrderBookWithDestination", &Trader::getOrderBookWithDestination, py::arg("symbols"), py::arg("type"))
             .def("getStockList", &Trader::getStockList)
             .def("requestCompanyNames", &Trader::requestCompanyNames)
@@ -76,9 +76,9 @@ public:
             .def("subAllOrderBook", &Trader::subAllOrderBook)
             .def("unsubAllOrderBook", &Trader::unsubAllOrderBook)
             .def("getSubscribedOrderBookList", &Trader::getSubscribedOrderBookList)
-            .def("onSetLastPriceUpdated", &Trader::onSetLastPriceUpdated)
-            .def("onSetPortfolioUpdated", &Trader::onSetPortfolioUpdated)
-            .def("onSetWaitingListUpdated", &Trader::onSetWaitingListUpdated);
+            .def("onLastPriceUpdated", &Trader::onLastPriceUpdated)
+            .def("onPortfolioItemUpdated", &Trader::onPortfolioItemUpdated)
+            .def("onWaitingListUpdated", &Trader::onWaitingListUpdated);
     }
 
     Trader();
@@ -111,7 +111,7 @@ private:
 
     // Order book methods
     shift::BestPrice getBestPrice(const std::string& symbol);
-    std::vector<shift::OrderBookEntry> getOrderBook(const std::string& symbol, shift::OrderBook::Type type);
+    std::vector<shift::OrderBookEntry> getOrderBook(const std::string& symbol, shift::OrderBook::Type type, int maxLevel);
     std::vector<shift::OrderBookEntry> getOrderBookWithDestination(const std::string& symbol, shift::OrderBook::Type type);
 
     // Symbols list and company names
@@ -137,9 +137,9 @@ private:
     std::vector<std::string> getSubscribedOrderBookList();
 
     // Callback methods
-    void onSetLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb);
-    void onSetPortfolioUpdated(const std::function<void(Trader*, const std::string&)>& cb);
-    void onSetWaitingListUpdated(const std::function<void(Trader*)>& cb);
+    void onLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb);
+    void onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb);
+    void onWaitingListUpdated(const std::function<void(Trader*)>& cb);
 
 private:
     shift::FIXInitiator& m_initiator;

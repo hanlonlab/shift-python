@@ -18,10 +18,10 @@ void PythonClient::receiveLastPrice(const std::string& symbol)
         lastPriceUpdatedCb(trader, symbol);
 }
 
-void PythonClient::receivePortfolio(const std::string& symbol)
+void PythonClient::receivePortfolioItem(const std::string& symbol)
 {
-    if (portfolioUpdatedCb)
-        portfolioUpdatedCb(trader, symbol);
+    if (portfolioItemUpdatedCb)
+        portfolioItemUpdatedCb(trader, symbol);
 }
 
 void PythonClient::receiveWaitingList()
@@ -161,7 +161,7 @@ shift::BestPrice Trader::getBestPrice(const std::string& symbol)
     return m_client->getBestPrice(symbol);
 }
 
-std::vector<shift::OrderBookEntry> Trader::getOrderBook(const std::string& symbol, shift::OrderBook::Type type)
+std::vector<shift::OrderBookEntry> Trader::getOrderBook(const std::string& symbol, shift::OrderBook::Type type, int maxLevel)
 {
     return m_client->getOrderBook(symbol, type);
 }
@@ -251,17 +251,17 @@ std::vector<std::string> Trader::getSubscribedOrderBookList()
     return m_client->getSubscribedOrderBookList();
 }
 
-void Trader::onSetLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb)
+void Trader::onLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb)
 {
     m_client->lastPriceUpdatedCb = cb;
 }
 
-void Trader::onSetPortfolioUpdated(const std::function<void(Trader*, const std::string&)>& cb)
+void Trader::onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb)
 {
-    m_client->portfolioUpdatedCb = cb;
+    m_client->portfolioItemUpdatedCb = cb;
 }
 
-void Trader::onSetWaitingListUpdated(const std::function<void(Trader*)>& cb)
+void Trader::onWaitingListUpdated(const std::function<void(Trader*)>& cb)
 {
     m_client->waitingListUpdatedCb = cb;
 }
