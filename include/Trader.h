@@ -60,7 +60,7 @@ public:
             .def("getLastPrice", &Trader::getLastPrice, py::arg("symbol"))
             .def("getClosePrice", &Trader::getClosePrice, py::arg("symbol"), py::arg("buy"), py::arg("size"))
             .def("getBestPrice", &Trader::getBestPrice, py::arg("symbol"))
-            .def("getOrderBook", &Trader::getOrderBook, py::arg("symbols"), py::arg("type"), py::arg("maxLevel") = 99 )
+            .def("getOrderBook", &Trader::getOrderBook, py::arg("symbols"), py::arg("type"), py::arg("maxLevel") = 99)
             .def("getOrderBookWithDestination", &Trader::getOrderBookWithDestination, py::arg("symbols"), py::arg("type"))
             .def("getStockList", &Trader::getStockList)
             .def("requestCompanyNames", &Trader::requestCompanyNames)

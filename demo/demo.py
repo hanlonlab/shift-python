@@ -10,7 +10,7 @@ def demo01(trader):
     :return:
     """
 
-    limitBuy = shift.Order("AAPL", 1.00, 1, shift.Order.LIMIT_BUY)
+    limitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 1.0)
     trader.submitOrder(limitBuy)
 
     return
@@ -23,10 +23,10 @@ def demo02(trader):
     :return:
     """
 
-    aaplLimitBuy = shift.Order("AAPL", 1.00, 10, shift.Order.LIMIT_BUY)
+    aaplLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 10, 1.00)
     trader.submitOrder(aaplLimitBuy)
 
-    msftLimitBuy = shift.Order("MSFT", 1.00, 10, shift.Order.LIMIT_BUY)
+    msftLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "MSFT", 10, 1.00)
     trader.submitOrder(msftLimitBuy)
 
     return
@@ -39,11 +39,10 @@ def demo03(trader):
     :return:
     """
 
-    print("Symbol\tPrice\tSize\tType\t\t\t\tID")
+    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID")
     for order in trader.getWaitingList():
-        print("%s\t%5.2f\t%4d\t%s\t%s" %
-              (order.symbol, order.price, order.size, order.type, order.id))
-        #print(order.symbol, order.price, order.size, order.id)
+        print("%s\t%s\t\t%5.2f\t%4d\t%s" %
+              (order.symbol, order.type, order.price, order.size, order.id))
 
     return
 
@@ -55,10 +54,10 @@ def demo04(trader):
     :return:
     """
 
-    print("Symbol\tPrice\tSize\tType\t\t\t\tID")
+    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID")
     for order in trader.getWaitingList():
-        print("%s\t%5.2f\t%4d\t%s\t%s" %
-              (order.symbol, order.price, order.size, order.type, order.id))
+        print("%s\t%s\t\t%5.2f\t%4d\t%s" %
+              (order.symbol, order.type, order.price, order.size, order.id))
 
     print()
 
@@ -92,10 +91,10 @@ def demo05(trader):
     :return:
     """
 
-    aaplMarketBuy = shift.Order("AAPL", 0.00, 1, shift.Order.MARKET_BUY)
+    aaplMarketBuy = shift.Order(shift.Order.MARKET_BUY, "AAPL", 1)
     trader.submitOrder(aaplMarketBuy)
 
-    msftMarketBuy = shift.Order("MSFT", 0.00, 1, shift.Order.MARKET_BUY)
+    msftMarketBuy = shift.Order(shift.Order.MARKET_BUY, "MSFT", 1)
     trader.submitOrder(msftMarketBuy)
 
     return
@@ -123,14 +122,14 @@ def demo06(trader):
     print("Buying Power\tTotal Shares\tTotal P&L")
     print("%12.2f\t%12d\t%9.2f" % (trader.getPortfolioSummary().totalBP,
                                    trader.getPortfolioSummary().totalShares,
-                                   trader.getPortfolioSummary().totalPL))
+                                   trader.getPortfolioSummary().totalRealizedPL))
 
     print()
 
     print("Symbol\tShares\t\tPrice\t\tP&L")
     for item in trader.getPortfolioItems().values():
         print("%s\t%6d\t%9.2f\t%7.2f" % (item.getSymbol(), item.getShares(),
-                                         item.getPrice(), item.getPL()))
+                                         item.getPrice(), item.getRealizedPL()))
 
     return
 
@@ -142,10 +141,10 @@ def demo07(trader):
     :return:
     """
 
-    aaplMarketSell = shift.Order("AAPL", 0.00, 1, shift.Order.MARKET_SELL)
+    aaplMarketSell = shift.Order(shift.Order.MARKET_SELL, "AAPL", 1)
     trader.submitOrder(aaplMarketSell)
 
-    msftMarketSell = shift.Order("MSFT", 0.00, 1, shift.Order.MARKET_SELL)
+    msftMarketSell = shift.Order(shift.Order.MARKET_SELL, "MSFT", 1)
     trader.submitOrder(msftMarketSell)
 
     return
@@ -158,11 +157,10 @@ def demo08(trader):
     :return:
     """
 
-    print("Symbol\tPrice\tSize\tType\t\t\t\tID")
+    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID")
     for order in trader.getSubmittedOrders():
-        print("%s\t%5.2f\t%4d\t%s\t%s" %
-              (order.symbol, order.price, order.size, order.type, order.id))
-        #print(order.symbol, order.price, order.size, order.id)
+        print("%s\t%s\t\t%5.2f\t%4d\t%s" %
+              (order.symbol, order.type, order.price, order.size, order.id))
 
     return
 
@@ -177,10 +175,10 @@ def demo09(trader):
     :param trader:
     :return:
     """
-    print("price\tdestination\ttype\tsize\t\t\t\tsymbol\ttime")
-    for order in trader.getOrderBook('AAPL', "B"):
-        print("%f\t%s\t%s\t%4d\t%s\t%f" %
-              (order.price, order.destination, order.type, order.size, order.symbol, order.time))
+    print("Price\tSize\tTime\t\tDestination")
+    for order in trader.getOrderBook("AAPL", shift.OrderBookType.GLOBAL_BID, 5):
+        print("%5.2f\t%4d\t%4d\t\t%s" %
+              (order.price, order.size, order.time, order.destination))
 
 
 def demo10(trader):
@@ -194,10 +192,10 @@ def demo10(trader):
     :return:
     """
 
-    print("price\tdestination\ttype\tsize\t\t\t\tsymbol\ttime")
-    for order in trader.getOrderBookWithDestination('AAPL', "B"):
-        print("%f\t%s\t%s\t%4d\t%s\t%f" %
-              (order.price, order.destination, order.type, order.size, order.symbol, order.time))
+    print("Price\tSize\tTime\t\tDestination")
+    for order in trader.getOrderBookWithDestination("AAPL", shift.OrderBookType.GLOBAL_BID):
+        print("%5.2f\t%4d\t%4d\t\t%s" %
+              (order.price, order.size, order.time, order.destination))
 
 
 def main(argv):

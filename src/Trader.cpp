@@ -267,10 +267,9 @@ void Trader::onPortfolioItemUpdated(const std::function<void(Trader*, const std:
     m_client->portfolioItemUpdatedCb = cb;
 }
 
-void Trader::onPortfolioSummaryUpdated(const std::function<void (Trader *)> &cb)
+void Trader::onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb)
 {
     m_client->portfolioSummaryUpdatedCb = cb;
-
 }
 
 void Trader::onWaitingListUpdated(const std::function<void(Trader*)>& cb)
