@@ -2,6 +2,8 @@
 
 #include "Common.h"
 
+#include <pybind11/chrono.h>
+
 namespace PortfolioSummary {
 
 void bindPython(py::module& m)
@@ -13,10 +15,11 @@ void bindPython(py::module& m)
     PORTFOLIO_SUMMARY //! Bind function
         .def("isOpenBPReady", &shift::PortfolioSummary::isOpenBPReady);
     PORTFOLIO_SUMMARY //! Bind property
+        .def_property("openBP", &shift::PortfolioSummary::getOpenBP, &shift::PortfolioSummary::setOpenBP, py::return_value_policy::reference)
         .def_property("totalBP", &shift::PortfolioSummary::getTotalBP, &shift::PortfolioSummary::setTotalBP, py::return_value_policy::reference)
         .def_property("totalShares", &shift::PortfolioSummary::getTotalShares, &shift::PortfolioSummary::setTotalShares, py::return_value_policy::reference)
         .def_property("totalRealizedPL", &shift::PortfolioSummary::getTotalRealizedPL, &shift::PortfolioSummary::setTotalRealizedPL, py::return_value_policy::reference)
-        .def_property("openBP", &shift::PortfolioSummary::getOpenBP, &shift::PortfolioSummary::setOpenBP, py::return_value_policy::reference);
+        .def_property("timestamp", &shift::PortfolioSummary::getTimestamp, &shift::PortfolioSummary::setTimestamp, py::return_value_policy::reference);
 }
 
 } // PortfolioSummary

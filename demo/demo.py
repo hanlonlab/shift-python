@@ -39,10 +39,10 @@ def demo03(trader):
     :return:
     """
 
-    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID")
+    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID\t\t\t\t\t\t\t\t\t\tTimestamp")
     for order in trader.getWaitingList():
-        print("%s\t%s\t\t%5.2f\t%4d\t%s" %
-              (order.symbol, order.type, order.price, order.size, order.id))
+        print("%s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
+              (order.symbol, order.type, order.price, order.size, order.id, order.timestamp))
 
     return
 
@@ -54,10 +54,10 @@ def demo04(trader):
     :return:
     """
 
-    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID")
+    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID\t\t\t\t\t\t\t\t\t\tTimestamp")
     for order in trader.getWaitingList():
-        print("%s\t%s\t\t%5.2f\t%4d\t%s" %
-              (order.symbol, order.type, order.price, order.size, order.id))
+        print("%s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
+              (order.symbol, order.type, order.price, order.size, order.id, order.timestamp))
 
     print()
 
@@ -107,29 +107,31 @@ def demo06(trader):
      1. Open Buying Power (openBP)
      2. Total Buying Power (totalBP)
      3. Total Shares (totalShares)
-     4. Total Profit and Loss (totalPL)
-     5. Total Realized Profit and Loss (totalRealizedPL)
+     4. Total Realized Profit/Loss (totalRealizedPL)
+     5. Timestamp of Last Update (timestamp)
 
      getPortfolioItems() returns a dictionary with "symbol" as keys and PortfolioItem as values, with each providing the following information:
      1. Symbol (getSymbol())
      2. Shares (getShares())
      3. Price (getPrice())
-     4. Profit/Loss (getPL())
+     4. Realized Profit/Loss (getRealizedPL())
+     5. Timestamp of Last Update (getTimestamp())
     :param trader:
     :return:
     """
 
-    print("Buying Power\tTotal Shares\tTotal P&L")
-    print("%12.2f\t%12d\t%9.2f" % (trader.getPortfolioSummary().totalBP,
-                                   trader.getPortfolioSummary().totalShares,
-                                   trader.getPortfolioSummary().totalRealizedPL))
+    print("Buying Power\tTotal Shares\tTotal P&L\tTimestamp")
+    print("%12.2f\t%12d\t%9.2f\t%s" % (trader.getPortfolioSummary().totalBP,
+                                       trader.getPortfolioSummary().totalShares,
+                                       trader.getPortfolioSummary().totalRealizedPL,
+                                       trader.getPortfolioSummary().timestamp))
 
     print()
 
-    print("Symbol\tShares\t\tPrice\t\tP&L")
+    print("Symbol\t\tShares\t\tPrice\t\tP&L\t\tTimestamp")
     for item in trader.getPortfolioItems().values():
-        print("%s\t%6d\t%9.2f\t%7.2f" % (item.getSymbol(), item.getShares(),
-                                         item.getPrice(), item.getRealizedPL()))
+        print("%s\t\t%6d\t%9.2f\t%7.2f\t\t%s" %
+              (item.getSymbol(), item.getShares(), item.getPrice(), item.getRealizedPL(), item.getTimestamp()))
 
     return
 
@@ -157,10 +159,10 @@ def demo08(trader):
     :return:
     """
 
-    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID")
+    print("Symbol\tType\t\t\t\t\tPrice\tSize\tID\t\t\t\t\t\t\t\t\t\tTimestamp")
     for order in trader.getSubmittedOrders():
-        print("%s\t%s\t\t%5.2f\t%4d\t%s" %
-              (order.symbol, order.type, order.price, order.size, order.id))
+        print("%s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
+              (order.symbol, order.type, order.price, order.size, order.id, order.timestamp))
 
     return
 
@@ -172,10 +174,10 @@ def demo09(trader):
     :return:
     """
 
-    print("Price\tSize\tTime\t\tDestination")
+    print("Price\tSize\tDest\tTime")
     for order in trader.getOrderBook("AAPL", shift.OrderBookType.GLOBAL_BID, 5):
-        print("%5.2f\t%4d\t%4d\t\t%s" %
-              (order.price, order.size, order.time, order.destination))
+        print("%5.2f\t%4d\t%s\t%4d" %
+              (order.price, order.size, order.destination, order.time))
 
 
 def demo10(trader):
@@ -185,10 +187,10 @@ def demo10(trader):
     :return:
     """
 
-    print("Price\tSize\tTime\t\tDestination")
+    print("Price\tSize\tDest\tTime")
     for order in trader.getOrderBookWithDestination("AAPL", shift.OrderBookType.GLOBAL_BID):
-        print("%5.2f\t%4d\t%4d\t\t%s" %
-              (order.price, order.size, order.time, order.destination))
+        print("%5.2f\t%4d\t%s\t\t%4d" %
+              (order.price, order.size, order.destination, order.time))
 
 
 def main(argv):
@@ -204,7 +206,7 @@ def main(argv):
     except shift.ConnectionTimeout as e:
         print(e)
 
-    demo01(trader)
+    # demo01(trader)
     # demo02(trader)
     # demo03(trader)
     # demo04(trader)

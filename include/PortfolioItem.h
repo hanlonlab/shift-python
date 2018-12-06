@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include <pybind11/chrono.h>
+
 namespace PortfolioItem {
 
 void bindPython(py::module& m)
@@ -17,7 +19,8 @@ void bindPython(py::module& m)
         .def("getSymbol", &shift::PortfolioItem::getSymbol)
         .def("getShares", &shift::PortfolioItem::getShares)
         .def("getPrice", &shift::PortfolioItem::getPrice)
-        .def("getRealizedPL", &shift::PortfolioItem::getRealizedPL);
+        .def("getRealizedPL", &shift::PortfolioItem::getRealizedPL)
+        .def("getTimestamp", &shift::PortfolioItem::getTimestamp);
 }
 
 } // PortfolioItem

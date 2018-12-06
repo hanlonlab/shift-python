@@ -17,7 +17,8 @@ void bindPython(py::module& m)
         .def_property("symbol", &shift::Order::getSymbol, &shift::Order::setSymbol, py::return_value_policy::reference)
         .def_property("size", &shift::Order::getSize, &shift::Order::setSize, py::return_value_policy::reference)
         .def_property("price", &shift::Order::getPrice, &shift::Order::setPrice, py::return_value_policy::reference)
-        .def_property("id", &shift::Order::getID, &shift::Order::setID, py::return_value_policy::reference);
+        .def_property("id", &shift::Order::getID, &shift::Order::setID, py::return_value_policy::reference)
+        .def_property("timestamp", &shift::Order::getTimestamp, &shift::Order::setTimestamp, py::return_value_policy::reference);
 
     //! Bind enum type
     py::enum_<shift::Order::Type> Type(ORDER, "OrderType");
