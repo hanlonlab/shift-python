@@ -10,7 +10,7 @@ def demo01(trader):
     :return:
     """
 
-    limitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 1.0)
+    limitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 50.0)
     trader.submitOrder(limitBuy)
 
     return
@@ -23,10 +23,10 @@ def demo02(trader):
     :return:
     """
 
-    aaplLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 10, 1.00)
+    aaplLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 10, 50.00)
     trader.submitOrder(aaplLimitBuy)
 
-    msftLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "MSFT", 10, 1.00)
+    msftLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "MSFT", 10, 50.00)
     trader.submitOrder(msftLimitBuy)
 
     return
