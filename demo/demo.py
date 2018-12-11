@@ -10,7 +10,7 @@ def demo01(trader):
     :return:
     """
 
-    limitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 50.00)
+    limitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 10.00)
     trader.submitOrder(limitBuy)
 
     return
@@ -23,10 +23,10 @@ def demo02(trader):
     :return:
     """
 
-    aaplLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 10, 50.00)
+    aaplLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 10, 10.00)
     trader.submitOrder(aaplLimitBuy)
 
-    msftLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "MSFT", 10, 50.00)
+    msftLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "MSFT", 10, 10.00)
     trader.submitOrder(msftLimitBuy)
 
     return
@@ -62,14 +62,10 @@ def demo04(trader):
     print()
 
     print("Waiting list size: " + str(trader.getWaitingListSize()))
+
     print("Canceling all pending orders...", end=" ")
 
-    for order in trader.getWaitingList():
-        if order.type == shift.Order.LIMIT_BUY:
-            order.type = shift.Order.CANCEL_BID
-        else:
-            order.type = shift.Order.CANCEL_ASK
-        trader.submitOrder(order)
+    trader.cancelAllPendingOrders()
 
     i = 0
     while trader.getWaitingListSize() > 0:
