@@ -100,11 +100,10 @@ def demo06(trader):
     """
     This method provides information on the structure of PortfolioSummary and PortfolioItem objects:
      getPortfolioSummary() returns a PortfolioSummary object with the following data:
-     1. Open Buying Power (openBP)
-     2. Total Buying Power (totalBP)
-     3. Total Shares (totalShares)
-     4. Total Realized Profit/Loss (totalRealizedPL)
-     5. Timestamp of Last Update (timestamp)
+     1. Total Buying Power (totalBP)
+     2. Total Shares (totalShares)
+     3. Total Realized Profit/Loss (totalRealizedPL)
+     4. Timestamp of Last Update (timestamp)
 
      getPortfolioItems() returns a dictionary with "symbol" as keys and PortfolioItem as values, with each providing the following information:
      1. Symbol (getSymbol())
