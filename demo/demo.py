@@ -10,7 +10,7 @@ def demo01(trader):
     :return:
     """
 
-    limitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 50.0)
+    limitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 50.00)
     trader.submitOrder(limitBuy)
 
     return
