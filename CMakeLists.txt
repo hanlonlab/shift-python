@@ -64,6 +64,19 @@ if(NOT WIN32)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     endif(UNIX)
 
+    # GCC (Ubuntu 18.04 LTS Bionic Beaver)
+    # -Wno-deprecated is required when linking QuickFIX on Ubuntu
+    if(UNIX AND NOT APPLE)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
+    endif(UNIX AND NOT APPLE)
+
+    # Clang (macOS Mojave 10.14)
+    # -Wno-overloaded-virtual is required when linking QuickFIX on macOS
+    if(APPLE)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
+        include_directories(/usr/local/include)
+    endif(APPLE)
+
 endif(NOT WIN32)
 
 # Visual C++ (Visual Studio 2017)
