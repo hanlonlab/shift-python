@@ -34,6 +34,28 @@ def demo02(trader):
 
 def demo03(trader):
     """
+    This method prints the local bid order book for corresponding symbols.
+    :param trader:
+    :return:
+    """
+
+    print("AAPL:")
+    print("Price\tSize\tDest\tTime")
+    for order in trader.getOrderBook("AAPL", shift.OrderBookType.LOCAL_BID):
+        print("%5.2f\t%4d\t%s\t%4d" %
+              (order.price, order.size, order.destination, order.time))
+
+    print()
+
+    print("MSFT:")
+    print("Price\tSize\tDest\tTime")
+    for order in trader.getOrderBook("MSFT", shift.OrderBookType.LOCAL_BID):
+        print("%5.2f\t%4d\t%s\t%4d" %
+              (order.price, order.size, order.destination, order.time))
+
+
+def demo04(trader):
+    """
     This method prints all current waiting orders information.
     :param trader:
     :return:
@@ -47,7 +69,7 @@ def demo03(trader):
     return
 
 
-def demo04(trader):
+def demo05(trader):
     """
     This method cancels all the orders in the waiting list.
     :param trader:
@@ -80,7 +102,7 @@ def demo04(trader):
     return
 
 
-def demo05(trader):
+def demo06(trader):
     """
     This method shows how to submit market buy orders.
     :param trader:
@@ -96,7 +118,7 @@ def demo05(trader):
     return
 
 
-def demo06(trader):
+def demo07(trader):
     """
     This method provides information on the structure of PortfolioSummary and PortfolioItem objects:
      getPortfolioSummary() returns a PortfolioSummary object with the following data:
@@ -131,7 +153,7 @@ def demo06(trader):
     return
 
 
-def demo07(trader):
+def demo08(trader):
     """
     This method shows how to submit market sell orders.
     :param trader:
@@ -147,7 +169,7 @@ def demo07(trader):
     return
 
 
-def demo08(trader):
+def demo09(trader):
     """
     This method prints all submitted orders information.
     :param trader:
@@ -162,9 +184,9 @@ def demo08(trader):
     return
 
 
-def demo09(trader):
+def demo10(trader):
     """
-    This method prints the order book for a corresponding symbol and type.
+    This method prints the global bid order book for a corresponding symbol and type.
     :param trader:
     :return:
     """
@@ -175,9 +197,10 @@ def demo09(trader):
               (order.price, order.size, order.destination, order.time))
 
 
-def demo10(trader):
+def demo11(trader):
     """
-    This method prints the order book for a corresponding symbol and type, with routing (destination) information.
+    This method prints the global bid order book for a corresponding symbol and type,
+    with routing (destination) information.
     :param trader:
     :return:
     """
@@ -211,6 +234,7 @@ def main(argv):
     # demo08(trader)
     # demo09(trader)
     # demo10(trader)
+    # demo11(trader)
 
     # disconnect
     trader.disconnect()
