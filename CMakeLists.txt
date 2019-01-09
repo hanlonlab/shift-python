@@ -40,42 +40,44 @@ set(OTHER
 
 ### Compiler Flags ############################################################
 
+# Important for libraries
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # UNIX only
 if(NOT WIN32)
 
-    # C++14
-    set(CMAKE_CXX_STANDARD 14)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_CXX_EXTENSIONS OFF)
+# C++14
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-    # Common Flags
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -pedantic-errors")
+# Common Flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -pedantic-errors")
 
-    # Debug Flags
-    set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
+# Debug Flags
+set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
 
-    # Release Flags
-    # -O2 instead of -O3
-    # -flto stands for Link Time Optimization (LTO)
-    set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -flto")
+# Release Flags
+# -O2 instead of -O3
+# -flto stands for Link Time Optimization (LTO)
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -flto")
 
-    # GCC / Clang
-    if(UNIX)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-    endif(UNIX)
+# GCC / Clang
+if(UNIX)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+endif(UNIX)
 
-    # GCC (Ubuntu 18.04 LTS Bionic Beaver)
-    # -Wno-deprecated is required when linking QuickFIX on Ubuntu
-    if(UNIX AND NOT APPLE)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
-    endif(UNIX AND NOT APPLE)
+# GCC (Ubuntu 18.04 LTS Bionic Beaver)
+# -Wno-deprecated is required when linking QuickFIX on Ubuntu
+if(UNIX AND NOT APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
+endif(UNIX AND NOT APPLE)
 
-    # Clang (macOS Mojave 10.14)
-    # -Wno-overloaded-virtual is required when linking QuickFIX on macOS
-    if(APPLE)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
-        include_directories(/usr/local/include)
-    endif(APPLE)
+# Clang (macOS Mojave 10.14)
+# -Wno-overloaded-virtual is required when linking QuickFIX on macOS
+if(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
+endif(APPLE)
 
 endif(NOT WIN32)
 
@@ -90,8 +92,6 @@ if(WIN32)
     include_directories(C:/quickfix/include)    
     include_directories("./pybind11/build/mock_install/include")
     include_directories("C:/Program Files (x86)/Python37-32/include")
-
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -fexceptions -pedantic-errors")
 endif(WIN32)
 
 ### Build Types ###############################################################
@@ -102,7 +102,6 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 ### Build Configuration #######################################################
-
 
 if(NOT WIN32) # UNIX only
     find_package(pybind11 REQUIRED)
@@ -174,6 +173,22 @@ if(NOT WIN32) # UNIX
 else(WIN32)   # Windows
     target_link_libraries(${LIB_NAME}
                           PRIVATE ${LIBCORECLIENT} ${CURL_LIBRARY}  ${QUICKFIX}  ${LIBMISCUTILS})
+endif(NOT WIN32)
+
+### Install Configuration #####################################################
+
+# UNIX only
+if(NOT WIN32)
+
+# If no installation path is set, the default is /usr/local
+if(NOT CMAKE_INSTALL_PREFIX)
+    set(CMAKE_INSTALL_PREFIX /usr/local)
+endif(NOT CMAKE_INSTALL_PREFIX)
+
+# Add installation path to list of include directories
+# (required to use other project libraries during compilation)
+include_directories(${CMAKE_INSTALL_PREFIX}/include)
+
 endif(NOT WIN32)
 
 ###############################################################################
