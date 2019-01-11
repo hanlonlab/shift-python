@@ -77,6 +77,7 @@ endif(UNIX AND NOT APPLE)
 # -Wno-overloaded-virtual is required when linking QuickFIX on macOS
 if(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
+    include_directories(/usr/local/include)
 endif(APPLE)
 
 endif(NOT WIN32)
@@ -165,6 +166,7 @@ pybind11_add_module(${LIB_NAME}
                     ${DEMO} ${INCLUDE} ${SRC} ${OTHER})
 
 target_include_directories(${LIB_NAME}
+                           PRIVATE ${CMAKE_PREFIX_PATH}/include
                            PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 if(NOT WIN32) # UNIX
@@ -184,10 +186,6 @@ if(NOT WIN32)
 if(NOT CMAKE_INSTALL_PREFIX)
     set(CMAKE_INSTALL_PREFIX /usr/local)
 endif(NOT CMAKE_INSTALL_PREFIX)
-
-# Add installation path to list of include directories
-# (required to use other project libraries during compilation)
-include_directories(${CMAKE_INSTALL_PREFIX}/include)
 
 endif(NOT WIN32)
 
