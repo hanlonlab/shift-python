@@ -1,0 +1,24 @@
+package:
+  name: shift-coreclient
+  version: "1.0.0"
+
+source:
+  path: ~/HanlonLab/shift-main
+
+requirements:
+  build:
+    # - {{ compiler('cxx') }}
+    - cmake
+    - curl
+    - quickfix
+    - shift-miscutils
+  run:
+    - curl
+    - quickfix
+    - shift-miscutils
+
+build:
+  include_recipe: False
+
+about:
+  home: https://github.com/hanlonlab/shift-main
