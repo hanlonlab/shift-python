@@ -3,7 +3,7 @@ package:
   version: "1.0.0"
 
 source:
-  path: ~/HanlonLab/shift-main
+  git_url: https://github.com/hanlonlab/shift-main.git
 
 requirements:
   build:
