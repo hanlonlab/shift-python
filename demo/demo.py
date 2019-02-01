@@ -26,8 +26,8 @@ def demo02(trader):
     aaplLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 10, 10.00)
     trader.submitOrder(aaplLimitBuy)
 
-    msftLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "MSFT", 10, 10.00)
-    trader.submitOrder(msftLimitBuy)
+    xomLimitBuy = shift.Order(shift.Order.LIMIT_BUY, "XOM", 10, 10.00)
+    trader.submitOrder(xomLimitBuy)
 
     return
 
@@ -47,9 +47,9 @@ def demo03(trader):
 
     print()
 
-    print("MSFT:")
+    print("XOM:")
     print("Price\tSize\tDest\tTime")
-    for order in trader.getOrderBook("MSFT", shift.OrderBookType.LOCAL_BID):
+    for order in trader.getOrderBook("XOM", shift.OrderBookType.LOCAL_BID):
         print("%5.2f\t%4d\t%s\t%4d" %
               (order.price, order.size, order.destination, order.time))
 
@@ -112,8 +112,8 @@ def demo06(trader):
     aaplMarketBuy = shift.Order(shift.Order.MARKET_BUY, "AAPL", 1)
     trader.submitOrder(aaplMarketBuy)
 
-    msftMarketBuy = shift.Order(shift.Order.MARKET_BUY, "MSFT", 1)
-    trader.submitOrder(msftMarketBuy)
+    xomMarketBuy = shift.Order(shift.Order.MARKET_BUY, "XOM", 1)
+    trader.submitOrder(xomMarketBuy)
 
     return
 
@@ -163,8 +163,8 @@ def demo08(trader):
     aaplMarketSell = shift.Order(shift.Order.MARKET_SELL, "AAPL", 1)
     trader.submitOrder(aaplMarketSell)
 
-    msftMarketSell = shift.Order(shift.Order.MARKET_SELL, "MSFT", 1)
-    trader.submitOrder(msftMarketSell)
+    xomMarketSell = shift.Order(shift.Order.MARKET_SELL, "XOM", 1)
+    trader.submitOrder(xomMarketSell)
 
     return
 
