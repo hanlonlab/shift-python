@@ -42,7 +42,7 @@ def demo03(trader):
     print("AAPL:")
     print("Price\tSize\tDest\tTime")
     for order in trader.getOrderBook("AAPL", shift.OrderBookType.LOCAL_BID):
-        print("%5.2f\t%4d\t%s\t%4d" %
+        print("%5.2f\t%4d\t%s\t%s" %
               (order.price, order.size, order.destination, order.time))
 
     print()
@@ -50,7 +50,7 @@ def demo03(trader):
     print("XOM:")
     print("Price\tSize\tDest\tTime")
     for order in trader.getOrderBook("XOM", shift.OrderBookType.LOCAL_BID):
-        print("%5.2f\t%4d\t%s\t%4d" %
+        print("%5.2f\t%4d\t%s\t%s" %
               (order.price, order.size, order.destination, order.time))
 
 
@@ -63,7 +63,7 @@ def demo04(trader):
 
     print("Symbol\tType\t\t\t\t\tPrice\tSize\tID\t\t\t\t\t\t\t\t\t\tTimestamp")
     for order in trader.getWaitingList():
-        print("%s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
+        print("%6s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
               (order.symbol, order.type, order.price, order.size, order.id, order.timestamp))
 
     return
@@ -78,7 +78,7 @@ def demo05(trader):
 
     print("Symbol\tType\t\t\t\t\tPrice\tSize\tID\t\t\t\t\t\t\t\t\t\tTimestamp")
     for order in trader.getWaitingList():
-        print("%s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
+        print("%6s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
               (order.symbol, order.type, order.price, order.size, order.id, order.timestamp))
 
     print()
@@ -87,7 +87,13 @@ def demo05(trader):
 
     print("Canceling all pending orders...", end=" ")
 
-    trader.cancelAllPendingOrders()
+    # trader.cancelAllPendingOrders() also works
+    for order in trader.getWaitingList():
+        if order.type == shift.Order.LIMIT_BUY:
+            order.type = shift.Order.CANCEL_BID
+        else:
+            order.type = shift.Order.CANCEL_ASK
+        trader.submitOrder(order)
 
     i = 0
     while trader.getWaitingListSize() > 0:
@@ -138,16 +144,16 @@ def demo07(trader):
     """
 
     print("Buying Power\tTotal Shares\tTotal P&L\tTimestamp")
-    print("%12.2f\t%12d\t%9.2f\t%s" % (trader.getPortfolioSummary().totalBP,
-                                       trader.getPortfolioSummary().totalShares,
-                                       trader.getPortfolioSummary().totalRealizedPL,
-                                       trader.getPortfolioSummary().timestamp))
+    print("%12.2f\t%12d\t%9.2f\t%s" % (trader.getPortfolioSummary().getTotalBP(),
+                                       trader.getPortfolioSummary().getTotalShares(),
+                                       trader.getPortfolioSummary().getTotalRealizedPL(),
+                                       trader.getPortfolioSummary().getTimestamp()))
 
     print()
 
     print("Symbol\t\tShares\t\tPrice\t\tP&L\t\tTimestamp")
     for item in trader.getPortfolioItems().values():
-        print("%s\t\t%6d\t%9.2f\t%7.2f\t\t%s" %
+        print("%6s\t\t%6d\t%9.2f\t%7.2f\t\t%s" %
               (item.getSymbol(), item.getShares(), item.getPrice(), item.getRealizedPL(), item.getTimestamp()))
 
     return
@@ -193,7 +199,7 @@ def demo10(trader):
 
     print("Price\tSize\tDest\tTime")
     for order in trader.getOrderBook("AAPL", shift.OrderBookType.GLOBAL_BID, 5):
-        print("%5.2f\t%4d\t%s\t%4d" %
+        print("%5.2f\t%4d\t%s\t%s" %
               (order.price, order.size, order.destination, order.time))
 
 
@@ -207,7 +213,7 @@ def demo11(trader):
 
     print("Price\tSize\tDest\tTime")
     for order in trader.getOrderBookWithDestination("AAPL", shift.OrderBookType.GLOBAL_BID):
-        print("%5.2f\t%4d\t%s\t\t%4d" %
+        print("%5.2f\t%4d\t%s\t\t%s" %
               (order.price, order.size, order.destination, order.time))
 
 
@@ -215,7 +221,7 @@ def main(argv):
     # create trader object
     trader = shift.Trader("democlient")
 
-    # connect and subscribe to all available stock orderbooks
+    # connect and subscribe to all available order books
     try:
         trader.connect("initiator.cfg", "password")
         trader.subAllOrderBook()
