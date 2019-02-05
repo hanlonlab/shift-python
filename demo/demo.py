@@ -184,7 +184,7 @@ def demo09(trader):
 
     print("Symbol\tType\t\t\t\t\tPrice\tSize\tID\t\t\t\t\t\t\t\t\t\tTimestamp")
     for order in trader.getSubmittedOrders():
-        print("%s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
+        print("%4s\t%s\t\t%5.2f\t%4d\t%s\t%s" %
               (order.symbol, order.type, order.price, order.size, order.id, order.timestamp))
 
     return
