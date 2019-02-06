@@ -14,7 +14,7 @@ void bindPython(py::module& m)
     py::class_<shift::PortfolioItem> PORTFOLIO_ITEM(m, "PortfolioItem");
     PORTFOLIO_ITEM //! Bind constructor
         .def(py::init<>())
-        .def(py::init<std::string, int, int, double, double, double>());
+        .def(py::init<std::string, int, int, double, double, double>(), py::arg("symbol"), py::arg("longShares"), py::arg("shortShares"), py::arg("longPrice"), py::arg("shortPrice"), py::arg("realizedPL"));
     PORTFOLIO_ITEM //! Bind function
         .def("getSymbol", &shift::PortfolioItem::getSymbol)
         .def("getShares", &shift::PortfolioItem::getShares)
