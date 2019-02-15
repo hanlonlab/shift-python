@@ -8,13 +8,14 @@
 ### Docker Image Installation (recommended)
 
 - Install latest docker from official website.
-- Download `shift-python_x.x.x_dockerfile_anaconda3_py37.zip`, the Dockerfile package from [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases/tag/0.0.1).
+- Download `shift-python_x.x.x_dockercompose_conda3_py37.zip`, the Docker Compose package from [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases/tag/0.0.1).
 - Unzip the downloaded files to the same directory somewhere you like.
 - Run in terminal/command prompt:
 
 ```bash
 cd [directory-you-unzipped-the-Dockerfile]
-docker build -t "shift-python-conda3:latest" .
+docker-compose build
+docker-compose up
 ```
 
 - If successful, you should see docker image named `shift-python-conda3:latest` by running:
@@ -35,8 +36,17 @@ docker run -it shift-python-conda3:latest
 
 **Note: This is for Linux users only. Windows and MacOS is not yet supported.**
 
-- Download `shift-python_x.x.x_dockerfile_anaconda3_py37.zip`, the Dockerfile package from [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases/tag/0.0.1).
-- Run `setup.sh`  only.
+- Run following:
+
+```bash
+conda create -y -n shift python=3.7
+source /opt/conda/etc/profile.d/conda.sh
+conda activate shift
+wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_conda_linux64_py37.zip | bsdtar -xvf-
+cd shift*
+conda install *.tar.bz2
+```
+
 - Installation finished! Get started with [command line](#get-started-with-command-line) or PyCharm IDE.
 
 ## Get started with command line
