@@ -15,10 +15,9 @@
 ```bash
 cd [directory-you-unzipped-the-Dockerfile]
 docker-compose build
-docker-compose up
 ```
 
-- If successful, you should see docker image named `shift-python-conda3:latest` by running:
+- If successful, you should see docker image named `shift-python-conda3_notebook` by running:
 
 ```bash
 docker images -a
@@ -27,10 +26,10 @@ docker images -a
 - Now you should be able to run SHIFT Python docker image by running:
 
 ```bash
-docker run -it shift-python-conda3:latest
+docker-compose up
 ```
 
-- Installation finished! Get started with [command line](#get-started-with-command-line) or [PyCharm IDE](#get-started-with -pycharm).
+- Installation finished! Get started with [PyCharm IDE](#get-started-with -pycharm).
 
 ### Anaconda package Installation (linux only)
 
@@ -39,7 +38,7 @@ docker run -it shift-python-conda3:latest
 - Run following:
 
 ```bash
-conda create -y -n shift python=3.7
+conda create -y -n shift python=3.7 anaconda
 source /opt/conda/etc/profile.d/conda.sh
 conda activate shift
 wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_conda_linux64_py37.zip | bsdtar -xvf-
