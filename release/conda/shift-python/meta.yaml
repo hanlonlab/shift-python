@@ -7,10 +7,10 @@ source:
 
 requirements:
   build:
-    - python
+    - python>3
     - shift-coreclient
   run:
-    - python
+    - python>3
     - shift-coreclient
 
 test:
