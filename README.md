@@ -1,61 +1,53 @@
 [header]: # "To generate a html version of this document:"
 [pandoc]: # "pandoc README.md -c ../shift-main/Templates/github.css -o README.html -s --self-contained"
 
-# SHIFT PythonClient Guide
+# SHIFT Python
 
-## Ubuntu and macOS
+## Installation
 
-### Required Libraries
+### Docker Image Installation (recommended)
 
-**Please refer to the other required libraries in the SHIFT Developer Guide.**
+- Install latest docker from official website.
+- Download `shift-python_x.x.x_dockerfile_anaconda3_py37.zip`, the Dockerfile package from [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases/tag/0.0.1).
+- Unzip the downloaded files to the same directory somewhere you like.
+- Run in terminal/command prompt:
 
-#### SHIFT Core Client
-
-Use the installer in the root folder of the SHIFT project:
-
-- In the Terminal: `sudo ./install -m LC`
-
-#### pybind11:
-
-Choose a location to keep the pybind11 source files (for debugging purposes), e.g. a "C++" folder in your home directory, and then:
-
-``` bash
-git clone https://github.com/pybind/pybind11.git
-cd pybind11
-git checkout stable
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
+```bash
+cd [directory-you-unzipped-the-Dockerfile]
+docker build -t "shift-python-conda3:latest" .
 ```
 
----
+- If successful, you should see docker image named `shift-python-conda3:latest` by running:
 
-### SHIFT PythonClient Installation
+```bash
+docker images -a
+```
 
-**Depending on how python was installed in your system, you may need to use `sudo` in the commands below.**
+- Now you should be able to run SHIFT Python docker image by running:
 
-To install the PythonClient:
+```bash
+docker run -it shift-python-conda3:latest
+```
 
-- In the Terminal: `# python3 setup.py install`
+- Installation finished! Get started with [command line](#get-started-with-command-line) or [PyCharm IDE](#get-started-with -pycharm).
 
-To uninstall the PythonClient:
+### Anaconda package Installation (linux only)
 
-- In the Terminal: `# pip3 uninstall shift`
+**Note: This is for Linux users only. Windows and MacOS is not yet supported.**
 
-To clean the build directories:
+- Download `shift-python_x.x.x_dockerfile_anaconda3_py37.zip`, the Dockerfile package from [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases/tag/0.0.1).
+- Run `setup.sh`  only.
+- Installation finished! Get started with [command line](#get-started-with-command-line) or PyCharm IDE.
 
-- In the Terminal: `# python3 setup.py clean`
+## Get started with command line
 
----
+- Run `conda activate shift` to get into shift environment. You need to do this every time you log in to docker container shell.
+- If you see `(shift)` in the beginning of your command line, that means you are in the right environment to run SHIFT.
+- Don't forget to `import shift` when you use Python with SHIFT.
 
-## Windows
+## Get started with PyCharm
 
-### [TODO] Required Libraries
+- Install PyCharm Pro from the official website. (You need to register pro version with your .edu email).
+- Configure your docker and PyCharm accordingly with this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
 
----
-
-### [TODO] SHIFT PythonClient Installation
-
----
+* Get started with you project!
