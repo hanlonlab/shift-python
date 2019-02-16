@@ -69,6 +69,7 @@ conda install *.tar.bz2
 - Configuring Docker as a remote interpreter:
     - For Windows, follow the extra instructions in the `Prerequisites` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
     - Open an existing project, or create a completely new Python project in Pycharm Pro.
+    - Follow the steps in the `Configuring Docker as a remote interpreter` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
 
 ## Get Started with Command Line
 
