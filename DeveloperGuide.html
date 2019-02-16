@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
+  <title>DeveloperGuide</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -659,83 +659,45 @@ border-bottom-color: #eee;
   <![endif]-->
 </head>
 <body>
-<h1 id="shift-python">SHIFT Python</h1>
-<h2 id="installation">Installation</h2>
-<h3 id="docker-image-installation-recommended">Docker Image Installation (recommended)</h3>
+<h1 id="shift-python-developer-guide">SHIFT Python Developer Guide</h1>
+<h2 id="ubuntu-and-macos">Ubuntu and macOS</h2>
+<h3 id="required-libraries">Required Libraries</h3>
+<p><strong>Please refer to the other required libraries in the SHIFT Developer Guide.</strong></p>
+<h4 id="shift-core-client">SHIFT Core Client</h4>
+<p>Use the installer in the root folder of the SHIFT project:</p>
 <ul>
-<li>Step 01
-<ul>
-<li>Install or upgrade your operating system to latest version:
-<ul>
-<li>For macOS, Mojave.</li>
-<li>For Windows, Windows 10 Pro (https://aka.ms/devtoolsforteaching). Use your Stevens email address to either login (IT confirms you should all have an account) or request an account from:
-<ul>
-<li><a href="https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685">Stevens IT Helpdesk</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>Step 02
-<ul>
-<li>Install <a href="https://www.docker.com/products/docker-desktop">Docker</a>. When you install Docker, make sure to choose <strong>Linux Containers</strong> and not <strong>Windows Containers</strong>:
-<ul>
-<li>For macOS, <a href="https://store.docker.com/editions/community/docker-ce-desktop-mac">Docker for macOS</a>.</li>
-<li>For Windows, <a href="https://store.docker.com/editions/community/docker-ce-desktop-windows">Docker for Windows</a>.</li>
-</ul></li>
-<li>For Windows, if you store your file in a different drive location from <strong>C:/</strong>, then you will need to access the Docker preferences to add other Shared Folder locations, such as <strong>D:/</strong> or whatever.</li>
-<li>Follow the online Docker installation instructions carefully and make sure to test the Docker installation.</li>
-<li>NOTE: In some cases, you may need to enable virtualization on your computers.</li>
-</ul></li>
-<li>Step 03
-<ul>
-<li>Download <code>shift-python_x.x.x_docker.zip</code>, the Docker Compose package from our <a href="https://github.com/hanlonlab/shift-python/releases">GitHub Release Page</a>.</li>
-<li>Unzip the downloaded file to somewhere you like.</li>
-<li>Access a terminal window on your computer. You may require admin privileges:
-<ul>
-<li>For macOS, Terminal.app.</li>
-<li>For Windows, Powershell. NOTE: do not use PowerShell ISE.</li>
-</ul></li>
-</ul></li>
+<li>In the Terminal: <code>sudo ./install -m LC</code></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">cd</span> [directory-you-unzipped-the-package]</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">docker-compose</span> build</a></code></pre></div>
+<h4 id="pybind11">pybind11:</h4>
+<p>Choose a location to keep the pybind11 source files (for debugging purposes), e.g. a “C++” folder in your home directory, and then:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">git</span> clone https://github.com/pybind/pybind11.git</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="bu">cd</span> pybind11</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">git</span> checkout stable</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">mkdir</span> build</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="bu">cd</span> build</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">cmake</span> ..</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="fu">make</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="fu">sudo</span> make install</a></code></pre></div>
+<hr />
+<h3 id="shift-python-installation">SHIFT Python Installation</h3>
+<p><strong>Depending on how python was installed in your system, you may need to use <code>sudo</code> in the commands below.</strong></p>
+<p>To install SHIFT Python:</p>
 <ul>
-<li>If successful, you should see the Docker image named <code>shift-python_xxx_docker_anaconda3</code> by running:</li>
+<li>In the Terminal: <code># python3 setup.py install</code></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">docker</span> images -a</a></code></pre></div>
+<p>To uninstall SHIFT Python:</p>
 <ul>
-<li>Now you should be able to run the SHIFT Python Docker image by running:</li>
+<li>In the Terminal: <code># pip3 uninstall shift</code></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">docker-compose</span> up</a></code></pre></div>
+<p>To clean the build directories:</p>
 <ul>
-<li>Installation finished! Get started with <a href="#get-started-with-pycharm-pro">PyCharm Pro</a>.</li>
+<li>In the Terminal: <code># python3 setup.py clean</code></li>
 </ul>
-<h3 id="anaconda-packages-installation-linux-only">Anaconda Packages Installation (linux only)</h3>
-<p><strong>Note: This is for Linux users only. Windows and macOS are not yet supported.</strong></p>
-<ul>
-<li>Run the following to create a new <code>shift</code> environment and install SHIFT Python:</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">conda</span> create -y -n shift python=3.6 anaconda</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">conda</span> activate shift</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">wget</span> -qO- https://github.com/hanlonlab/shift-python/releases/download/1.0.0/shift-python_1.0.0_conda_linux64.zip <span class="kw">|</span> <span class="ex">bsdtar</span> -xvf-</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="bu">cd</span> shift*</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="ex">conda</span> install *.tar.bz2</a></code></pre></div>
-<ul>
-<li>Installation finished! Get started with <a href="#get-started-with-command-line">Command Line</a>.</li>
-</ul>
-<h2 id="get-started-with-pycharm-pro">Get Started with PyCharm Pro</h2>
-<ul>
-<li>Install <a href="https://www.jetbrains.com/pycharm">PyCharm Pro</a>. Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).</li>
-<li>Configuring Docker as a remote interpreter:
-<ul>
-<li>For Windows, follow the extra instructions in the <code>Prerequisites</code> session of this <a href="https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html">guide</a>.</li>
-<li>Open an existing project, or create a completely new Python project in Pycharm Pro.</li>
-</ul></li>
-</ul>
-<h2 id="get-started-with-command-line">Get Started with Command Line</h2>
-<ul>
-<li>Run <code>conda activate shift</code> to get into the <code>shift</code> environment. You need to do this every time you open a new shell (or you can add this command onto your <code>.bashrc</code> or <code>.bash_profile</code> file).</li>
-<li>If you see <code>(shift)</code> in the beginning of your command line, that means you are in the right environment to run SHIFT.</li>
-<li>Don’t forget to <code>import shift</code> when you use Python with SHIFT.</li>
-</ul>
+<hr />
+<h2 id="windows">Windows</h2>
+<h3 id="todo-required-libraries">[TODO] Required Libraries</h3>
+<hr />
+<h3 id="todo-shift-python-installation">[TODO] SHIFT Python Installation</h3>
+<hr />
 </body>
 </html>

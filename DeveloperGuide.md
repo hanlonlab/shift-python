@@ -1,7 +1,7 @@
 [header]: # "To generate a html version of this document:"
-[pandoc]: # "pandoc README.md -c ../shift-main/Templates/github.css -o README.html -s --self-contained"
+[pandoc]: # "pandoc DeveloperGuide.md -c ../shift-main/Templates/github.css -o DeveloperGuide.html -s --self-contained"
 
-# SHIFT PythonClient Guide
+# SHIFT Python Developer Guide
 
 ## Ubuntu and macOS
 
@@ -32,15 +32,15 @@ sudo make install
 
 ---
 
-### SHIFT PythonClient Installation
+### SHIFT Python Installation
 
 **Depending on how python was installed in your system, you may need to use `sudo` in the commands below.**
 
-To install the PythonClient:
+To install SHIFT Python:
 
 - In the Terminal: `# python3 setup.py install`
 
-To uninstall the PythonClient:
+To uninstall SHIFT Python:
 
 - In the Terminal: `# pip3 uninstall shift`
 
@@ -56,6 +56,6 @@ To clean the build directories:
 
 ---
 
-### [TODO] SHIFT PythonClient Installation
+### [TODO] SHIFT Python Installation
 
 ---
