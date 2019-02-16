@@ -16,7 +16,7 @@ RUN conda update --all -y
 #     conda install tensorflow==1.9.0
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_linux64_anaconda3_py37.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_conda_linux64.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 
