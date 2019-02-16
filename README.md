@@ -22,7 +22,7 @@
     - NOTE: In some cases, you may need to enable virtualization on your computers.
 
 - Step 03
-    - Download `shift-python_x.x.x_dockercompose_anaconda3_py36.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
+    - Download `shift-python_x.x.x_docker.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
     - Unzip the downloaded file to somewhere you like.
     - Access a terminal window on your computer. You may require admin privileges:
         - For macOS, Terminal.app.
@@ -33,7 +33,7 @@ cd [directory-you-unzipped-the-package]
 docker-compose build
 ```
 
-- If successful, you should see the Docker image named `shift-python_anaconda3` by running:
+- If successful, you should see the Docker image named `shift-python_xxx_docker_anaconda3` by running:
 
 ```bash
 docker images -a
@@ -56,7 +56,7 @@ docker-compose up
 ```bash
 conda create -y -n shift python=3.6 anaconda
 conda activate shift
-wget -qO- https://github.com/hanlonlab/shift-python/releases/download/1.0.0/shift-python_1.0.0_linux64_anaconda3_py36.zip | bsdtar -xvf-
+wget -qO- https://github.com/hanlonlab/shift-python/releases/download/1.0.0/shift-python_1.0.0_conda_linux64.zip | bsdtar -xvf-
 cd shift*
 conda install *.tar.bz2
 ```
