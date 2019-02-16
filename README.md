@@ -7,13 +7,13 @@
 
 ### Docker Image Installation (recommended)
 
-- Step 01
+- Step 01:
     - Install or upgrade your operating system to latest version:
         - For macOS, Mojave.
         - For Windows, Windows 10 Pro (https://aka.ms/devtoolsforteaching). Use your Stevens email address to either login (IT confirms you should all have an account) or request an account from:
             - [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685)
 
-- Step 02
+- Step 02:
     - Install [Docker](https://www.docker.com/products/docker-desktop). When you install Docker, make sure to choose **Linux Containers** and not **Windows Containers**:
         - For macOS, [Docker for macOS](https://store.docker.com/editions/community/docker-ce-desktop-mac).
         - For Windows, [Docker for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows).
@@ -21,7 +21,7 @@
     - Follow the online Docker installation instructions carefully and make sure to test the Docker installation.
     - NOTE: In some cases, you may need to enable virtualization on your computers.
 
-- Step 03
+- Step 03:
     - Download `shift-python_x.x.x_docker.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
     - Unzip the downloaded file to somewhere you like.
     - Access a terminal window on your computer. You may require admin privileges:
