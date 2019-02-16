@@ -4,6 +4,10 @@ FROM continuumio/anaconda3:latest
 # shift-python maintainer
 MAINTAINER Han Zheng (zhenghanecho@gmail.com)
 
+# Set correct time zone
+ENV TZ=America/New_York
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Update all conda packages
 RUN conda update --all -y
 
