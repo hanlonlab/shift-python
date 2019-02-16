@@ -7,56 +7,71 @@
 
 ### Docker Image Installation (recommended)
 
-- Install latest docker from official website.
-- Download `shift-python_x.x.x_dockercompose_conda3_py37.zip`, the Docker Compose package from [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases/tag/0.0.1).
-- Unzip the downloaded files to the same directory somewhere you like.
-- Run in terminal/command prompt:
+- Step 01
+    - Install or upgrade your operating system to latest version:
+        - For macOS, Mojave.
+        - For Windows, Windows 10 Pro (https://aka.ms/devtoolsforteaching). Use your Stevens email address to either login (IT confirms you should all have an account) or request an account from:
+            - [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685)
+
+- Step 02
+    - Install [Docker](https://www.docker.com/products/docker-desktop). When you install Docker, make sure to choose **Linux Containers** and not **Windows Containers**:
+        - For macOS, [Docker for macOS](https://store.docker.com/editions/community/docker-ce-desktop-mac).
+        - For Windows, [Docker for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+    - For Windows, if you store your file in a different drive location from **C:/**, then you will need to access the Docker preferences to add other Shared Folder locations, such as **D:/** or whatever.
+    - Follow the online Docker installation instructions carefully and make sure to test the Docker installation.
+    - NOTE: In some cases, you may need to enable virtualization on your computers.
+
+- Step 03
+    - Download `shift-python_x.x.x_dockercompose_anaconda3_py36.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
+    - Unzip the downloaded file to somewhere you like.
+    - Access a terminal window on your computer. You may require admin privileges:
+        - For macOS, Terminal.app.
+        - For Windows, Powershell. NOTE: do not use PowerShell ISE.
 
 ```bash
-cd [directory-you-unzipped-the-Dockerfile]
+cd [directory-you-unzipped-the-package]
 docker-compose build
 ```
 
-- If successful, you should see docker image named `shift-python-conda3_notebook` by running:
+- If successful, you should see the Docker image named `shift-python_anaconda3` by running:
 
 ```bash
 docker images -a
 ```
 
-- Now you should be able to run SHIFT Python docker image by running:
+- Now you should be able to run the SHIFT Python Docker image by running:
 
 ```bash
 docker-compose up
 ```
 
-- Installation finished! Get started with [PyCharm IDE](#get-started-with -pycharm).
+- Installation finished! Get started with [PyCharm Pro](#get-started-with-pycharm-pro).
 
-### Anaconda package Installation (linux only)
+### Anaconda Packages Installation (linux only)
 
-**Note: This is for Linux users only. Windows and MacOS is not yet supported.**
+**Note: This is for Linux users only. Windows and macOS are not yet supported.**
 
-- Run following:
+- Run the following to create a new `shift` environment and install SHIFT Python:
 
 ```bash
-conda create -y -n shift python=3.7 anaconda
-source /opt/conda/etc/profile.d/conda.sh
+conda create -y -n shift python=3.6 anaconda
 conda activate shift
 wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_conda_linux64_py37.zip | bsdtar -xvf-
 cd shift*
 conda install *.tar.bz2
 ```
 
-- Installation finished! Get started with [command line](#get-started-with-command-line) or PyCharm IDE.
+- Installation finished! Get started with [Command Line](#get-started-with-command-line).
 
-## Get started with command line
+## Get Started with PyCharm Pro
 
-- Run `conda activate shift` to get into shift environment. You need to do this every time you log in to docker container shell.
+- Install [PyCharm Pro](https://www.jetbrains.com/pycharm). Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).
+- Configuring Docker as a remote interpreter:
+    - For Windows, follow the extra instructions in the `Prerequisites` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
+    - Open an existing project, or create a completely new Python project in Pycharm Pro.
+
+## Get Started with Command Line
+
+- Run `conda activate shift` to get into the `shift` environment. You need to do this every time you open a new shell (or you can add this command onto your `.bashrc` or `.bash_profile` file).
 - If you see `(shift)` in the beginning of your command line, that means you are in the right environment to run SHIFT.
 - Don't forget to `import shift` when you use Python with SHIFT.
-
-## Get started with PyCharm
-
-- Install PyCharm Pro from the official website. (You need to register pro version with your .edu email).
-- Configure your docker and PyCharm accordingly with this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
-
-* Get started with you project!
