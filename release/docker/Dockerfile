@@ -16,12 +16,15 @@ RUN conda update --all -y
 #     conda install tensorflow==1.9.0
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_conda_linux64_py37.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_linux64_anaconda3_py37.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 
 # Clean conda packages cache
 RUN conda clean --all -y
+
+# Generate a notebook server config
+RUN jupyter notebook --generate-config
 
 # Set working directory 
 WORKDIR /home/notebooks
