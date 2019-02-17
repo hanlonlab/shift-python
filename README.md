@@ -36,7 +36,7 @@ docker-compose build
 - If successful, you should see the Docker image named `shift-python_xxx_docker_anaconda3` by running:
 
 ```bash
-docker images -a
+docker images
 ```
 
 - Now you should be able to run the SHIFT Python Docker image by running:
