@@ -5,7 +5,7 @@ import time
 
 def demo01(trader):
     """
-    This method submits a limit buy order by indicating symbol, limit price, limit size and order type.
+    This method submits a limit buy order by indicating order type, symbol, size, and limit price.
     :param trader:
     :return:
     """
@@ -18,7 +18,7 @@ def demo01(trader):
 
 def demo02(trader):
     """
-    This method submits 2 limit buy orders by indicating symbol, limit price, limit size and order type.
+    This method submits 2 limit buy orders by indicating order type, symbol, size, and limit price.
     :param trader:
     :return:
     """
@@ -145,9 +145,9 @@ def demo07(trader):
 
     print("Buying Power\tTotal Shares\tTotal P&L\tTimestamp")
     print("%12.2f\t%12d\t%9.2f\t%26s" % (trader.getPortfolioSummary().getTotalBP(),
-                                       trader.getPortfolioSummary().getTotalShares(),
-                                       trader.getPortfolioSummary().getTotalRealizedPL(),
-                                       trader.getPortfolioSummary().getTimestamp()))
+                                         trader.getPortfolioSummary().getTotalShares(),
+                                         trader.getPortfolioSummary().getTotalRealizedPL(),
+                                         trader.getPortfolioSummary().getTimestamp()))
 
     print()
 
@@ -203,19 +203,6 @@ def demo10(trader):
               (order.price, order.size, order.destination, order.time))
 
 
-def demo11(trader):
-    """
-    This method prints the global bid order book for a corresponding symbol and type,
-    with routing (destination) information.
-    :param trader:
-    :return:
-    """
-
-    print("  Price\t\tSize\t  Dest\t\tTime")
-    for order in trader.getOrderBookWithDestination("AAPL", shift.OrderBookType.GLOBAL_BID):
-        print("%7.2f\t\t%4d\t%6s\t\t%19s" %
-              (order.price, order.size, order.destination, order.time))
-
 def main(argv):
     # create trader object
     trader = shift.Trader("democlient")
@@ -239,7 +226,6 @@ def main(argv):
     # demo08(trader)
     # demo09(trader)
     # demo10(trader)
-    # demo11(trader)
 
     # disconnect
     trader.disconnect()
