@@ -26,7 +26,7 @@
     - Unzip the downloaded file to somewhere you like.
     - Access a terminal window on your computer. You may require admin privileges:
         - For macOS, Terminal.app.
-        - For Windows, Powershell. NOTE: do not use PowerShell ISE.
+        - For Windows, Powershell (run as administrator). NOTE: do not use PowerShell ISE.
 
 ```bash
 cd [directory-you-unzipped-the-package]
