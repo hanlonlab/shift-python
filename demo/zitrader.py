@@ -106,9 +106,9 @@ def main(argv):
 
     # attach callback functors
     # trader.onLastPriceUpdated(goodcbfs.LastPriceUpdatedCB(stock_ticker, verbose))
-    trader.onPortfolioSummaryUpdated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
-    trader.onPortfolioItemUpdated(goodcbfs.PortfolioItemUpdatedCB(stock_ticker, verbose))
-    trader.onWaitingListUpdated(goodcbfs.WaitingListUpdatedCB(verbose))
+    # trader.onPortfolioSummaryUpdated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
+    # trader.onPortfolioItemUpdated(goodcbfs.PortfolioItemUpdatedCB(stock_ticker, verbose))
+    # trader.onWaitingListUpdated(goodcbfs.WaitingListUpdatedCB(verbose))
 
     # connect
     try:
@@ -131,7 +131,7 @@ def main(argv):
             print()
             print(f"Trading Time: {trading_times[i]}")
 
-        # cancel las order if it has not executed yet
+        # cancel last order if it has not executed yet
         if trader.getWaitingListSize() != 0:
             if verbose:
                 print("Canceling Pending Orders!")
