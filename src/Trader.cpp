@@ -18,16 +18,16 @@ void PythonClient::receiveLastPrice(const std::string& symbol)
         lastPriceUpdatedCb(trader, symbol);
 }
 
-void PythonClient::receivePortfolioItem(const std::string& symbol)
-{
-    if (portfolioItemUpdatedCb)
-        portfolioItemUpdatedCb(trader, symbol);
-}
-
 void PythonClient::receivePortfolioSummary()
 {
     if (portfolioSummaryUpdatedCb)
         portfolioSummaryUpdatedCb(trader);
+}
+
+void PythonClient::receivePortfolioItem(const std::string& symbol)
+{
+    if (portfolioItemUpdatedCb)
+        portfolioItemUpdatedCb(trader, symbol);
 }
 
 void PythonClient::receiveWaitingList()
@@ -262,14 +262,14 @@ void Trader::onLastPriceUpdated(const std::function<void(Trader*, const std::str
     m_client->lastPriceUpdatedCb = cb;
 }
 
-void Trader::onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb)
-{
-    m_client->portfolioItemUpdatedCb = cb;
-}
-
 void Trader::onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb)
 {
     m_client->portfolioSummaryUpdatedCb = cb;
+}
+
+void Trader::onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb)
+{
+    m_client->portfolioItemUpdatedCb = cb;
 }
 
 void Trader::onWaitingListUpdated(const std::function<void(Trader*)>& cb)

@@ -19,16 +19,16 @@ public:
     PythonClient(const std::string& username, Trader* t);
 
     std::function<void(Trader*, const std::string&)> lastPriceUpdatedCb;
-    std::function<void(Trader*, const std::string&)> portfolioItemUpdatedCb;
     std::function<void(Trader*)> portfolioSummaryUpdatedCb;
+    std::function<void(Trader*, const std::string&)> portfolioItemUpdatedCb;
     std::function<void(Trader*)> waitingListUpdatedCb;
 
     Trader* trader;
 
 protected:
     virtual void receiveLastPrice(const std::string& symbol) override;
-    virtual void receivePortfolioItem(const std::string& symbol) override;
     virtual void receivePortfolioSummary() override;
+    virtual void receivePortfolioItem(const std::string& symbol) override;
     virtual void receiveWaitingList() override;
 
 private:
@@ -141,8 +141,8 @@ private:
 
     // Callback methods
     void onLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb);
-    void onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb);
+    void onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onWaitingListUpdated(const std::function<void(Trader*)>& cb);
 
 private:
