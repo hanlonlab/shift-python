@@ -56,7 +56,7 @@ docker-compose up
 ```bash
 conda create -y -n shift python=3.6 anaconda
 conda activate shift
-wget -qO- https://github.com/hanlonlab/shift-python/releases/download/1.0.0/shift-python_1.0.0_conda_linux64.zip | bsdtar -xvf-
+wget -qO- https://github.com/hanlonlab/shift-python/releases/download/beta/shift-python_beta_conda_linux64.zip | bsdtar -xvf-
 cd shift*
 conda install *.tar.bz2
 ```
