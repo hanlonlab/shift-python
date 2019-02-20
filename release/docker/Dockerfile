@@ -1,5 +1,5 @@
 # Set the base image using anaconda3
-FROM continuumio/anaconda3:latest
+FROM continuumio/anaconda3:5.2.0
 
 # shift-python maintainer
 MAINTAINER Han Zheng (zhenghanecho@gmail.com)
@@ -12,11 +12,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN conda update --all -y
 
 # Install extra packages for the algorithmic trading competition
-# RUN conda install joblib && \
-#     conda install tensorflow==1.9.0
+RUN conda install joblib && \
+    conda install tensorflow==1.9.0
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/0.0.1/shift-python_0.0.1_conda_linux64.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/beta/shift-python_beta_conda_linux64.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 
