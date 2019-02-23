@@ -106,9 +106,9 @@ def main(argv):
 
     # attach callback functors
     # trader.onLastPriceUpdated(goodcbfs.LastPriceUpdatedCB(stock_ticker, verbose))
-    # trader.onPortfolioSummaryUpdated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
-    # trader.onPortfolioItemUpdated(goodcbfs.PortfolioItemUpdatedCB(stock_ticker, verbose))
-    # trader.onWaitingListUpdated(goodcbfs.WaitingListUpdatedCB(verbose))
+    trader.onPortfolioSummaryUpdated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
+    trader.onPortfolioItemUpdated(goodcbfs.PortfolioItemUpdatedCB(stock_ticker, verbose))
+    trader.onWaitingListUpdated(goodcbfs.WaitingListUpdatedCB(verbose))
 
     # connect
     try:
