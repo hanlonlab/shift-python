@@ -14,7 +14,7 @@ RUN conda update --all -y
 # Install extra packages for the algorithmic trading competition
 RUN conda install joblib && \
     conda install keras && \
-    conda install tensorflow==1.9.0
+    conda install tensorflow
 
 # Install shift-python
 RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/beta/shift-python_beta_conda_linux64.zip | bsdtar -xvf- && \
