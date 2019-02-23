@@ -13,6 +13,7 @@ RUN conda update --all -y
 
 # Install extra packages for the algorithmic trading competition
 RUN conda install joblib && \
+    conda install keras && \
     conda install tensorflow==1.9.0
 
 # Install shift-python
