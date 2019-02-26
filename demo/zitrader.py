@@ -7,6 +7,8 @@ import time
 
 import goodcbfs
 
+from credentials import my_username, my_password
+
 
 def usage():
     print()
@@ -30,7 +32,6 @@ def decimal_truncate(value, precision) -> float:
 
 
 def main(argv):
-    client_id_number = 1  # client ID number
     stock_ticker = "AAPL"  # stock ticker (e.g. XYZ)
     simulation_duration = 380  # duration of simulation (in minutes)
     trading_rate = 190  # number of trader per simulation session
@@ -40,8 +41,8 @@ def main(argv):
     verbose = False  # verbose mode
 
     try:
-        opts, args = getopt.getopt(argv, "hn:t:d:r:b:a:c:v",
-                                   ["help", "number=", "ticker=", "duration=", "rate=",
+        opts, args = getopt.getopt(argv, "ht:d:r:b:a:c:v",
+                                   ["help", "ticker=", "duration=", "rate=",
                                     "bid=", "ask=", "change=", "verbose"])
     except getopt.GetoptError as e:
         # print help information and exit:
@@ -53,8 +54,6 @@ def main(argv):
         if o in ("-h", "--help"):
             usage()
             sys.exit()
-        elif o in ("-n", "--number"):
-            client_id_number = int(a)
         elif o in ("-t", "--ticker"):
             stock_ticker = str(a)
         elif o in ("-d", "--duration"):
@@ -71,8 +70,6 @@ def main(argv):
             verbose = True
         else:
             assert False, "unhandled option"
-
-    client_id = f"test{str(client_id_number).zfill(3)}"
 
     last_price = (initial_bid_price + initial_ask_price) / 2.0
     best_bid = initial_bid_price
@@ -102,7 +99,7 @@ def main(argv):
     num_trades = len(trading_times)
 
     # create trader object
-    trader = shift.Trader(client_id)
+    trader = shift.Trader(my_username)
 
     # attach callback functors
     # trader.onLastPriceUpdated(goodcbfs.LastPriceUpdatedCB(stock_ticker, verbose))
@@ -112,7 +109,7 @@ def main(argv):
 
     # connect
     try:
-        trader.connect("initiator.cfg", "password")
+        trader.connect("initiator.cfg", my_password)
     except shift.IncorrectPassword as e:
         print(e)
         sys.exit(2)
