@@ -152,14 +152,24 @@ void Trader::cancelAllPendingOrders()
     return m_client->cancelAllPendingOrders();
 }
 
+double Trader::getClosePrice(const std::string& symbol, bool buy, int size)
+{
+    return m_client->getClosePrice(symbol, buy, size);
+}
+
 double Trader::getLastPrice(const std::string& symbol)
 {
     return m_client->getLastPrice(symbol);
 }
 
-double Trader::getClosePrice(const std::string& symbol, bool buy, int size)
+int Trader::getLastSize(const std::string& symbol)
 {
-    return m_client->getClosePrice(symbol, buy, size);
+    return m_client->getLastSize(symbol);
+}
+
+std::chrono::system_clock::time_point Trader::getLastTradeTime()
+{
+    return m_client->getLastTradeTime();
 }
 
 shift::BestPrice Trader::getBestPrice(const std::string& symbol)

@@ -57,8 +57,10 @@ public:
             .def("getWaitingListSize", &Trader::getWaitingListSize)
             .def("getWaitingList", &Trader::getWaitingList)
             .def("cancelAllPendingOrders", &Trader::cancelAllPendingOrders)
-            .def("getLastPrice", &Trader::getLastPrice, py::arg("symbol"))
             .def("getClosePrice", &Trader::getClosePrice, py::arg("symbol"), py::arg("buy"), py::arg("size"))
+            .def("getLastPrice", &Trader::getLastPrice, py::arg("symbol"))
+            .def("getLastSize", &Trader::getLastSize, py::arg("symbol"))
+            .def("getLastTradeTime", &Trader::getLastTradeTime)
             .def("getBestPrice", &Trader::getBestPrice, py::arg("symbol"))
             .def("getOrderBook", &Trader::getOrderBook, py::arg("symbols"), py::arg("type"), py::arg("maxLevel") = 99)
             .def("getOrderBookWithDestination", &Trader::getOrderBookWithDestination, py::arg("symbols"), py::arg("type"))
@@ -109,8 +111,10 @@ private:
     void cancelAllPendingOrders();
 
     // Price methods
-    double getLastPrice(const std::string& symbol);
     double getClosePrice(const std::string& symbol, bool buy, int size);
+    double getLastPrice(const std::string& symbol);
+    int getLastSize(const std::string& symbol);
+    std::chrono::system_clock::time_point getLastTradeTime();
 
     // Order book methods
     shift::BestPrice getBestPrice(const std::string& symbol);
