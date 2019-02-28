@@ -49,6 +49,7 @@ public:
             .def("disconnect", &Trader::disconnect)
             .def("isConnected", &Trader::isConnected)
             .def("submitOrder", &Trader::submitOrder, py::arg("order"))
+            .def("submitCancellation", &Trader::submitCancellation, py::arg("order"))
             .def("getPortfolioSummary", &Trader::getPortfolioSummary)
             .def("getPortfolioItems", &Trader::getPortfolioItems)
             .def("getPortfolioItem", &Trader::getPortfolioItem, py::arg("symbol"))
@@ -99,6 +100,7 @@ private:
     bool isConnected();
 
     void submitOrder(const shift::Order& order);
+    void submitCancellation(shift::Order order);
 
     // Portfolio methods
     shift::PortfolioSummary getPortfolioSummary();

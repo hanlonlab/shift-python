@@ -112,6 +112,11 @@ void Trader::submitOrder(const shift::Order& order)
     return m_client->submitOrder(order);
 }
 
+void Trader::submitCancellation(shift::Order order)
+{
+    return m_client->submitCancellation(order);
+}
+
 shift::PortfolioSummary Trader::getPortfolioSummary()
 {
     return m_client->getPortfolioSummary();
