@@ -134,11 +134,7 @@ def main(argv):
                 print("Canceling Pending Orders!")
             # trader.cancelAllPendingOrders()
             for order in trader.getWaitingList():
-                if order.type == shift.Order.LIMIT_BUY:
-                    order.type = shift.Order.CANCEL_BID
-                else:
-                    order.type = shift.Order.CANCEL_ASK
-                trader.submitOrder(order)
+                trader.submitCancellation(order)
             while trader.getWaitingListSize() > 0:
                 time.sleep(1)
 
