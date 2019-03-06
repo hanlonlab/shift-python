@@ -1,8 +1,7 @@
 #include "Trader.h"
 
 PythonClient::PythonClient(Trader* t)
-    : shift::CoreClient()
-    , trader(t)
+    : trader(t)
 {
 }
 
@@ -78,10 +77,10 @@ bool Trader::connect(const std::string& cfgFile, const std::string& password)
     try {
         m_initiator.connectBrokerageCenter(cfgFile, m_client, password);
         Log(Log::INFO) << "Connection established.";
-    } catch (shift::ConnectionTimeout e) {
+    } catch (shift::ConnectionTimeout &e) {
         Log(Log::ERRO) << e.what();
         throw e;
-    } catch (shift::IncorrectPassword e) {
+    } catch (shift::IncorrectPassword &e) {
         Log(Log::ERRO) << e.what();
         throw e;
     }
