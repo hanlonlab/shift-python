@@ -17,6 +17,12 @@ void PythonClient::receiveLastPrice(const std::string& symbol)
         lastPriceUpdatedCb(trader, symbol);
 }
 
+void PythonClient::receiveExecutionReport(const std::string& orderID)
+{
+    if (executionReportReceivedCb)
+        executionReportReceivedCb(trader, orderID);
+}
+
 void PythonClient::receivePortfolioSummary()
 {
     if (portfolioSummaryUpdatedCb)
@@ -77,10 +83,10 @@ bool Trader::connect(const std::string& cfgFile, const std::string& password)
     try {
         m_initiator.connectBrokerageCenter(cfgFile, m_client, password);
         Log(Log::INFO) << "Connection established.";
-    } catch (shift::ConnectionTimeout &e) {
+    } catch (shift::ConnectionTimeout& e) {
         Log(Log::ERRO) << e.what();
         throw e;
-    } catch (shift::IncorrectPassword &e) {
+    } catch (shift::IncorrectPassword& e) {
         Log(Log::ERRO) << e.what();
         throw e;
     }
@@ -139,6 +145,11 @@ int Trader::getSubmittedOrdersSize()
 std::vector<shift::Order> Trader::getSubmittedOrders()
 {
     return m_client->getSubmittedOrders();
+}
+
+shift::Order Trader::getOrder(const std::string& orderID)
+{
+    return m_client->getOrder(orderID);
 }
 
 int Trader::getWaitingListSize()
@@ -274,6 +285,11 @@ std::vector<std::string> Trader::getSubscribedOrderBookList()
 void Trader::onLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb)
 {
     m_client->lastPriceUpdatedCb = cb;
+}
+
+void Trader::onExecutionReportReceived(const std::function<void(Trader*, const std::string&)>& cb)
+{
+    m_client->executionReportReceivedCb = cb;
 }
 
 void Trader::onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb)

@@ -129,7 +129,8 @@ def demo07(trader):
      3. Total Realized Profit/Loss (totalRealizedPL)
      4. Timestamp of Last Update (timestamp)
 
-     getPortfolioItems() returns a dictionary with "symbol" as keys and PortfolioItem as values, with each providing the following information:
+     getPortfolioItems() returns a dictionary with "symbol" as keys and PortfolioItem as values,
+     with each providing the following information:
      1. Symbol (getSymbol())
      2. Shares (getShares())
      3. Price (getPrice())
@@ -178,10 +179,11 @@ def demo09(trader):
     :return:
     """
 
-    print("Symbol\t\t\t\t\t Type\t  Price\t\tSize\tID\t\t\t\t\t\t\t\t\t\tTimestamp")
+    print("Symbol\t\t\t\t\t Type\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  Status\tTimestamp")
     for order in trader.getSubmittedOrders():
-        print("%6s\t%21s\t%7.2f\t\t%4d\t%36s\t%26s" %
-              (order.symbol, order.type, order.price, order.size, order.id, order.timestamp))
+        print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
+              (order.symbol, order.type, order.price, order.size,
+               order.executed, order.id, order.status, order.timestamp))
 
     return
 

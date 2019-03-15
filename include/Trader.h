@@ -19,6 +19,7 @@ public:
     PythonClient(const std::string& username, Trader* t);
 
     std::function<void(Trader*, const std::string&)> lastPriceUpdatedCb;
+    std::function<void(Trader*, const std::string&)> executionReportReceivedCb;
     std::function<void(Trader*)> portfolioSummaryUpdatedCb;
     std::function<void(Trader*, const std::string&)> portfolioItemUpdatedCb;
     std::function<void(Trader*)> waitingListUpdatedCb;
@@ -27,6 +28,7 @@ public:
 
 protected:
     virtual void receiveLastPrice(const std::string& symbol) override;
+    virtual void receiveExecutionReport(const std::string& orderID) override;
     virtual void receivePortfolioSummary() override;
     virtual void receivePortfolioItem(const std::string& symbol) override;
     virtual void receiveWaitingList() override;
@@ -55,6 +57,7 @@ public:
             .def("getPortfolioItem", &Trader::getPortfolioItem, py::arg("symbol"))
             .def("getSubmittedOrdersSize", &Trader::getSubmittedOrdersSize)
             .def("getSubmittedOrders", &Trader::getSubmittedOrders)
+            .def("getOrder", &Trader::getOrder, py::arg("orderID"))
             .def("getWaitingListSize", &Trader::getWaitingListSize)
             .def("getWaitingList", &Trader::getWaitingList)
             .def("cancelAllPendingOrders", &Trader::cancelAllPendingOrders)
@@ -108,6 +111,7 @@ private:
     shift::PortfolioItem getPortfolioItem(const std::string& symbol);
     int getSubmittedOrdersSize();
     std::vector<shift::Order> getSubmittedOrders();
+    shift::Order getOrder(const std::string& orderID);
     int getWaitingListSize();
     std::vector<shift::Order> getWaitingList();
     void cancelAllPendingOrders();
@@ -147,6 +151,7 @@ private:
 
     // Callback methods
     void onLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb);
+    void onExecutionReportReceived(const std::function<void(Trader*, const std::string&)>& cb);
     void onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb);
     void onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onWaitingListUpdated(const std::function<void(Trader*)>& cb);
