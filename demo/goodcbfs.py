@@ -57,7 +57,7 @@ def waiting_list_updated_cb(trader):
         for order in curr_waiting_list:
             print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
                   (order.symbol, order.type, order.price, order.size,
-                   order.executedSize, order.id, order.status, order.timestamp))
+                   order.executed_size, order.id, order.status, order.timestamp))
     else:
         print("Waiting List Empty!")
 
@@ -74,6 +74,6 @@ class WaitingListUpdatedCB(object):
                 for order in curr_waiting_list:
                     print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
                           (order.symbol, order.type, order.price, order.size,
-                           order.executedSize, order.id, order.status, order.timestamp))
+                           order.executed_size, order.id, order.status, order.timestamp))
             else:
                 print("Waiting List Empty!")
