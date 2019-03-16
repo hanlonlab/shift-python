@@ -17,10 +17,10 @@ void PythonClient::receiveLastPrice(const std::string& symbol)
         lastPriceUpdatedCb(trader, symbol);
 }
 
-void PythonClient::receiveExecutionReport(const std::string& orderID)
+void PythonClient::receiveExecution(const std::string& orderID)
 {
-    if (executionReportReceivedCb)
-        executionReportReceivedCb(trader, orderID);
+    if (executionUpdatedCb)
+        executionUpdatedCb(trader, orderID);
 }
 
 void PythonClient::receivePortfolioSummary()
@@ -287,9 +287,9 @@ void Trader::onLastPriceUpdated(const std::function<void(Trader*, const std::str
     m_client->lastPriceUpdatedCb = cb;
 }
 
-void Trader::onExecutionReportReceived(const std::function<void(Trader*, const std::string&)>& cb)
+void Trader::onExecutionUpdated(const std::function<void(Trader*, const std::string&)>& cb)
 {
-    m_client->executionReportReceivedCb = cb;
+    m_client->executionUpdatedCb = cb;
 }
 
 void Trader::onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb)

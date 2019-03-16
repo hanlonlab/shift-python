@@ -181,9 +181,13 @@ def demo09(trader):
 
     print("Symbol\t\t\t\t\t Type\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  Status\tTimestamp")
     for order in trader.getSubmittedOrders():
+        if order.executedSize == order.size:
+            price = order.executedPrice
+        else:
+            price = order.price
         print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
-              (order.symbol, order.type, order.price, order.size,
-               order.executed, order.id, order.status, order.timestamp))
+              (order.symbol, order.type, price, order.size,
+               order.executedSize, order.id, order.status, order.timestamp))
 
     return
 
