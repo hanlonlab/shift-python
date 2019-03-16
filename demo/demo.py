@@ -61,10 +61,11 @@ def demo04(trader):
     :return:
     """
 
-    print("Symbol\t\t\t\t\t Type\t  Price\t\tSize\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  Status\tTimestamp")
+    print("Symbol\t\t\t\t\t Type\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  Status\tTimestamp")
     for order in trader.getWaitingList():
-        print("%6s\t%21s\t%7.2f\t\t%4d\t%36s\t%28s\t%26s" %
-              (order.symbol, order.type, order.price, order.size, order.id, order.status, order.timestamp))
+        print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
+              (order.symbol, order.type, order.price, order.size,
+               order.executedSize, order.id, order.status, order.timestamp))
 
     return
 
@@ -76,10 +77,11 @@ def demo05(trader):
     :return:
     """
 
-    print("Symbol\t\t\t\t\t Type\t  Price\t\tSize\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  Status\tTimestamp")
+    print("Symbol\t\t\t\t\t Type\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  Status\tTimestamp")
     for order in trader.getWaitingList():
-        print("%6s\t%21s\t%7.2f\t\t%4d\t%36s\t%28s\t%26s" %
-              (order.symbol, order.type, order.price, order.size, order.id, order.status, order.timestamp))
+        print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
+              (order.symbol, order.type, order.price, order.size,
+               order.executedSize, order.id, order.status, order.timestamp))
 
     print()
 
