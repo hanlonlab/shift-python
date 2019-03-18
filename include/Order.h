@@ -24,7 +24,7 @@ void bindPython(py::module& m)
         .def_property("timestamp", &shift::Order::getTimestamp, &shift::Order::setTimestamp, py::return_value_policy::reference);
 
     //! Bind enum
-    py::enum_<shift::Order::Type> Type(ORDER, "OrderType");
+    py::enum_<shift::Order::Type> Type(ORDER, "Type");
     Type
         .value("LIMIT_BUY", shift::Order::Type::LIMIT_BUY)
         .value("LIMIT_SELL", shift::Order::Type::LIMIT_SELL)
@@ -35,7 +35,7 @@ void bindPython(py::module& m)
         .export_values();
 
     //! Bind enum
-    py::enum_<shift::Order::Status> Status(ORDER, "OrderStatus");
+    py::enum_<shift::Order::Status> Status(ORDER, "Status");
     Status
         .value("PENDING_NEW", shift::Order::Status::PENDING_NEW)
         .value("NEW", shift::Order::Status::NEW)
