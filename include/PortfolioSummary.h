@@ -12,7 +12,7 @@ void bindPython(py::module& m)
     py::class_<shift::PortfolioSummary> PORTFOLIO_SUMMARY(m, "PortfolioSummary");
     PORTFOLIO_SUMMARY //! Bind constructor
         .def(py::init<>())
-        .def(py::init<double, int, double>(), py::arg("totalBP"), py::arg("totalShares"), py::arg("totalRealizedPL"));
+        .def(py::init<double, int, double>(), py::arg("total_bp"), py::arg("total_shares"), py::arg("total_realized_pl"));
     PORTFOLIO_SUMMARY //! Bind function
         // .def("isOpenBPReady", &shift::PortfolioSummary::isOpenBPReady)
         // .def("getOpenBP", &shift::PortfolioSummary::getOpenBP)

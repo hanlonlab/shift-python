@@ -9,7 +9,7 @@ void bindPython(py::module& m)
     //! Bind class
     py::class_<shift::BestPrice> BEST_PRICE(m, "BestPrice");
     BEST_PRICE //! Bind constructor
-        .def(py::init<double, int, double, int, double, int, double, int>(), py::arg("globalBidPrice"), py::arg("globalBidSize"), py::arg("globalAskPrice"), py::arg("globalAskSize"), py::arg("localBidPrice"), py::arg("localBidSize"), py::arg("localAskPrice"), py::arg("localAskSize"));
+        .def(py::init<double, int, double, int, double, int, double, int>(), py::arg("global_bid_price"), py::arg("global_bid_size"), py::arg("global_ask_price"), py::arg("global_ask_size"), py::arg("local_bid_price"), py::arg("local_bid_size"), py::arg("local_ask_price"), py::arg("local_ask_size"));
     BEST_PRICE //! Bind function
         .def("getBidPrice", &shift::BestPrice::getBidPrice)
         .def("getBidSize", &shift::BestPrice::getBidSize)

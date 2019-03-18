@@ -103,9 +103,10 @@ def main(argv):
 
     # attach callback functors
     # trader.onLastPriceUpdated(goodcbfs.LastPriceUpdatedCB(stock_ticker, verbose))
-    trader.onPortfolioSummaryUpdated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
-    trader.onPortfolioItemUpdated(goodcbfs.PortfolioItemUpdatedCB(stock_ticker, verbose))
-    trader.onWaitingListUpdated(goodcbfs.WaitingListUpdatedCB(verbose))
+    # trader.onExecutionUpdated(goodcbfs.ExecutionUpdatedCB(verbose))
+    # trader.onPortfolioSummaryUpdated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
+    # trader.onPortfolioItemUpdated(goodcbfs.PortfolioItemUpdatedCB(verbose))
+    # trader.onWaitingListUpdated(goodcbfs.WaitingListUpdatedCB(verbose))
 
     # connect
     try:
@@ -129,14 +130,14 @@ def main(argv):
             print(f"Trading Time: {trading_times[i]}")
 
         # cancel last order if it has not executed yet
-        if trader.getWaitingListSize() != 0:
+        if trader.getWaitingListSize() > 0:
             if verbose:
                 print("Canceling Pending Orders!")
-            # trader.cancelAllPendingOrders()
-            for order in trader.getWaitingList():
-                trader.submitCancellation(order)
-            while trader.getWaitingListSize() > 0:
-                time.sleep(1)
+            trader.cancelAllPendingOrders()
+            # for order in trader.getWaitingList():
+            #     trader.submitCancellation(order)
+            # while trader.getWaitingListSize() > 0:
+            #     time.sleep(1)
 
         # robot should not trade anymore
         if i == (num_trades - 1):
