@@ -12,6 +12,7 @@
 PYBIND11_MODULE(shift, m)
 {
     m.doc() = "Python SHIFT plugin";
+    m.attr("__version__") = "1.1.0";
 
     py::register_exception<shift::IncorrectPassword>(m, "IncorrectPassword");
     py::register_exception<shift::ConnectionTimeout>(m, "ConnectionTimeout");
