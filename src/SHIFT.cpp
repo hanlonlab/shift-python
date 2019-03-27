@@ -11,7 +11,7 @@
  */
 PYBIND11_MODULE(shift, m)
 {
-    m.doc() = "Python SHIFT plugin";
+    m.doc() = "SHIFT-Python API";
     m.attr("__version__") = "1.1.0";
 
     py::register_exception<shift::IncorrectPassword>(m, "IncorrectPassword");
