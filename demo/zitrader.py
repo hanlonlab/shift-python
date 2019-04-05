@@ -20,8 +20,7 @@ def usage():
     print("-t [ --ticker ] arg      stock ticker (e.g. XYZ)")
     print("-d [ --duration ] arg    duration of simulation (in minutes)")
     print("-r [ --rate ] arg        number of trader per simulation session")
-    print("-b [ --bid ] arg         initial bid price")
-    print("-a [ --ask ] arg         initial ask price")
+    print("-p [ --price ] arg       initial price")
     print("-c [ --change ] arg      minimum dollar change (e.g. 0.01)")
     print("-v [ --verbose ]         verbose mode")
     print()
@@ -35,15 +34,14 @@ def main(argv):
     stock_ticker = "AAPL"  # stock ticker (e.g. XYZ)
     simulation_duration = 380  # duration of simulation (in minutes)
     trading_rate = 190  # number of trader per simulation session
-    initial_bid_price = 99.95  # initial bid price
-    initial_ask_price = 100.05  # initial ask price
+    initial_price = 100.00  # initial price
     minimum_dollar_change = 0.05  # minimum dollar change (e.g. 0.01)
     verbose = False  # verbose mode
 
     try:
-        opts, args = getopt.getopt(argv, "ht:d:r:b:a:c:v",
+        opts, args = getopt.getopt(argv, "ht:d:r:p:c:v",
                                    ["help", "ticker=", "duration=", "rate=",
-                                    "bid=", "ask=", "change=", "verbose"])
+                                    "price=", "change=", "verbose"])
     except getopt.GetoptError as e:
         # print help information and exit:
         print()
@@ -60,10 +58,8 @@ def main(argv):
             simulation_duration = int(a)
         elif o in ("-r", "--rate"):
             trading_rate = int(a)
-        elif o in ("-b", "--bind"):
-            initial_bid_price = float(a)
-        elif o in ("-a", "--ask"):
-            initial_ask_price = float(a)
+        elif o in ("-p", "--price"):
+            initial_price = float(a)
         elif o in ("-c", "--change"):
             minimum_dollar_change = float(a)
         elif o in ("-v", "--verbose"):
@@ -71,9 +67,7 @@ def main(argv):
         else:
             assert False, "unhandled option"
 
-    last_price = (initial_bid_price + initial_ask_price) / 2.0
-    best_bid = initial_bid_price
-    best_ask = initial_ask_price
+    last_price = initial_price
 
     confidence_level = int(numpy.random.randint(low=1, high=5))  # confidence level: 1, 2, 3, or 4
     risk_appetite = int(numpy.random.randint(low=1, high=5))  # risk appetite: 1, 2, 3, or 4
@@ -152,8 +146,8 @@ def main(argv):
 
         if numpy.random.binomial(n=1, p=0.5) == 0:  # limit buy
 
-            curr_best_bid = trader.getBestPrice(stock_ticker).getBidPrice()
-            best_bid = best_bid if curr_best_bid == 0.0 else curr_best_bid
+            best_bid = trader.getBestPrice(stock_ticker).getBidPrice()
+            best_bid = best_bid if best_bid != 0.0 else last_price
 
             target_price = min(last_price, best_bid)
             if verbose:
@@ -176,8 +170,8 @@ def main(argv):
 
         else:  # limit sell
 
-            curr_best_ask = trader.getBestPrice(stock_ticker).getAskPrice()
-            best_ask = best_ask if curr_best_ask == 0.0 else curr_best_ask
+            best_ask = trader.getBestPrice(stock_ticker).getAskPrice()
+            best_ask = best_ask if best_ask != 0.0 else last_price
 
             target_price = max(last_price, best_ask)
             if verbose:
