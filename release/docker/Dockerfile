@@ -16,6 +16,8 @@ RUN conda install joblib && \
     conda install keras && \
     conda install tensorflow
 
+RUN pip install pymdptoolbox
+
 # Install shift-python
 RUN conda install libpq
 RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.1.0/shift-python_1.1.0_conda_linux64.zip | bsdtar -xvf- && \
