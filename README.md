@@ -56,7 +56,6 @@ docker-compose up
 ```bash
 conda create -y -n shift python=3.6 anaconda
 conda activate shift
-conda install libpq
 wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.1.0/shift-python_1.1.0_conda_linux64.zip | bsdtar -xvf-
 cd shift*
 conda install *.tar.bz2
