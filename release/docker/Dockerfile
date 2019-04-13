@@ -18,7 +18,6 @@ RUN conda install joblib && \
 RUN pip install pymdptoolbox
 
 # Install shift-python
-RUN conda install libpq
 RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.2.0/shift-python_1.2.0_conda_linux64.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
