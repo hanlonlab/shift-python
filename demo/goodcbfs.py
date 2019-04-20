@@ -82,9 +82,9 @@ class PortfolioItemUpdatedCB(object):
 
 def waiting_list_updated_cb(trader):
     if trader.getWaitingListSize() > 0:
+        waiting_list = trader.getWaitingList()
         print("Waiting List:")
-        curr_waiting_list = trader.getWaitingList()
-        for order in curr_waiting_list:
+        for order in waiting_list:
             print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
                   (order.symbol, order.type, order.price, order.size,
                    order.executed_size, order.id, order.status, order.timestamp))
@@ -99,9 +99,9 @@ class WaitingListUpdatedCB(object):
     def __call__(self, trader):
         if self.verbose:
             if trader.getWaitingListSize() > 0:
+                waiting_list = trader.getWaitingList()
                 print("Waiting List:")
-                curr_waiting_list = trader.getWaitingList()
-                for order in curr_waiting_list:
+                for order in waiting_list:
                     print("%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s" %
                           (order.symbol, order.type, order.price, order.size,
                            order.executed_size, order.id, order.status, order.timestamp))
