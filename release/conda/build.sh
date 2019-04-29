@@ -41,14 +41,18 @@ function util.absPath(){
 
 # activate conda environment
 log.info "activating conda environment..."
-source /home/han/anaconda3/bin/activate shift36
+source /home/$USER/anaconda3/bin/activate shift36
 
 # prepare environment variables
 log.info "preparing environment variables..."
 bld_path=$(util.absPath "${CONDA_PREFIX}/../../conda-bld/linux-64")
-log.plain "    conda pkg build path: ${bld_path}"
+log.plain "    USER (user name): ${USER}"
+log.plain "    bld_path (conda pkg build path): ${bld_path}"
 
 # clean previous builds and installs
+log.info "cleaning previous builds and installs..."
+rm -rf /home/$USER/anaconda3/conda-bld/linux-64/shift* > /dev/null 2>&1
+conda build purge
 conda remove -y -q quickfix > /dev/null 2>&1
 conda remove -y -q shift-miscutils > /dev/null 2>&1
 conda remove -y -q shift-coreclient > /dev/null 2>&1
@@ -56,25 +60,31 @@ conda remove -y -q shift-python > /dev/null 2>&1
 
 sleep 2
 
-log.info "building quickfix..."
-if /home/han/anaconda3/bin/conda-build quickfix ;  
-then
-	log.info "built QuickFIX"
-else
-	log.err "fail to build QuickFIX"
-	exit
-fi
+# $1 dir name
+# $2 pkg name
+function install() {
+	log.info "building $2..."
+	if /home/$USER/anaconda3/bin/conda-build $1 ;  
+	then
+		log.info "built $2"
+	else
+		log.err "fail to build $2"
+		exit
+	fi
+	
+	log.info "installing $2..."
+	if conda install ${bld_path}/$1* ; 
+	then
+		log.info "installed $2"
+	else
+		log.err "fail to install $@"
+		exit
+	fi
 
-log.info "installing quickfix..."
-if conda install ${bld_path}/quickfix* ; 
-then
-	log.info "installed QuickFIX"
-else
-	log.err "fail to build QuickFIX"
-	exit
-fi
+}
 
 
-
-
-
+install quickfix QuickFIX
+install shift-coreclient CoreClient
+install shift-miscutils MiscUtils
+install shift-python ShiftPython
