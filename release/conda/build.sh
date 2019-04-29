@@ -83,7 +83,6 @@ function install() {
 
 }
 
-
 install quickfix QuickFIX
 install shift-coreclient CoreClient
 install shift-miscutils MiscUtils
