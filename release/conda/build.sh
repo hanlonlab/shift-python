@@ -41,7 +41,7 @@ function util.absPath() {
 
 # activate conda environment
 log.info "activating conda environment..."
-source /home/$USER/anaconda3/bin/activate shift
+source /home/$USER/miniconda/bin/activate shift
 
 # prepare environment variables
 log.info "preparing environment variables..."
@@ -51,7 +51,7 @@ log.plain "    bld_path (conda pkg build path): ${bld_path}"
 
 # clean previous builds and installs
 log.info "cleaning previous builds and installs..."
-rm -rf /home/$USER/anaconda3/conda-bld/linux-64/shift* > /dev/null 2>&1
+rm -rf /home/$USER/miniconda/conda-bld/linux-64/shift* > /dev/null 2>&1
 conda build purge
 conda remove -y -q quickfix > /dev/null 2>&1
 conda remove -y -q shift-miscutils > /dev/null 2>&1
@@ -64,7 +64,7 @@ sleep 2
 # $2 pkg name
 function install() {
 	log.info "building $2..."
-	if /home/$USER/anaconda3/bin/conda-build $1 ;  
+	if /home/$USER/miniconda/bin/conda-build $1 ;  
 	then
 		log.info "built $2"
 	else
