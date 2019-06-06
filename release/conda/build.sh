@@ -83,6 +83,6 @@ function install() {
 }
 
 install quickfix QuickFIX
-install shift-coreclient SHIFT-CoreClient
 install shift-miscutils SHIFT-MiscUtils
+install shift-coreclient SHIFT-CoreClient
 install shift-python SHIFT-Python
