@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # verbose
-if [ "$1" == "-v" ]; 
+if [ "$1" == "-v" ];
 then
 VERBOSE_OPTION=""
 else
@@ -33,7 +33,7 @@ function log.err() {
 }
 
 # utilities
-function util.absPath(){
+function util.absPath() {
  	cd "$(dirname "$1")"
 	printf "%s/%s\n" "$(pwd)" "$(basename "$1")"
 	cd "$OLDPWD"
@@ -41,7 +41,7 @@ function util.absPath(){
 
 # activate conda environment
 log.info "activating conda environment..."
-source /home/$USER/anaconda3/bin/activate shift36
+source /home/$USER/anaconda3/bin/activate shift
 
 # prepare environment variables
 log.info "preparing environment variables..."
@@ -80,10 +80,9 @@ function install() {
 		log.err "fail to install $@"
 		exit
 	fi
-
 }
 
 install quickfix QuickFIX
-install shift-coreclient CoreClient
-install shift-miscutils MiscUtils
-install shift-python ShiftPython
+install shift-coreclient SHIFT-CoreClient
+install shift-miscutils SHIFT-MiscUtils
+install shift-python SHIFT-Python
