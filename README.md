@@ -15,7 +15,7 @@
 
 ## Installation
 
-### macOS:
+### macOS
 
 - Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
 - Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
@@ -25,7 +25,7 @@
     - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/username/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
-### Ubuntu:
+### Ubuntu
 
 - Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
 - Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
@@ -35,18 +35,18 @@
     - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
-### Windows:
+### Windows
 
-- Install the Ubuntu subsystem on Windows 10 using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
-- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/). Please make sure you choose the Linux distribution.
+- Install the Ubuntu subsystem on Windows 10 using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10). After installation, you will find an Ubuntu icon in Start menu. You can open a Ubuntu shell by simply run this app.
+- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/). Please make sure you choose the Linux distribution. Tips: You can browse file stored in Windows file system in Ubuntu WSL under `/mnt/` folder. Thus, if download the Anaconda installation file to Windows desktop (`C:/Users/<WinUserName>/Desktop/Anaconda.sh`), you can also find it in Ubuntu at `/mnt/c/Users/<WinUserName>/Desktop/Anaconda.sh`. You can install this package by execute `./mnt/c/Users/<WinUserName>/Desktop/Anaconda.sh` in Ubuntu bash terminal. [This blog](https://www.digitalocean.com/community/tutorials/how-to-install-anaconda-on-ubuntu-18-04-quickstart) contains more information for Anaconda installation in Ubuntu. 
 - Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
 - Create a new project in PyCharm Pro:
     - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **WSL**.
     - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
-- You are good to go!
+- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
-### (Deprecated) Docker Image:
+### Docker Image Installation (deprecated)
 
 - Step 01:
     - Install or upgrade your operating system to latest version:
