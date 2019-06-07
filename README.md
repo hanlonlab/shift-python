@@ -3,9 +3,50 @@
 
 # SHIFT Python
 
+## Requirements
+
+- Upgrade your operating system to the latest version:
+    - macOS: macOS Mojave 10.14
+    - Ubuntu: Ubuntu 18.04 LTS Bionic Beaver
+    - Windows: Windows 10 Pro (https://aka.ms/devtoolsforteaching). Use your Stevens email address to either login (IT confirms you should all have an account) or request an account from:
+        - [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685)
+
+- Install [PyCharm Pro](https://www.jetbrains.com/pycharm). Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).
+
 ## Installation
 
-### Docker Image Installation (recommended)
+### macOS
+
+- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
+- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
+- Create a new project in PyCharm Pro:
+    - Click **PyCharm** -> **Preferences...** -> **Project: *Project Name*** -> **Project Interpreter**.
+    - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
+    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/username/anaconda3/envs/shift/bin/python`.
+- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+
+### Ubuntu
+
+- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
+- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
+- Create a new project in PyCharm Pro:
+    - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
+    - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
+    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
+- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+
+### Windows
+
+- Install the Ubuntu subsystem on Windows 10 using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/). Please make sure you choose the Linux distribution.
+- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
+- Create a new project in PyCharm Pro:
+    - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
+    - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **WSL**.
+    - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
+- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+
+### Docker Image Installation (deprecated)
 
 - Step 01:
     - Install or upgrade your operating system to latest version:
@@ -45,38 +86,12 @@ docker images
 docker-compose up
 ```
 
-- Installation finished! Get started with [PyCharm Pro](#get-started-with-pycharm-pro).
-
-### Windows 10 Installation (WSL)
-0. Install Ubuntu subsystem on Windows 10. Here are more instructions about Windows 10 WSL installation. 
-0. Install PyCharm Windows version on Windows 10. Please find more detail in section <Get Start with PyCharm Pro>.
-0. Install Anaconda 3.7 (https://www.anaconda.com/distribution/) on your Ubuntu subsystem. Please make sure you choose the Linux distribution.
-0. Please follow the instructions in next section <Anaconda Packages Installation>, to create new environment and install SHIFT packages.
-0. Create a new project in PyCharm Pro, click File -> Settint -> Project Interpreter. Click Interpreter bar and click Show All -> Plus icon (+) -> WSL. Linux distribution will be Ubuntu and interpreter path should be something like `/home/UserName/anaconda3/envs/shift/bin/python` if you installed Anaconda in default settings. Then you are good to go!
-
-### Anaconda Packages Installation (linux only)
-
-**Note: This is for Linux users only. Windows and macOS are not yet supported.**
-
-- Run the following to create a new `shift` environment and install SHIFT Python:
-
-```bash
-conda create -y -n shift python=3.6 anaconda
-conda activate shift
-wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.2.3/shift-python_1.2.3_conda_linux.zip | bsdtar -xvf-
-cd shift*
-conda install *.tar.bz2
-```
-
-- Installation finished! Get started with [Command Line](#get-started-with-command-line).
-
-## Get Started with PyCharm Pro
-
-- Install [PyCharm Pro](https://www.jetbrains.com/pycharm). Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).
-- Configuring Docker as a remote interpreter:
+- Configuring Docker as a remote interpreter in PyCharm Pro:
     - For Windows, follow the extra instructions in the `Prerequisites` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
     - Open an existing project, or create a completely new Python project in Pycharm Pro.
     - Follow the steps in the `Configuring Docker as a remote interpreter` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
+
+- Installation finished!
 
 ## Get Started with Command Line
 
