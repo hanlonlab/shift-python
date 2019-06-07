@@ -22,7 +22,7 @@
 - Create a new project in PyCharm Pro:
     - Click **PyCharm** -> **Preferences...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
-    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/username/anaconda3/envs/shift/bin/python`.
+    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/USERNAME/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
 ### Ubuntu
@@ -32,29 +32,40 @@
 - Create a new project in PyCharm Pro:
     - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
-    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
+    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/USERNAME/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
 ### Windows
 
+<<<<<<< HEAD
+- Install the Ubuntu subsystem using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10). After installation, you will find an Ubuntu icon in the Start menu. You can open an Ubuntu terminal by simply running this app.
+- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/):
+    - Please make sure you choose the Linux distribution.
+    - You can browse files stored in Windows in the Ubuntu app under the `/mnt` folder. Thus, if you downloaded the Anaconda installation file to your desktop (`C:/Users/USERNAME/Desktop`), you will be able to find it in Ubuntu under `/mnt/c/Users/USERNAME/Desktop`.
+    - Install Anaconda by opening the Ubuntu app and executing:
+```bash
+cd /mnt/c/Users/USERNAME/Desktop
+./Anaconda3-yyyy.xx-Linux-x86_64.sh
+```
+=======
 - Install the Ubuntu subsystem on Windows 10 using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10). After installation, you will find an Ubuntu icon in Start menu. You can open a Ubuntu shell by simply run this app.
 - Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/). Please make sure you choose the Linux distribution. Tips: You can browse file stored in Windows file system in Ubuntu WSL under `/mnt/` folder. Thus, if download the Anaconda installation file to Windows desktop (`C:/Users/<WinUserName>/Desktop/Anaconda.sh`), you can also find it in Ubuntu at `/mnt/c/Users/<WinUserName>/Desktop/Anaconda.sh`. You can install this package by execute `./mnt/c/Users/<WinUserName>/Desktop/Anaconda.sh` in Ubuntu bash terminal. [This blog](https://www.digitalocean.com/community/tutorials/how-to-install-anaconda-on-ubuntu-18-04-quickstart) contains more information for Anaconda installation in Ubuntu. 
+>>>>>>> 90468ac1bd42d1ed2a92053de13f6b471c7685ea
 - Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
 - Create a new project in PyCharm Pro:
     - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **WSL**.
+<<<<<<< HEAD
+    - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/USERNAME/anaconda3/envs/shift/bin/python`.
+- You are good to go!
+=======
     - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+>>>>>>> 90468ac1bd42d1ed2a92053de13f6b471c7685ea
 
 ### Docker Image Installation (deprecated)
 
 - Step 01:
-    - Install or upgrade your operating system to latest version:
-        - For macOS, Mojave.
-        - For Windows, Windows 10 Pro (https://aka.ms/devtoolsforteaching). Use your Stevens email address to either login (IT confirms you should all have an account) or request an account from:
-            - [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685)
-
-- Step 02:
     - Install [Docker](https://www.docker.com/products/docker-desktop). When you install Docker, make sure to choose **Linux Containers** and not **Windows Containers**:
         - For macOS, [Docker for macOS](https://store.docker.com/editions/community/docker-ce-desktop-mac).
         - For Windows, [Docker for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows).
@@ -62,7 +73,7 @@
     - Follow the online Docker installation instructions carefully and make sure to test the Docker installation.
     - NOTE: In some cases, you may need to enable virtualization on your computers.
 
-- Step 03:
+- Step 02:
     - Download `shift-python_x.x.x_docker.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
     - Unzip the downloaded file to somewhere you like.
     - Access a terminal window on your computer. You may require admin privileges:
@@ -86,7 +97,7 @@ docker images
 docker-compose up
 ```
 
-- Configuring Docker as a remote interpreter in PyCharm Pro:
+- Configure Docker as a remote interpreter in PyCharm Pro:
     - For Windows, follow the extra instructions in the `Prerequisites` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
     - Open an existing project, or create a completely new Python project in Pycharm Pro.
     - Follow the steps in the `Configuring Docker as a remote interpreter` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
