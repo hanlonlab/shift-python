@@ -37,7 +37,6 @@
 
 ### Windows
 
-<<<<<<< HEAD
 - Install the Ubuntu subsystem using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10). After installation, you will find an Ubuntu icon in the Start menu. You can open an Ubuntu terminal by simply running this app.
 - Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/):
     - Please make sure you choose the Linux distribution.
@@ -47,21 +46,12 @@
 cd /mnt/c/Users/USERNAME/Desktop
 ./Anaconda3-yyyy.xx-Linux-x86_64.sh
 ```
-=======
-- Install the Ubuntu subsystem on Windows 10 using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10). After installation, you will find an Ubuntu icon in Start menu. You can open a Ubuntu shell by simply run this app.
-- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/). Please make sure you choose the Linux distribution. Tips: You can browse file stored in Windows file system in Ubuntu WSL under `/mnt/` folder. Thus, if download the Anaconda installation file to Windows desktop (`C:/Users/<WinUserName>/Desktop/Anaconda.sh`), you can also find it in Ubuntu at `/mnt/c/Users/<WinUserName>/Desktop/Anaconda.sh`. You can install this package by execute `./mnt/c/Users/<WinUserName>/Desktop/Anaconda.sh` in Ubuntu bash terminal. [This blog](https://www.digitalocean.com/community/tutorials/how-to-install-anaconda-on-ubuntu-18-04-quickstart) contains more information for Anaconda installation in Ubuntu. 
->>>>>>> 90468ac1bd42d1ed2a92053de13f6b471c7685ea
 - Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
 - Create a new project in PyCharm Pro:
     - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **WSL**.
-<<<<<<< HEAD
     - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/USERNAME/anaconda3/envs/shift/bin/python`.
 - You are good to go!
-=======
-    - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
-- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
->>>>>>> 90468ac1bd42d1ed2a92053de13f6b471c7685ea
 
 ### Docker Image Installation (deprecated)
 
