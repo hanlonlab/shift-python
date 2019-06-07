@@ -44,7 +44,7 @@
     - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **WSL**.
     - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
-- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+- You are good to go!
 
 ### Docker Image Installation (deprecated)
 
