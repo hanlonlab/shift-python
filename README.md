@@ -15,7 +15,7 @@
 
 ## Installation
 
-### macOS
+### macOS:
 
 - Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
 - Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
@@ -25,7 +25,7 @@
     - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/username/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
-### Ubuntu
+### Ubuntu:
 
 - Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
 - Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
@@ -35,7 +35,7 @@
     - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
-### Windows
+### Windows:
 
 - Install the Ubuntu subsystem on Windows 10 using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/). Please make sure you choose the Linux distribution.
@@ -46,7 +46,7 @@
     - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/Username/anaconda3/envs/shift/bin/python`.
 - You are good to go!
 
-### Docker Image Installation (deprecated)
+### (Deprecated) Docker Image:
 
 - Step 01:
     - Install or upgrade your operating system to latest version:
