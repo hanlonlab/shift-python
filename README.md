@@ -22,7 +22,7 @@
 - Create a new project in PyCharm Pro:
     - Click **PyCharm** -> **Preferences...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
-    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/USERNAME/anaconda3/envs/shift/bin/python`.
+    - Select **Existing environment**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/USERNAME/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
 ### Ubuntu
@@ -32,7 +32,7 @@
 - Create a new project in PyCharm Pro:
     - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
-    - Select **Existing environemnt**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/USERNAME/anaconda3/envs/shift/bin/python`.
+    - Select **Existing environment**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/USERNAME/anaconda3/envs/shift/bin/python`.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
 ### Windows
@@ -46,7 +46,8 @@
 cd /mnt/c/Users/USERNAME/Desktop
 ./Anaconda3-yyyy.xx-Linux-x86_64.sh
 ```
-- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
+- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages:
+    - The last step ("In the Terminal") must also be run from the Ubuntu app.
 - Create a new project in PyCharm Pro:
     - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
     - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **WSL**.
