@@ -660,8 +660,58 @@ border-bottom-color: #eee;
 </head>
 <body>
 <h1 id="shift-python">SHIFT Python</h1>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Upgrade your operating system to the latest version:
+<ul>
+<li>macOS: macOS Mojave 10.14</li>
+<li>Ubuntu: Ubuntu 18.04 LTS Bionic Beaver</li>
+<li>Windows: Windows 10 Pro (https://aka.ms/devtoolsforteaching). Use your Stevens email address to either login (IT confirms you should all have an account) or request an account from:
+<ul>
+<li><a href="https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685">Stevens IT Helpdesk</a></li>
+</ul></li>
+</ul></li>
+<li>Install <a href="https://www.jetbrains.com/pycharm">PyCharm Pro</a>. Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).</li>
+</ul>
 <h2 id="installation">Installation</h2>
-<h3 id="docker-image-installation-recommended">Docker Image Installation (recommended)</h3>
+<h3 id="macos">macOS</h3>
+<ul>
+<li>Download and install the latest version of <a href="https://www.anaconda.com/distribution/">Anaconda</a>.</li>
+<li>Follow the instructions in <a href="https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API">SHIFT Python API</a> to create a new environment and install all SHIFT packages.</li>
+<li>Create a new project in PyCharm Pro:
+<ul>
+<li>Click <strong>PyCharm</strong> -&gt; <strong>Preferences…</strong> -&gt; <strong>Project: <em>Project Name</em></strong> -&gt; <strong>Project Interpreter</strong>.</li>
+<li>Click in the <strong>Project Interpreter</strong> bar and select <strong>Show All</strong> -&gt; <strong><em>Plus Icon</em> (+)</strong> -&gt; <strong>Conda Environment</strong>.</li>
+<li>Select <strong>Existing environemnt</strong>. If you installed Anaconda with default settings, the <em>Interpreter</em> path should look something like <code>/Users/username/anaconda3/envs/shift/bin/python</code>.</li>
+</ul></li>
+<li>You are good to go! (You may also get started with <a href="#get-started-with-command-line">Command Line</a>.)</li>
+</ul>
+<h3 id="ubuntu">Ubuntu</h3>
+<ul>
+<li>Download and install the latest version of <a href="https://www.anaconda.com/distribution/">Anaconda</a>.</li>
+<li>Follow the instructions in <a href="https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API">SHIFT Python API</a> to create a new environment and install all SHIFT packages.</li>
+<li>Create a new project in PyCharm Pro:
+<ul>
+<li>Click <strong>File</strong> -&gt; <strong>Settings…</strong> -&gt; <strong>Project: <em>Project Name</em></strong> -&gt; <strong>Project Interpreter</strong>.</li>
+<li>Click in the <strong>Project Interpreter</strong> bar and select <strong>Show All</strong> -&gt; <strong><em>Plus Icon</em> (+)</strong> -&gt; <strong>Conda Environment</strong>.</li>
+<li>Select <strong>Existing environemnt</strong>. If you installed Anaconda with default settings, the <em>Interpreter</em> path should look something like <code>/home/Username/anaconda3/envs/shift/bin/python</code>.</li>
+</ul></li>
+<li>You are good to go! (You may also get started with <a href="#get-started-with-command-line">Command Line</a>.)</li>
+</ul>
+<h3 id="windows">Windows</h3>
+<ul>
+<li>Install the Ubuntu subsystem on Windows 10 using the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Windows Subsystem for Linux Installation Guide for Windows 10</a>.</li>
+<li>Download and install the latest version of <a href="https://www.anaconda.com/distribution/">Anaconda</a>. Please make sure you choose the Linux distribution.</li>
+<li>Follow the instructions in <a href="https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API">SHIFT Python API</a> to create a new environment and install all SHIFT packages.</li>
+<li>Create a new project in PyCharm Pro:
+<ul>
+<li>Click <strong>File</strong> -&gt; <strong>Settings…</strong> -&gt; <strong>Project: <em>Project Name</em></strong> -&gt; <strong>Project Interpreter</strong>.</li>
+<li>Click in the <strong>Project Interpreter</strong> bar and select <strong>Show All</strong> -&gt; <strong><em>Plus Icon</em> (+)</strong> -&gt; <strong>WSL</strong>.</li>
+<li>If you installed Anaconda with default settings, the <em>Interpreter</em> path should look something like <code>/home/Username/anaconda3/envs/shift/bin/python</code>.</li>
+</ul></li>
+<li>You are good to go! (You may also get started with <a href="#get-started-with-command-line">Command Line</a>.)</li>
+</ul>
+<h3 id="docker-image-installation-deprecated">Docker Image Installation (deprecated)</h3>
 <ul>
 <li>Step 01:
 <ul>
@@ -707,30 +757,13 @@ border-bottom-color: #eee;
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">docker-compose</span> up</a></code></pre></div>
 <ul>
-<li>Installation finished! Get started with <a href="#get-started-with-pycharm-pro">PyCharm Pro</a>.</li>
-</ul>
-<h3 id="anaconda-packages-installation-linux-only">Anaconda Packages Installation (linux only)</h3>
-<p><strong>Note: This is for Linux users only. Windows and macOS are not yet supported.</strong></p>
-<ul>
-<li>Run the following to create a new <code>shift</code> environment and install SHIFT Python:</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">conda</span> create -y -n shift python=3.6 anaconda</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">conda</span> activate shift</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">wget</span> -qO- https://github.com/hanlonlab/shift-python/releases/download/beta/shift-python_beta_conda_linux64.zip <span class="kw">|</span> <span class="ex">bsdtar</span> -xvf-</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="bu">cd</span> shift*</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="ex">conda</span> install *.tar.bz2</a></code></pre></div>
-<ul>
-<li>Installation finished! Get started with <a href="#get-started-with-command-line">Command Line</a>.</li>
-</ul>
-<h2 id="get-started-with-pycharm-pro">Get Started with PyCharm Pro</h2>
-<ul>
-<li>Install <a href="https://www.jetbrains.com/pycharm">PyCharm Pro</a>. Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).</li>
-<li>Configuring Docker as a remote interpreter:
+<li>Configuring Docker as a remote interpreter in PyCharm Pro:
 <ul>
 <li>For Windows, follow the extra instructions in the <code>Prerequisites</code> session of this <a href="https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html">guide</a>.</li>
 <li>Open an existing project, or create a completely new Python project in Pycharm Pro.</li>
 <li>Follow the steps in the <code>Configuring Docker as a remote interpreter</code> session of this <a href="https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html">guide</a>.</li>
 </ul></li>
+<li>Installation finished!</li>
 </ul>
 <h2 id="get-started-with-command-line">Get Started with Command Line</h2>
 <ul>
