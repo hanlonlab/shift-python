@@ -47,6 +47,13 @@ docker-compose up
 
 - Installation finished! Get started with [PyCharm Pro](#get-started-with-pycharm-pro).
 
+### Windows 10 Installation (WSL)
+0. Install Ubuntu subsystem on Windows 10. Here are more instructions about Windows 10 WSL installation. 
+0. Install PyCharm Windows version on Windows 10. Please find more detail in section <Get Start with PyCharm Pro>.
+0. Install Anaconda 3.7 (https://www.anaconda.com/distribution/) on your Ubuntu subsystem. Please make sure you choose the Linux distribution.
+0. Please follow the instructions in next section <Anaconda Packages Installation>, to create new environment and install SHIFT packages.
+0. Create a new project in PyCharm Pro, click File -> Settint -> Project Interpreter. Click Interpreter bar and click Show All -> Plus icon (+) -> WSL. Linux distribution will be Ubuntu and interpreter path should be something like `/home/UserName/anaconda3/envs/shift/bin/python` if you installed Anaconda in default settings. Then you are good to go!
+
 ### Anaconda Packages Installation (linux only)
 
 **Note: This is for Linux users only. Windows and macOS are not yet supported.**
