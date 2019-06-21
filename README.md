@@ -8,8 +8,7 @@
 - Upgrade your operating system to the latest version:
     - macOS: macOS Mojave 10.14
     - Ubuntu: Ubuntu 18.04 LTS Bionic Beaver
-    - Windows: Windows 10 Pro (https://aka.ms/devtoolsforteaching). Use your Stevens email address to either login (IT confirms you should all have an account) or request an account from:
-        - [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685)
+    - Windows: Windows 10
 
 - Install [PyCharm Pro](https://www.jetbrains.com/pycharm). Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).
 
@@ -57,6 +56,10 @@ cd /mnt/c/Users/USERNAME/Desktop
 ### (Deprecated) Docker Image:
 
 - Step 01:
+    - If you are using Windows 10, upgrade to Windows 10 Pro or Windows 10 Education (https://aka.ms/devtoolsforteaching):
+        - Use your Stevens email address to login (IT confirms you should all have an account) or request an account from [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685)
+
+- Step 02:
     - Install [Docker](https://www.docker.com/products/docker-desktop). When you install Docker, make sure to choose **Linux Containers** and not **Windows Containers**:
         - For macOS, [Docker for macOS](https://store.docker.com/editions/community/docker-ce-desktop-mac).
         - For Windows, [Docker for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows).
@@ -64,7 +67,7 @@ cd /mnt/c/Users/USERNAME/Desktop
     - Follow the online Docker installation instructions carefully and make sure to test the Docker installation.
     - NOTE: In some cases, you may need to enable virtualization on your computers.
 
-- Step 02:
+- Step 03:
     - Download `shift-python_x.x.x_docker.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
     - Unzip the downloaded file to somewhere you like.
     - Access a terminal window on your computer. You may require admin privileges:
