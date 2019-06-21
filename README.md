@@ -56,8 +56,8 @@ cd /mnt/c/Users/USERNAME/Desktop
 ### (Deprecated) Docker Image:
 
 - Step 01:
-    - If you are using Windows 10, upgrade to Windows 10 Pro or Windows 10 Education (https://aka.ms/devtoolsforteaching):
-        - Use your Stevens email address to login (IT confirms you should all have an account) or request an account from [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685)
+    - If you are using Windows 10, upgrade to Windows 10 Pro or Windows 10 Education:
+        - Use your Stevens email address to login [here](https://aka.ms/devtoolsforteaching) (IT confirms you should all have an account) or request an account from [Stevens IT Helpdesk](https://sit.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19685).
 
 - Step 02:
     - Install [Docker](https://www.docker.com/products/docker-desktop). When you install Docker, make sure to choose **Linux Containers** and not **Windows Containers**:
