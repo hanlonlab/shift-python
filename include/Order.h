@@ -8,11 +8,11 @@ namespace Order {
 
 void bindPython(py::module& m)
 {
-    //! Bind class
+    //! bind class
     py::class_<shift::Order> ORDER(m, "Order");
-    ORDER //! Bind constructor
+    ORDER //! bind constructor
         .def(py::init<shift::Order::Type, std::string, int, double, std::string>(), py::arg("type"), py::arg("symbol"), py::arg("size"), py::arg("price") = 0.0, py::arg("id") = "");
-    ORDER //! Bind property
+    ORDER //! bind property
         .def_property("type", &shift::Order::getType, &shift::Order::setType, py::return_value_policy::reference)
         .def_property("symbol", &shift::Order::getSymbol, &shift::Order::setSymbol, py::return_value_policy::reference)
         .def_property("size", &shift::Order::getSize, &shift::Order::setSize, py::return_value_policy::reference)
@@ -23,7 +23,7 @@ void bindPython(py::module& m)
         .def_property("status", &shift::Order::getStatus, &shift::Order::setStatus, py::return_value_policy::reference)
         .def_property("timestamp", &shift::Order::getTimestamp, &shift::Order::setTimestamp, py::return_value_policy::reference);
 
-    //! Bind enum
+    //! bind enum
     py::enum_<shift::Order::Type> Type(ORDER, "Type");
     Type
         .value("LIMIT_BUY", shift::Order::Type::LIMIT_BUY)
@@ -34,7 +34,7 @@ void bindPython(py::module& m)
         .value("CANCEL_ASK", shift::Order::Type::CANCEL_ASK)
         .export_values();
 
-    //! Bind enum
+    //! bind enum
     py::enum_<shift::Order::Status> Status(ORDER, "Status");
     Status
         .value("PENDING_NEW", shift::Order::Status::PENDING_NEW)

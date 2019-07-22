@@ -7,12 +7,12 @@
 #include "Trader.h"
 
 /*!
- * \brief PYBIND11_MODULE create module entry points
+ * @brief PYBIND11_MODULE creates module entry points
  */
 PYBIND11_MODULE(shift, m)
 {
     m.doc() = "SHIFT-Python API";
-    m.attr("__version__") = "1.2.5";
+    m.attr("__version__") = "1.3.0";
 
     py::register_exception<shift::IncorrectPassword>(m, "IncorrectPassword");
     py::register_exception<shift::ConnectionTimeout>(m, "ConnectionTimeout");

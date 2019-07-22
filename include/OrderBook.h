@@ -8,7 +8,7 @@ namespace OrderBook {
 
 void bindPython(py::module& m)
 {
-    //! Bind enum
+    //! bind enum
     py::enum_<shift::OrderBook::Type> Type(m, "OrderBookType");
     Type
         .value("GLOBAL_BID", shift::OrderBook::Type::GLOBAL_BID)
@@ -18,4 +18,4 @@ void bindPython(py::module& m)
         .export_values();
 }
 
-} // OrderBookEntry
+} // OrderBook

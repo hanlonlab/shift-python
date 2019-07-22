@@ -2,7 +2,7 @@
 FROM continuumio/anaconda3:5.2.0
 
 # shift-python maintainer
-MAINTAINER Han Zheng (zhenghanecho@gmail.com)
+MAINTAINER Thiago W. Alves (twinkle1@stevens.edu)
 
 # Set correct time zone
 ENV TZ=America/New_York
@@ -18,7 +18,7 @@ RUN conda install joblib && \
 RUN pip install pymdptoolbox
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.2.5/shift-python_1.2.5_conda_linux.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.3.0/shift-python_1.3.0_conda_linux.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 

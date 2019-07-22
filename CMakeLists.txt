@@ -7,13 +7,22 @@ cmake_minimum_required(VERSION 3.10)
 get_filename_component(PROJECT_DIR_NAME ${CMAKE_CURRENT_LIST_DIR} NAME)
 string(REPLACE " " "_" PROJECT_DIR_NAME ${PROJECT_DIR_NAME})
 
-set(LIB_NAME shift)
+project(${PROJECT_DIR_NAME}
+        VERSION 1.3.0 # <major>.<minor>.<patch>
+        LANGUAGES CXX)
+
+set(LIB_NAME ${PROJECT_NAME})
 
 ### List of Files #############################################################
 
 set(DEMO
+    ${PROJECT_SOURCE_DIR}/demo/credentials.py
     ${PROJECT_SOURCE_DIR}/demo/demo.py
+    ${PROJECT_SOURCE_DIR}/demo/FIX50SP2.xml
+    ${PROJECT_SOURCE_DIR}/demo/FIXT11.xml
+    ${PROJECT_SOURCE_DIR}/demo/goodcbfs.py
     ${PROJECT_SOURCE_DIR}/demo/initiator.cfg
+    ${PROJECT_SOURCE_DIR}/demo/zitrader.py
 )
 
 set(INCLUDE
@@ -36,6 +45,7 @@ set(OTHER
     ${PROJECT_SOURCE_DIR}/mingw64-build.sh
     ${PROJECT_SOURCE_DIR}/setup.py
     ${PROJECT_SOURCE_DIR}/win-build-clientx86.sh
+    ${PROJECT_SOURCE_DIR}/win-build-pybind11x86.sh
 )
 
 ### Compiler Flags ############################################################

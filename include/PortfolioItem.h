@@ -10,12 +10,12 @@ namespace PortfolioItem {
 
 void bindPython(py::module& m)
 {
-    //! Bind class
+    //! bind class
     py::class_<shift::PortfolioItem> PORTFOLIO_ITEM(m, "PortfolioItem");
-    PORTFOLIO_ITEM //! Bind constructor
+    PORTFOLIO_ITEM //! bind constructor
         .def(py::init<>())
         .def(py::init<std::string, int, int, double, double, double>(), py::arg("symbol"), py::arg("long_shares"), py::arg("short_shares"), py::arg("long_price"), py::arg("short_price"), py::arg("realized_pl"));
-    PORTFOLIO_ITEM //! Bind function
+    PORTFOLIO_ITEM //! bind function
         .def("getSymbol", &shift::PortfolioItem::getSymbol)
         .def("getShares", &shift::PortfolioItem::getShares)
         .def("getLongShares", &shift::PortfolioItem::getLongShares)

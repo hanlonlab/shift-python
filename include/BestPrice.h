@@ -6,11 +6,11 @@ namespace BestPrice {
 
 void bindPython(py::module& m)
 {
-    //! Bind class
+    //! bind class
     py::class_<shift::BestPrice> BEST_PRICE(m, "BestPrice");
-    BEST_PRICE //! Bind constructor
+    BEST_PRICE //! bind constructor
         .def(py::init<double, int, double, int, double, int, double, int>(), py::arg("global_bid_price"), py::arg("global_bid_size"), py::arg("global_ask_price"), py::arg("global_ask_size"), py::arg("local_bid_price"), py::arg("local_bid_size"), py::arg("local_ask_price"), py::arg("local_ask_size"));
-    BEST_PRICE //! Bind function
+    BEST_PRICE //! bind function
         .def("getBidPrice", &shift::BestPrice::getBidPrice)
         .def("getBidSize", &shift::BestPrice::getBidSize)
         .def("getAskPrice", &shift::BestPrice::getAskPrice)

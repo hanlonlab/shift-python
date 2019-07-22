@@ -152,6 +152,11 @@ shift::Order Trader::getOrder(const std::string& orderID)
     return m_client->getOrder(orderID);
 }
 
+std::vector<shift::Order> Trader::getExecutedOrders(const std::string& orderID)
+{
+    return m_client->getExecutedOrders(orderID);
+}
+
 int Trader::getWaitingListSize()
 {
     return m_client->getWaitingListSize();

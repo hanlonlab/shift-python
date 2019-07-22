@@ -8,12 +8,12 @@ namespace PortfolioSummary {
 
 void bindPython(py::module& m)
 {
-    //! Bind class
+    //! bind class
     py::class_<shift::PortfolioSummary> PORTFOLIO_SUMMARY(m, "PortfolioSummary");
-    PORTFOLIO_SUMMARY //! Bind constructor
+    PORTFOLIO_SUMMARY //! bind constructor
         .def(py::init<>())
         .def(py::init<double, int, double>(), py::arg("total_bp"), py::arg("total_shares"), py::arg("total_realized_pl"));
-    PORTFOLIO_SUMMARY //! Bind function
+    PORTFOLIO_SUMMARY //! bind function
         // .def("isOpenBPReady", &shift::PortfolioSummary::isOpenBPReady)
         // .def("getOpenBP", &shift::PortfolioSummary::getOpenBP)
         .def("getTotalBP", &shift::PortfolioSummary::getTotalBP)

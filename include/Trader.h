@@ -40,13 +40,13 @@ class Trader {
 public:
     static void bindPython(py::module& m)
     {
-        //! Bind class
+        //! bind class
         py::class_<Trader> TRADER(m, "Trader");
-        TRADER //! Bind constructor
+        TRADER //! bind constructor
             .def(py::init<const std::string&>(), py::arg("username"));
-        TRADER //! Bind property
+        TRADER //! bind property
             .def_property("username", &Trader::getUsername, &Trader::setUsername, py::return_value_policy::reference);
-        TRADER //! Bind function
+        TRADER //! bind function
             .def("connect", &Trader::connect, py::arg("cfg_file"), py::arg("password"))
             .def("disconnect", &Trader::disconnect)
             .def("isConnected", &Trader::isConnected)
@@ -58,6 +58,7 @@ public:
             .def("getSubmittedOrdersSize", &Trader::getSubmittedOrdersSize)
             .def("getSubmittedOrders", &Trader::getSubmittedOrders)
             .def("getOrder", &Trader::getOrder, py::arg("order_id"))
+            .def("getExecutedOrders", &Trader::getExecutedOrders, py::arg("order_id"))
             .def("getWaitingListSize", &Trader::getWaitingListSize)
             .def("getWaitingList", &Trader::getWaitingList)
             .def("cancelAllPendingOrders", &Trader::cancelAllPendingOrders)
@@ -106,35 +107,36 @@ private:
     void submitOrder(const shift::Order& order);
     void submitCancellation(shift::Order order);
 
-    // Portfolio methods
+    // portfolio methods
     shift::PortfolioSummary getPortfolioSummary();
     std::map<std::string, shift::PortfolioItem> getPortfolioItems();
     shift::PortfolioItem getPortfolioItem(const std::string& symbol);
     int getSubmittedOrdersSize();
     std::vector<shift::Order> getSubmittedOrders();
     shift::Order getOrder(const std::string& orderID);
+    std::vector<shift::Order> getExecutedOrders(const std::string& orderID);
     int getWaitingListSize();
     std::vector<shift::Order> getWaitingList();
     void cancelAllPendingOrders();
 
-    // Price methods
+    // price methods
     double getClosePrice(const std::string& symbol, bool buy, int size);
     double getLastPrice(const std::string& symbol);
     int getLastSize(const std::string& symbol);
     std::chrono::system_clock::time_point getLastTradeTime();
 
-    // Order book methods
+    // order book methods
     shift::BestPrice getBestPrice(const std::string& symbol);
     std::vector<shift::OrderBookEntry> getOrderBook(const std::string& symbol, shift::OrderBook::Type type, int maxLevel);
     std::vector<shift::OrderBookEntry> getOrderBookWithDestination(const std::string& symbol, shift::OrderBook::Type type);
 
-    // Symbols list and company names
+    // symbols list and company names
     std::vector<std::string> getStockList();
     void requestCompanyNames();
     std::map<std::string, std::string> getCompanyNames();
     std::string getCompanyName(const std::string& symbol);
 
-    // Sample prices
+    // sample prices
     bool requestSamplePrices(std::vector<std::string> symbols, double samplingFrequency, unsigned int samplingWindow);
     bool cancelSamplePricesRequest(const std::vector<std::string>& symbols);
     bool cancelAllSamplePricesRequests();
@@ -143,14 +145,14 @@ private:
     int getLogReturnsSize(const std::string& symbol);
     std::list<double> getLogReturns(const std::string& symbol, bool midPrices);
 
-    // Subscription methods
+    // subscription methods
     bool subOrderBook(const std::string& symbol);
     bool unsubOrderBook(const std::string& symbol);
     bool subAllOrderBook();
     bool unsubAllOrderBook();
     std::vector<std::string> getSubscribedOrderBookList();
 
-    // Callback methods
+    // callback methods
     void onLastPriceUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onExecutionUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb);
