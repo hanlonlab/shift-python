@@ -26,10 +26,6 @@ def usage():
     print()
 
 
-def decimal_truncate(value, precision) -> float:
-    return math.trunc(value * pow(10.0, precision)) / pow(10.0, precision)
-
-
 def main(argv):
     stock_ticker = "AAPL"  # stock ticker (e.g. XYZ)
     simulation_duration = 380  # duration of simulation (in minutes)
@@ -82,7 +78,7 @@ def main(argv):
 
     trading_times.add(0)
     for i in range(num_trades):
-        trading_times.add(math.trunc(simulation_duration * 60 * float(numpy.random.uniform(low=0.0, high=1.0))))
+        trading_times.add(round(simulation_duration * 60 * float(numpy.random.uniform(low=0.0, high=1.0))))
     trading_times.add(simulation_duration * 60)
 
     # sort trading times
@@ -155,7 +151,7 @@ def main(argv):
                 print(f"Best Bid: {best_bid:.2f}")
                 print(f"Target Price: {target_price:.2f}")
 
-            order_price = decimal_truncate(
+            order_price = round(
                 target_price + minimum_dollar_change * float(numpy.random.normal(loc=0.0, scale=(0.5 * risk_appetite))),
                 2)
             if verbose:
@@ -179,7 +175,7 @@ def main(argv):
                 print(f"Best ask: {best_ask:.2f}")
                 print(f"Target Price: {target_price:.2f}")
 
-            order_price = decimal_truncate(
+            order_price = round(
                 target_price + minimum_dollar_change * float(numpy.random.normal(loc=0.0, scale=(0.5 * risk_appetite))),
                 2)
             if verbose:
