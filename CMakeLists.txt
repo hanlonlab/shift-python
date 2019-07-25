@@ -11,7 +11,7 @@ project(${PROJECT_DIR_NAME}
         VERSION 1.3.0 # <major>.<minor>.<patch>
         LANGUAGES CXX)
 
-set(LIB_NAME ${PROJECT_NAME})
+set(LIB_NAME shift)
 
 ### List of Files #############################################################
 
