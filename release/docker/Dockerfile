@@ -8,13 +8,14 @@ MAINTAINER Thiago W. Alves (twinkle1@stevens.edu)
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+# Fix python and openssl versions
+RUN conda install python=3.6 openssl=1.0
+
 # Update all conda packages
 RUN conda update --all -y
 
 # Install extra packages for the algorithmic trading competition
-RUN conda install joblib && \
-    conda install keras && \
-    conda install tensorflow
+RUN conda install keras
 RUN pip install pymdptoolbox
 
 # Install shift-python
