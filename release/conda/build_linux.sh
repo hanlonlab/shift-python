@@ -51,12 +51,13 @@ log.plain "    bld_path (conda pkg build path): ${bld_path}"
 
 # clean previous builds and installs
 log.info "cleaning previous builds and installs..."
-rm -rf /home/$USER/miniconda/conda-bld/linux-64/shift* > /dev/null 2>&1
+rm -rf /home/$USER/miniconda/conda-bld/linux-64/quickfix* >/dev/null 2>&1
+rm -rf /home/$USER/miniconda/conda-bld/linux-64/shift* >/dev/null 2>&1
 conda build purge
-conda remove -y -q quickfix > /dev/null 2>&1
-conda remove -y -q shift-miscutils > /dev/null 2>&1
-conda remove -y -q shift-coreclient > /dev/null 2>&1
-conda remove -y -q shift-python > /dev/null 2>&1
+conda remove -y -q quickfix >/dev/null 2>&1
+conda remove -y -q shift-miscutils >/dev/null 2>&1
+conda remove -y -q shift-coreclient >/dev/null 2>&1
+conda remove -y -q shift-python >/dev/null 2>&1
 
 sleep 2
 
