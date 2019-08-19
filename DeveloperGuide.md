@@ -25,7 +25,7 @@ cd pybind11
 git checkout stable
 mkdir build
 cd build
-cmake ..
+cmake -DPYBIND11_PYTHON_VERSION=3.6 ..
 make
 sudo make install
 ```
