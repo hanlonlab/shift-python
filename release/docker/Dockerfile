@@ -16,7 +16,6 @@ RUN conda update --all -y
 
 # Install extra packages for the algorithmic trading competition
 RUN conda install keras
-RUN pip install pymdptoolbox
 
 # Install shift-python
 RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.3.0/shift-python_1.3.0_conda_linux.zip | bsdtar -xvf- && \
