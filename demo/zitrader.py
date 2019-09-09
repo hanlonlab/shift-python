@@ -35,9 +35,11 @@ def main(argv):
     verbose = False  # verbose mode
 
     try:
-        opts, args = getopt.getopt(argv, "ht:d:r:p:c:v",
-                                   ["help", "ticker=", "duration=", "rate=",
-                                    "price=", "change=", "verbose"])
+        opts, args = getopt.getopt(
+            argv,
+            "ht:d:r:p:c:v",
+            ["help", "ticker=", "duration=", "rate=", "price=", "change=", "verbose"],
+        )
     except getopt.GetoptError as e:
         # print help information and exit:
         print()
@@ -65,8 +67,10 @@ def main(argv):
 
     last_price = initial_price
 
-    confidence_level = int(numpy.random.randint(low=1, high=5))  # confidence level: 1, 2, 3, or 4
-    risk_appetite = int(numpy.random.randint(low=1, high=5))  # risk appetite: 1, 2, 3, or 4
+    # confidence level: 1, 2, 3, or 4
+    confidence_level = int(numpy.random.randint(low=1, high=5))
+    # risk appetite: 1, 2, 3, or 4
+    risk_appetite = int(numpy.random.randint(low=1, high=5))
     if verbose:
         print()
         print(f"Confidence Level: {confidence_level}")
@@ -78,7 +82,13 @@ def main(argv):
 
     trading_times.add(0)
     for i in range(num_trades):
-        trading_times.add(round(simulation_duration * 60 * float(numpy.random.uniform(low=0.0, high=1.0))))
+        trading_times.add(
+            round(
+                simulation_duration
+                * 60
+                * float(numpy.random.uniform(low=0.0, high=1.0))
+            )
+        )
     trading_times.add(simulation_duration * 60)
 
     # sort trading times
@@ -152,16 +162,24 @@ def main(argv):
                 print(f"Target Price: {target_price:.2f}")
 
             order_price = round(
-                target_price + minimum_dollar_change * float(numpy.random.normal(loc=0.0, scale=(0.5 * risk_appetite))),
-                2)
+                target_price
+                + minimum_dollar_change
+                * float(numpy.random.normal(loc=0.0, scale=(0.5 * risk_appetite))),
+                2,
+            )
             if verbose:
                 print(f"Bid Price: {order_price:.2f}")
 
-            order_size = math.floor((target_rate * trader.getPortfolioSummary().getTotalBP()) / (100 * order_price))
+            order_size = math.floor(
+                (target_rate * trader.getPortfolioSummary().getTotalBP())
+                / (100 * order_price)
+            )
             if verbose:
                 print(f"Bid Size: {order_size}")
 
-            limit_buy = shift.Order(shift.Order.LIMIT_BUY, stock_ticker, order_size, order_price)
+            limit_buy = shift.Order(
+                shift.Order.LIMIT_BUY, stock_ticker, order_size, order_price
+            )
             trader.submitOrder(limit_buy)
 
         else:  # limit sell
@@ -176,16 +194,23 @@ def main(argv):
                 print(f"Target Price: {target_price:.2f}")
 
             order_price = round(
-                target_price + minimum_dollar_change * float(numpy.random.normal(loc=0.0, scale=(0.5 * risk_appetite))),
-                2)
+                target_price
+                + minimum_dollar_change
+                * float(numpy.random.normal(loc=0.0, scale=(0.5 * risk_appetite))),
+                2,
+            )
             if verbose:
                 print(f"Ask Price: {order_price:.2f}")
 
-            order_size = math.floor(target_rate * (trader.getPortfolioItem(stock_ticker).getShares() / 100))
+            order_size = math.floor(
+                target_rate * (trader.getPortfolioItem(stock_ticker).getShares() / 100)
+            )
             if verbose:
                 print(f"Ask Size: {order_size}")
 
-            limit_sell = shift.Order(shift.Order.LIMIT_SELL, stock_ticker, order_size, order_price)
+            limit_sell = shift.Order(
+                shift.Order.LIMIT_SELL, stock_ticker, order_size, order_price
+            )
             trader.submitOrder(limit_sell)
 
         if verbose:

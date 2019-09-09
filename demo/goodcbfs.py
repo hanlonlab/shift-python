@@ -3,6 +3,7 @@
 
 # on last price updated callbacks:
 
+
 def last_price_updated_cb(trader, symbol):
     print(f"{symbol} Trade: {trader.getLastPrice(symbol):.2f}")
 
@@ -19,6 +20,7 @@ class LastPriceUpdatedCB(object):
 
 # on execution updated callbacks:
 
+
 def execution_updated_cb(trader, order_id):
     order = trader.getOrder(order_id)
     if order.executed_size == order.size:
@@ -26,9 +28,19 @@ def execution_updated_cb(trader, order_id):
     else:
         price = order.price
     print("Report:")
-    print("%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s" %
-          (order.symbol, order.type, price, order.size,
-           order.executed_size, order.id, order.status, order.timestamp))
+    print(
+        "%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s"
+        % (
+            order.symbol,
+            order.type,
+            price,
+            order.size,
+            order.executed_size,
+            order.id,
+            order.status,
+            order.timestamp,
+        )
+    )
 
 
 class ExecutionUpdatedCB(object):
@@ -43,12 +55,23 @@ class ExecutionUpdatedCB(object):
             else:
                 price = order.price
             print("Report:")
-            print("%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s" %
-                  (order.symbol, order.type, price, order.size,
-                   order.executed_size, order.id, order.status, order.timestamp))
+            print(
+                "%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s"
+                % (
+                    order.symbol,
+                    order.type,
+                    price,
+                    order.size,
+                    order.executed_size,
+                    order.id,
+                    order.status,
+                    order.timestamp,
+                )
+            )
 
 
 # on portfolio summary updated callbacks:
+
 
 def portfolio_summary_updated_cb(trader):
     print(f"Buying Power: {trader.getPortfolioSummary().getTotalBP():.2f}")
@@ -65,6 +88,7 @@ class PortfolioSummaryUpdatedCB(object):
 
 # on portfolio item updated callbacks:
 
+
 def portfolio_item_updated_cb(trader, symbol):
     print(f"{symbol} Shares: {trader.getPortfolioItem(symbol).getShares()}")
 
@@ -80,14 +104,25 @@ class PortfolioItemUpdatedCB(object):
 
 # on waiting list updated callbacks:
 
+
 def waiting_list_updated_cb(trader):
     if trader.getWaitingListSize() > 0:
         waiting_list = trader.getWaitingList()
         print("Waiting List:")
         for order in waiting_list:
-            print("%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s" %
-                  (order.symbol, order.type, order.price, order.size,
-                   order.executed_size, order.id, order.status, order.timestamp))
+            print(
+                "%6s\t%21s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%28s\t%26s"
+                % (
+                    order.symbol,
+                    order.type,
+                    order.price,
+                    order.size,
+                    order.executed_size,
+                    order.id,
+                    order.status,
+                    order.timestamp,
+                )
+            )
     else:
         print("Waiting List Empty!")
 
@@ -102,8 +137,18 @@ class WaitingListUpdatedCB(object):
                 waiting_list = trader.getWaitingList()
                 print("Waiting List:")
                 for order in waiting_list:
-                    print("%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s" %
-                          (order.symbol, order.type, order.price, order.size,
-                           order.executed_size, order.id, order.status, order.timestamp))
+                    print(
+                        "%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s"
+                        % (
+                            order.symbol,
+                            order.type,
+                            order.price,
+                            order.size,
+                            order.executed_size,
+                            order.id,
+                            order.status,
+                            order.timestamp,
+                        )
+                    )
             else:
                 print("Waiting List Empty!")
