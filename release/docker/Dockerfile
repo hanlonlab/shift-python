@@ -15,6 +15,7 @@ RUN conda install python=3.6 openssl=1.0
 RUN conda update --all -y
 
 # Install extra packages for the algorithmic trading competition
+RUN conda install black
 RUN conda install keras
 
 # Install shift-python
