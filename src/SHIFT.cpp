@@ -14,8 +14,8 @@ PYBIND11_MODULE(shift, m)
     m.doc() = "SHIFT-Python API";
     m.attr("__version__") = "1.3.0";
 
-    py::register_exception<shift::IncorrectPassword>(m, "IncorrectPassword");
-    py::register_exception<shift::ConnectionTimeout>(m, "ConnectionTimeout");
+    py::register_exception<shift::IncorrectPasswordError>(m, "IncorrectPasswordError");
+    py::register_exception<shift::ConnectionTimeoutError>(m, "ConnectionTimeoutError");
 
     BestPrice::bindPython(m);
     Order::bindPython(m);

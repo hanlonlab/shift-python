@@ -83,10 +83,10 @@ bool Trader::connect(const std::string& cfgFile, const std::string& password)
     try {
         m_initiator.connectBrokerageCenter(cfgFile, m_client, password);
         Log(Log::INFO) << "Connection established.";
-    } catch (shift::ConnectionTimeout& e) {
+    } catch (shift::ConnectionTimeoutError& e) {
         Log(Log::ERRO) << e.what();
         throw e;
-    } catch (shift::IncorrectPassword& e) {
+    } catch (shift::IncorrectPasswordError& e) {
         Log(Log::ERRO) << e.what();
         throw e;
     }

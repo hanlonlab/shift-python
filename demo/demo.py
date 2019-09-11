@@ -270,9 +270,9 @@ def main(argv):
     try:
         trader.connect("initiator.cfg", "password")
         trader.subAllOrderBook()
-    except shift.IncorrectPassword as e:
+    except shift.IncorrectPasswordError as e:
         print(e)
-    except shift.ConnectionTimeout as e:
+    except shift.ConnectionTimeoutError as e:
         print(e)
 
     # demo01(trader)

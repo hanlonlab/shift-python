@@ -111,10 +111,10 @@ def main(argv):
     # connect
     try:
         trader.connect("initiator.cfg", my_password)
-    except shift.IncorrectPassword as e:
+    except shift.IncorrectPasswordError as e:
         print(e)
         sys.exit(2)
-    except shift.ConnectionTimeout as e:
+    except shift.ConnectionTimeoutError as e:
         print(e)
         sys.exit(2)
 
