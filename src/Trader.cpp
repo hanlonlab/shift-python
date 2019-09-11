@@ -76,7 +76,7 @@ void Trader::setUsername(const std::string& username)
 bool Trader::connect(const std::string& cfgFile, const std::string& password)
 {
     if (isConnected()) {
-        Log(Log::WARN) << "Already connected.";
+        Log(Log::WARNING) << "Already connected.";
         return false;
     }
 
@@ -84,10 +84,10 @@ bool Trader::connect(const std::string& cfgFile, const std::string& password)
         m_initiator.connectBrokerageCenter(cfgFile, m_client, password);
         Log(Log::INFO) << "Connection established.";
     } catch (shift::ConnectionTimeoutError& e) {
-        Log(Log::ERRO) << e.what();
+        Log(Log::ERROR) << e.what();
         throw e;
     } catch (shift::IncorrectPasswordError& e) {
-        Log(Log::ERRO) << e.what();
+        Log(Log::ERROR) << e.what();
         throw e;
     }
 
@@ -97,7 +97,7 @@ bool Trader::connect(const std::string& cfgFile, const std::string& password)
 bool Trader::disconnect()
 {
     if (!isConnected()) {
-        Log(Log::ERRO) << "No connection established.";
+        Log(Log::ERROR) << "No connection established.";
         return false;
     }
 

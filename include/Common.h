@@ -22,12 +22,12 @@ class Log {
 public:
     enum LogLevel {
         INFO,
-        WARN,
-        ERRO,
-        FATA
+        WARNING,
+        ERROR,
+        FATAL
     };
     struct LogStruct {
-        LogLevel level = WARN;
+        LogLevel level = WARNING;
     };
 
     Log() {}
@@ -61,13 +61,13 @@ private:
         case INFO:
             label = "\033[32;1;1mINFO\033[0m";
             break;
-        case WARN:
+        case WARNING:
             label = "\033[36;1;1mWARNING\033[0m";
             break;
-        case ERRO:
+        case ERROR:
             label = "\033[33;1;1mERROR\033[0m";
             break;
-        case FATA:
+        case FATAL:
             label = "\033[31;1;1mFATAL\033[0m";
             break;
         }
