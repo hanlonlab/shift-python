@@ -178,7 +178,7 @@ def main(argv):
                 print(f"Bid Size: {order_size}")
 
             limit_buy = shift.Order(
-                shift.Order.LIMIT_BUY, stock_ticker, order_size, order_price
+                shift.Order.Type.LIMIT_BUY, stock_ticker, order_size, order_price
             )
             trader.submitOrder(limit_buy)
 
@@ -209,7 +209,7 @@ def main(argv):
                 print(f"Ask Size: {order_size}")
 
             limit_sell = shift.Order(
-                shift.Order.LIMIT_SELL, stock_ticker, order_size, order_price
+                shift.Order.Type.LIMIT_SELL, stock_ticker, order_size, order_price
             )
             trader.submitOrder(limit_sell)
 

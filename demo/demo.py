@@ -10,7 +10,7 @@ def demo01(trader):
     :return:
     """
 
-    limit_buy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 1, 10.00)
+    limit_buy = shift.Order(shift.Order.Type.LIMIT_BUY, "AAPL", 1, 10.00)
     trader.submitOrder(limit_buy)
 
     return
@@ -23,10 +23,10 @@ def demo02(trader):
     :return:
     """
 
-    aapl_limit_buy = shift.Order(shift.Order.LIMIT_BUY, "AAPL", 10, 10.00)
+    aapl_limit_buy = shift.Order(shift.Order.Type.LIMIT_BUY, "AAPL", 10, 10.00)
     trader.submitOrder(aapl_limit_buy)
 
-    xom_limit_buy = shift.Order(shift.Order.LIMIT_BUY, "XOM", 10, 10.00)
+    xom_limit_buy = shift.Order(shift.Order.Type.LIMIT_BUY, "XOM", 10, 10.00)
     trader.submitOrder(xom_limit_buy)
 
     return
@@ -141,10 +141,10 @@ def demo06(trader):
     :return:
     """
 
-    aapl_market_buy = shift.Order(shift.Order.MARKET_BUY, "AAPL", 1)
+    aapl_market_buy = shift.Order(shift.Order.Type.MARKET_BUY, "AAPL", 1)
     trader.submitOrder(aapl_market_buy)
 
-    xom_market_buy = shift.Order(shift.Order.MARKET_BUY, "XOM", 1)
+    xom_market_buy = shift.Order(shift.Order.Type.MARKET_BUY, "XOM", 1)
     trader.submitOrder(xom_market_buy)
 
     return
@@ -206,10 +206,10 @@ def demo08(trader):
     :return:
     """
 
-    aapl_market_sell = shift.Order(shift.Order.MARKET_SELL, "AAPL", 1)
+    aapl_market_sell = shift.Order(shift.Order.Type.MARKET_SELL, "AAPL", 1)
     trader.submitOrder(aapl_market_sell)
 
-    xom_market_sell = shift.Order(shift.Order.MARKET_SELL, "XOM", 1)
+    xom_market_sell = shift.Order(shift.Order.Type.MARKET_SELL, "XOM", 1)
     trader.submitOrder(xom_market_sell)
 
     return
@@ -226,7 +226,7 @@ def demo09(trader):
         "Symbol\t\t\t\tType\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t Status\t\tTimestamp"
     )
     for order in trader.getSubmittedOrders():
-        if order.executed_size == order.size:
+        if order.status == shift.Order.Status.FILLED:
             price = order.executed_price
         else:
             price = order.price
