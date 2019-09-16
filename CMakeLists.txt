@@ -8,7 +8,7 @@ get_filename_component(PROJECT_DIR_NAME ${CMAKE_CURRENT_LIST_DIR} NAME)
 string(REPLACE " " "_" PROJECT_DIR_NAME ${PROJECT_DIR_NAME})
 
 project(${PROJECT_DIR_NAME}
-        VERSION 1.3.0 # <major>.<minor>.<patch>
+        VERSION 1.5.0 # <major>.<minor>.<patch>
         LANGUAGES CXX)
 
 set(LIB_NAME shift)
@@ -82,6 +82,11 @@ endif(UNIX)
 if(UNIX AND NOT APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
 endif(UNIX AND NOT APPLE)
+
+# GCC (Raspbian Buster for Raspberry Pi 4)
+if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+endif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
 
 # Clang (macOS Mojave 10.14)
 # -Wno-overloaded-virtual is required when linking QuickFIX on macOS

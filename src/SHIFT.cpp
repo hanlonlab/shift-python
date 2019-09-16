@@ -12,7 +12,7 @@
 PYBIND11_MODULE(shift, m)
 {
     m.doc() = "SHIFT-Python API";
-    m.attr("__version__") = "1.3.0";
+    m.attr("__version__") = "1.5.0";
 
     py::register_exception<shift::IncorrectPasswordError>(m, "IncorrectPasswordError");
     py::register_exception<shift::ConnectionTimeoutError>(m, "ConnectionTimeoutError");

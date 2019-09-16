@@ -1,5 +1,5 @@
 # Set the base image using anaconda3
-FROM continuumio/anaconda3:5.2.0
+FROM continuumio/anaconda3:latest
 
 # shift-python maintainer
 MAINTAINER Thiago W. Alves (twinkle1@stevens.edu)
@@ -7,9 +7,6 @@ MAINTAINER Thiago W. Alves (twinkle1@stevens.edu)
 # Set correct time zone
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Fix python and openssl versions
-RUN conda install python=3.6 openssl=1.0
 
 # Update all conda packages
 RUN conda update --all -y
@@ -19,7 +16,7 @@ RUN conda install black
 RUN conda install keras
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.3.0/shift-python_1.3.0_conda_linux.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.5.0/shift-python_1.5.0_conda_linux.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 

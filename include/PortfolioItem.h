@@ -16,15 +16,15 @@ void bindPython(py::module& m)
         .def(py::init<>())
         .def(py::init<std::string, int, int, double, double, double>(), py::arg("symbol"), py::arg("long_shares"), py::arg("short_shares"), py::arg("long_price"), py::arg("short_price"), py::arg("realized_pl"));
     PORTFOLIO_ITEM //! bind function
-        .def("getSymbol", &shift::PortfolioItem::getSymbol)
-        .def("getShares", &shift::PortfolioItem::getShares)
-        .def("getLongShares", &shift::PortfolioItem::getLongShares)
-        .def("getShortShares", &shift::PortfolioItem::getShortShares)
-        .def("getPrice", &shift::PortfolioItem::getPrice)
-        .def("getLongPrice", &shift::PortfolioItem::getLongPrice)
-        .def("getShortPrice", &shift::PortfolioItem::getShortPrice)
-        .def("getRealizedPL", &shift::PortfolioItem::getRealizedPL)
-        .def("getTimestamp", &shift::PortfolioItem::getTimestamp);
+        .def("get_symbol", &shift::PortfolioItem::getSymbol)
+        .def("get_shares", &shift::PortfolioItem::getShares)
+        .def("get_long_shares", &shift::PortfolioItem::getLongShares)
+        .def("get_short_shares", &shift::PortfolioItem::getShortShares)
+        .def("get_price", &shift::PortfolioItem::getPrice)
+        .def("get_long_price", &shift::PortfolioItem::getLongPrice)
+        .def("get_short_price", &shift::PortfolioItem::getShortPrice)
+        .def("get_realized_pl", &shift::PortfolioItem::getRealizedPL)
+        .def("get_timestamp", &shift::PortfolioItem::getTimestamp);
 }
 
 } // PortfolioItem

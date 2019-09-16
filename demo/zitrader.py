@@ -1,13 +1,14 @@
 import getopt
 import math
-import numpy
-import shift
 import sys
 import time
+from typing import List
+
+import numpy
+import shift
 
 import goodcbfs
-
-from credentials import my_username, my_password
+from credentials import my_password, my_username
 
 
 def usage():
@@ -26,7 +27,7 @@ def usage():
     print()
 
 
-def main(argv):
+def main(argv: List[str]):
     stock_ticker = "AAPL"  # stock ticker (e.g. XYZ)
     simulation_duration = 380  # duration of simulation (in minutes)
     trading_rate = 190  # number of trader per simulation session
@@ -102,11 +103,11 @@ def main(argv):
     trader = shift.Trader(my_username)
 
     # attach callback functors
-    # trader.onLastPriceUpdated(goodcbfs.LastPriceUpdatedCB(stock_ticker, verbose))
-    # trader.onExecutionUpdated(goodcbfs.ExecutionUpdatedCB(verbose))
-    # trader.onPortfolioSummaryUpdated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
-    # trader.onPortfolioItemUpdated(goodcbfs.PortfolioItemUpdatedCB(verbose))
-    # trader.onWaitingListUpdated(goodcbfs.WaitingListUpdatedCB(verbose))
+    # trader.on_last_price_updated(goodcbfs.LastPriceUpdatedCB(stock_ticker, verbose))
+    # trader.on_execution_updated(goodcbfs.ExecutionUpdatedCB(verbose))
+    # trader.on_portfolio_summary_updated(goodcbfs.PortfolioSummaryUpdatedCB(verbose))
+    # trader.on_portfolio_item_updated(goodcbfs.PortfolioItemUpdatedCB(verbose))
+    # trader.on_waiting_list_updated(goodcbfs.WaitingListUpdatedCB(verbose))
 
     # connect
     try:
@@ -119,7 +120,7 @@ def main(argv):
         sys.exit(2)
 
     # subscribe to all available order books
-    trader.subAllOrderBook()
+    trader.sub_all_order_book()
 
     # trading strategy
     for i in range(1, num_trades):  # trading_times[0] == 0
@@ -130,13 +131,13 @@ def main(argv):
             print(f"Trading Time: {trading_times[i]}")
 
         # cancel last order if it has not executed yet
-        if trader.getWaitingListSize() > 0:
+        if trader.get_waiting_list_size() > 0:
             if verbose:
                 print("Canceling Pending Orders!")
-            trader.cancelAllPendingOrders()
-            # for order in trader.getWaitingList():
-            #     trader.submitCancellation(order)
-            # while trader.getWaitingListSize() > 0:
+            trader.cancel_all_pending_orders()
+            # for order in trader.get_waiting_list():
+            #     trader.submit_cancellation(order)
+            # while trader.get_waiting_list_size() > 0:
             #     time.sleep(1)
 
         # robot should not trade anymore
@@ -147,12 +148,12 @@ def main(argv):
         if verbose:
             print(f"Target Rate: {target_rate}")
 
-        curr_last_price = trader.getLastPrice(stock_ticker)
+        curr_last_price = trader.get_last_price(stock_ticker)
         last_price = last_price if curr_last_price == 0.0 else curr_last_price
 
         if numpy.random.binomial(n=1, p=0.5) == 0:  # limit buy
 
-            best_bid = trader.getBestPrice(stock_ticker).getBidPrice()
+            best_bid = trader.get_best_price(stock_ticker).get_bid_price()
             best_bid = best_bid if best_bid != 0.0 else last_price
 
             target_price = min(last_price, best_bid)
@@ -171,7 +172,7 @@ def main(argv):
                 print(f"Bid Price: {order_price:.2f}")
 
             order_size = math.floor(
-                (target_rate * trader.getPortfolioSummary().getTotalBP())
+                (target_rate * trader.get_portfolio_summary().get_total_bp())
                 / (100 * order_price)
             )
             if verbose:
@@ -180,11 +181,11 @@ def main(argv):
             limit_buy = shift.Order(
                 shift.Order.Type.LIMIT_BUY, stock_ticker, order_size, order_price
             )
-            trader.submitOrder(limit_buy)
+            trader.submit_order(limit_buy)
 
         else:  # limit sell
 
-            best_ask = trader.getBestPrice(stock_ticker).getAskPrice()
+            best_ask = trader.get_best_price(stock_ticker).get_ask_price()
             best_ask = best_ask if best_ask != 0.0 else last_price
 
             target_price = max(last_price, best_ask)
@@ -203,7 +204,8 @@ def main(argv):
                 print(f"Ask Price: {order_price:.2f}")
 
             order_size = math.floor(
-                target_rate * (trader.getPortfolioItem(stock_ticker).getShares() / 100)
+                target_rate
+                * (trader.get_portfolio_item(stock_ticker).get_shares() / 100)
             )
             if verbose:
                 print(f"Ask Size: {order_size}")
@@ -211,7 +213,7 @@ def main(argv):
             limit_sell = shift.Order(
                 shift.Order.Type.LIMIT_SELL, stock_ticker, order_size, order_price
             )
-            trader.submitOrder(limit_sell)
+            trader.submit_order(limit_sell)
 
         if verbose:
             print()

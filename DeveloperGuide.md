@@ -22,10 +22,10 @@ Choose a location to keep the pybind11 source files (for debugging purposes), e.
 ``` bash
 git clone https://github.com/pybind/pybind11.git
 cd pybind11
-git checkout stable
+git checkout v2.2 # v2.3 has a bug with char enums
 mkdir build
 cd build
-cmake -DPYBIND11_PYTHON_VERSION=3.6 ..
+cmake -DPYBIND11_PYTHON_VERSION=3.7 ..
 make
 sudo make install
 ```
