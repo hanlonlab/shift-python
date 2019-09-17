@@ -70,7 +70,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
 # Release Flags
 # -O2 instead of -O3
 # -flto stands for Link Time Optimization (LTO)
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -flto")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -finline-functions -flto")
 
 # GCC / Clang
 if(UNIX)
@@ -78,9 +78,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 endif(UNIX)
 
 # GCC (Ubuntu 18.04 LTS Bionic Beaver)
-# -Wno-deprecated is required when linking QuickFIX on Ubuntu
 if(UNIX AND NOT APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 endif(UNIX AND NOT APPLE)
 
 # GCC (Raspbian Buster for Raspberry Pi 4)
@@ -89,7 +88,6 @@ if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
 endif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
 
 # Clang (macOS Mojave 10.14)
-# -Wno-overloaded-virtual is required when linking QuickFIX on macOS
 if(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
     include_directories(/usr/local/include)
