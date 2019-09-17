@@ -42,10 +42,7 @@ set(SRC
 )
 
 set(OTHER
-    ${PROJECT_SOURCE_DIR}/mingw64-build.sh
     ${PROJECT_SOURCE_DIR}/setup.py
-    ${PROJECT_SOURCE_DIR}/win-build-clientx86.sh
-    ${PROJECT_SOURCE_DIR}/win-build-pybind11x86.sh
 )
 
 ### Compiler Flags ############################################################
