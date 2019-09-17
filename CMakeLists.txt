@@ -53,9 +53,6 @@ set(OTHER
 # Important for libraries
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# UNIX only
-if(NOT WIN32)
-
 # C++14
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -71,11 +68,6 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
 # -O2 instead of -O3
 # -flto stands for Link Time Optimization (LTO)
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -finline-functions -flto")
-
-# GCC / Clang
-if(UNIX)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-endif(UNIX)
 
 # GCC (Ubuntu 18.04 LTS Bionic Beaver)
 if(UNIX AND NOT APPLE)
@@ -93,21 +85,6 @@ if(APPLE)
     include_directories(/usr/local/include)
 endif(APPLE)
 
-endif(NOT WIN32)
-
-# Visual C++ (Visual Studio 2017)
-if(WIN32)
-	add_definitions(-DCURL_STATICLIB)
-    add_subdirectory(pybind11)
-
-    include_directories(${PROJECT_SOURCE_DIR}/include)
-    include_directories(${PROJECT_SOURCE_DIR}/../shift-main/LibCoreClient/include)
-    include_directories(${PROJECT_SOURCE_DIR}/../shift-main/LibMiscUtils/include)
-    include_directories(C:/quickfix/include)    
-    include_directories("./pybind11/build/mock_install/include")
-    include_directories("C:/Program Files (x86)/Python37-32/include")
-endif(WIN32)
-
 ### Build Types ###############################################################
 
 # if no build type is set, the default is Release
@@ -117,63 +94,20 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 ### Build Configuration #######################################################
 
-if(NOT WIN32) # UNIX only
-    find_package(pybind11 REQUIRED)
-endif(NOT WIN32)
-
-if(WIN32)   # Windows
-	if(CMAKE_BUILD_TYPE MATCHES Debug)
-        find_library(QUICKFIX quickfix
-                    PATHS C:/quickfix/lib/debug)
-        set(CURL_INCLUDE_DIR "C:/curl-7.58.0/builds/libcurl-vc17-x86-debug-static-ipv6-sspi-winssl/include")
-        set(CURL_LIBRARY "C:/curl-7.58.0/builds/libcurl-vc17-x86-debug-static-ipv6-sspi-winssl/lib/libcurl_a_debug.lib")
-    endif(CMAKE_BUILD_TYPE MATCHES Debug)
-    if(CMAKE_BUILD_TYPE MATCHES Release)
-        find_library(QUICKFIX quickfix
-                    PATHS C:/quickfix/lib)
-        set(CURL_INCLUDE_DIR "C:/curl-7.58.0/builds/libcurl-vc17-x86-release-static-ipv6-sspi-winssl/include")
-        set(CURL_LIBRARY "C:/curl-7.58.0/builds/libcurl-vc17-x86-release-static-ipv6-sspi-winssl/lib/libcurl_a.lib") 
-    endif(CMAKE_BUILD_TYPE MATCHES Release)
-
-    find_package(CURL REQUIRED)
-
-    if(CURL_FOUND)
-        INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIR})
-        find_library(CURL curl)
-    else(CURL_FOUND)
-        message(FATAL_ERROR "Could not find the CURL library")
-    endif(CURL_FOUND)
-endif(WIN32)
+find_package(pybind11 REQUIRED)
 
 # Always enforce search for SHIFT LibCoreClient
 # (necessary when using the same name for Debug and Release)
 set (LIBCORECLIENT "LIBCORECLIENT-NOTFOUND")
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-    find_library(LIBCORECLIENT shift_coreclient-d 
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibCoreClient/build/Debug)
+    find_library(LIBCORECLIENT shift_coreclient-d)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 if(CMAKE_BUILD_TYPE MATCHES Release)
-    find_library(LIBCORECLIENT shift_coreclient 
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibCoreClient/build/Release)
-endif(CMAKE_BUILD_TYPE MATCHES Release) 
+    find_library(LIBCORECLIENT shift_coreclient)
+endif(CMAKE_BUILD_TYPE MATCHES Release)
 if(NOT LIBCORECLIENT)
     message(FATAL_ERROR "SHIFT LibCoreClient was not found.")
 endif(NOT LIBCORECLIENT)
-
-# Always enforce search for SHIFT LibMiscUtils
-# (necessary when using the same name for Debug and Release)
-set (LIBMISCUTILS "LIBMISCUTILS-NOTFOUND")
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-    find_library(LIBMISCUTILS shift_miscutils-d
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibMiscUtils/build/Debug)
-endif(CMAKE_BUILD_TYPE MATCHES Debug)
-if(CMAKE_BUILD_TYPE MATCHES Release)
-    find_library(LIBMISCUTILS shift_miscutils
-    	PATHS ${PROJECT_SOURCE_DIR}/../shift-main/LibMiscUtils/build/Release)
-endif(CMAKE_BUILD_TYPE MATCHES Release)
-if(NOT LIBMISCUTILS)
-    message(FATAL_ERROR "SHIFT LibMiscUtils was not found.")
-endif(NOT LIBMISCUTILS)
 
 pybind11_add_module(${LIB_NAME}
                     ${DEMO} ${INCLUDE} ${SRC} ${OTHER})
@@ -182,24 +116,7 @@ target_include_directories(${LIB_NAME}
                            PRIVATE ${CMAKE_PREFIX_PATH}/include
                            PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
-if(NOT WIN32) # UNIX
-    target_link_libraries(${LIB_NAME}
-                          PRIVATE ${LIBCORECLIENT})
-else(WIN32)   # Windows
-    target_link_libraries(${LIB_NAME}
-                          PRIVATE ${LIBCORECLIENT} ${CURL_LIBRARY}  ${QUICKFIX}  ${LIBMISCUTILS})
-endif(NOT WIN32)
-
-### Install Configuration #####################################################
-
-# UNIX only
-if(NOT WIN32)
-
-# If no installation path is set, the default is /usr/local
-if(NOT CMAKE_INSTALL_PREFIX)
-    set(CMAKE_INSTALL_PREFIX /usr/local)
-endif(NOT CMAKE_INSTALL_PREFIX)
-
-endif(NOT WIN32)
+target_link_libraries(${LIB_NAME}
+                      PRIVATE ${LIBCORECLIENT})
 
 ###############################################################################
