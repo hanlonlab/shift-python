@@ -1,5 +1,5 @@
 # Set the base image using anaconda3
-FROM continuumio/anaconda3:latest
+FROM continuumio/anaconda3:2019.07
 
 # shift-python maintainer
 MAINTAINER Thiago W. Alves (twinkle1@stevens.edu)
