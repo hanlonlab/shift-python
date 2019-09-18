@@ -672,7 +672,7 @@ border-bottom-color: #eee;
 <p>Choose a location to keep the pybind11 source files (for debugging purposes), e.g. a “C++” folder in your home directory, and then:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">git</span> clone https://github.com/pybind/pybind11.git</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="bu">cd</span> pybind11</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">git</span> checkout v2.2.4 <span class="co"># v2.3.0 has a bug with char enums</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">git</span> checkout tags/v2.2.4 <span class="co"># v2.3.0 has a bug with char enums</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">mkdir</span> build</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="bu">cd</span> build</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">cmake</span> -DPYBIND11_PYTHON_VERSION=3.7 ..</a>
