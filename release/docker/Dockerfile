@@ -8,6 +8,9 @@ MAINTAINER Thiago W. Alves (twinkle1@stevens.edu)
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+# Add conda to PATH
+ENV PATH /opt/conda/bin:$PATH
+
 # Update all conda packages
 RUN conda update --all -y
 
@@ -16,7 +19,7 @@ RUN conda install black
 RUN conda install keras
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.5.0/shift-python_1.5.0_conda_linux.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.5.0/shift_python-1.5.0-conda_linux.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 

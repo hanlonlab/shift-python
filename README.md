@@ -68,7 +68,7 @@ cd /mnt/c/Users/USERNAME/Desktop
     - NOTE: In some cases, you may need to enable virtualization on your computers.
 
 - Step 03:
-    - Download `shift-python_x.x.x_docker.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
+    - Download `shift_python-x.x.x-docker.zip`, the Docker Compose package from our [GitHub Release Page](https://github.com/hanlonlab/shift-python/releases).
     - Unzip the downloaded file to somewhere you like.
     - Access a terminal window on your computer. You may require admin privileges:
         - For macOS, Terminal.app.
