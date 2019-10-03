@@ -178,7 +178,8 @@ def main(argv: List[str]):
             if verbose:
                 print(f"Bid Size: {order_size}")
             if order_size == 0:
-                print(f"Not submitting order of size: : {order_size}")
+                if verbose:
+                    print(f"Not submitting order of size: : {order_size}")
                 continue
 
             limit_buy = shift.Order(
@@ -213,7 +214,8 @@ def main(argv: List[str]):
             if verbose:
                 print(f"Ask Size: {order_size}")
             if order_size == 0:
-                print(f"Not submitting order of size: : {order_size}")
+                if verbose:
+                    print(f"Not submitting order of size: : {order_size}")
                 continue
 
             limit_sell = shift.Order(
