@@ -114,6 +114,6 @@ target_include_directories(${LIB_NAME}
                            PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 target_link_libraries(${LIB_NAME}
-                      PRIVATE ${LIBCORECLIENT})
+                      ${LIBCORECLIENT})
 
 ###############################################################################
