@@ -19,7 +19,7 @@ RUN conda install black
 RUN conda install keras
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.5.0/shift_python-1.5.0-conda_linux.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.5.1/shift_python-1.5.1-conda_linux.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 
