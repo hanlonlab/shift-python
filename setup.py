@@ -96,7 +96,7 @@ class CleanCommand(Command):
 
 setup(
     name="shift",
-    version="1.5.1",
+    version="1.7.0",
     author="SHIFT",
     author_email="",
     description="Stevens High Frequency Trading (SHIFT) Simulation System Python Client",
