@@ -16,7 +16,7 @@ RUN conda update --all -y
 
 # Install extra packages for the algorithmic trading competition
 RUN conda install black
-RUN conda install keras
+RUN pip install keras==2.2.5 tensorflow==1.14.0
 
 # Install shift-python
 RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.7.0/shift_python-1.7.0-conda_linux.zip | bsdtar -xvf- && \
