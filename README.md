@@ -6,7 +6,7 @@
 ## Requirements
 
 - Upgrade your operating system to the latest version:
-    - macOS: macOS Mojave 10.14
+    - macOS: macOS Catalina 10.15
     - Ubuntu: Ubuntu 18.04 LTS Bionic Beaver
     - Windows: Windows 10
 
