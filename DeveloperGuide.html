@@ -675,7 +675,7 @@ border-bottom-color: #eee;
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">git</span> checkout tags/v2.2.4 <span class="co"># v2.3.0 has a bug with char enums</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">mkdir</span> build</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="bu">cd</span> build</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">cmake</span> -DPYBIND11_PYTHON_VERSION=3.7 ..</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">cmake</span> -DCMAKE_CXX_STANDARD=17 -DPYBIND11_PYTHON_VERSION=3.7 ..</a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="fu">make</span></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="fu">sudo</span> make install</a></code></pre></div>
 <hr />

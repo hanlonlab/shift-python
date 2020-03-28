@@ -25,7 +25,7 @@ cd pybind11
 git checkout tags/v2.2.4 # v2.3.0 has a bug with char enums
 mkdir build
 cd build
-cmake -DPYBIND11_PYTHON_VERSION=3.7 ..
+cmake -DCMAKE_CXX_STANDARD=17 -DPYBIND11_PYTHON_VERSION=3.7 ..
 make
 sudo make install
 ```
