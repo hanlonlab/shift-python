@@ -67,7 +67,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
 # -flto stands for Link Time Optimization (LTO)
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -finline-functions -flto")
 
-# GCC (Ubuntu 18.04 LTS Bionic Beaver)
+# GCC (Ubuntu 20.04 LTS Focal Fossa)
 if(UNIX AND NOT APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 endif(UNIX AND NOT APPLE)
