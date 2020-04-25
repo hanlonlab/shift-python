@@ -55,6 +55,7 @@ public:
             .def("get_portfolio_summary", &Trader::getPortfolioSummary)
             .def("get_portfolio_items", &Trader::getPortfolioItems)
             .def("get_portfolio_item", &Trader::getPortfolioItem, py::arg("symbol"))
+            .def("get_unrealized_pl", &Trader::getUnrealizedPL, py::arg("symbol") = "")
             .def("get_submitted_orders_size", &Trader::getSubmittedOrdersSize)
             .def("get_submitted_orders", &Trader::getSubmittedOrders)
             .def("get_order", &Trader::getOrder, py::arg("order_id"))
@@ -62,7 +63,8 @@ public:
             .def("get_waiting_list_size", &Trader::getWaitingListSize)
             .def("get_waiting_list", &Trader::getWaitingList)
             .def("cancel_all_pending_orders", &Trader::cancelAllPendingOrders)
-            .def("get_close_price", &Trader::getClosePrice, py::arg("symbol"), py::arg("buy"), py::arg("size"))
+            .def("get_close_price", py::overload_cast<const std::string&, bool, int>(&Trader::getClosePrice), py::arg("symbol"), py::arg("buy"), py::arg("size"))
+            .def("get_close_price", py::overload_cast<const std::string&>(&Trader::getClosePrice), py::arg("symbol"))
             .def("get_last_price", &Trader::getLastPrice, py::arg("symbol"))
             .def("get_last_size", &Trader::getLastSize, py::arg("symbol"))
             .def("get_last_trade_time", &Trader::getLastTradeTime)
@@ -111,6 +113,7 @@ private:
     shift::PortfolioSummary getPortfolioSummary();
     std::map<std::string, shift::PortfolioItem> getPortfolioItems();
     shift::PortfolioItem getPortfolioItem(const std::string& symbol);
+    double getUnrealizedPL(const std::string& symbol);
     int getSubmittedOrdersSize();
     std::vector<shift::Order> getSubmittedOrders();
     shift::Order getOrder(const std::string& orderID);
@@ -121,6 +124,7 @@ private:
 
     // price methods
     double getClosePrice(const std::string& symbol, bool buy, int size);
+    double getClosePrice(const std::string& symbol);
     double getLastPrice(const std::string& symbol);
     int getLastSize(const std::string& symbol);
     std::chrono::system_clock::time_point getLastTradeTime();

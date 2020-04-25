@@ -8,7 +8,7 @@ get_filename_component(PROJECT_DIR_NAME ${CMAKE_CURRENT_LIST_DIR} NAME)
 string(REPLACE " " "_" PROJECT_DIR_NAME ${PROJECT_DIR_NAME})
 
 project(${PROJECT_DIR_NAME}
-        VERSION 1.7.0 # <major>.<minor>.<patch>
+        VERSION 1.7.5 # <major>.<minor>.<patch>
         LANGUAGES CXX)
 
 set(LIB_NAME shift)

@@ -17,5 +17,6 @@ requirements:
     - openssl
 
 about:
-  home: https://github.com/quickfix/quickfix
+  home: https://github.com/hanlonlab/quickfix
+  # home: https://github.com/quickfix/quickfix
   license_file: LICENSE

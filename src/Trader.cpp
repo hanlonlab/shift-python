@@ -137,6 +137,11 @@ shift::PortfolioItem Trader::getPortfolioItem(const std::string& symbol)
     return m_client->getPortfolioItem(symbol);
 }
 
+double Trader::getUnrealizedPL(const std::string& symbol)
+{
+    return m_client->getUnrealizedPL(symbol);
+}
+
 int Trader::getSubmittedOrdersSize()
 {
     return m_client->getSubmittedOrdersSize();
@@ -175,6 +180,11 @@ void Trader::cancelAllPendingOrders()
 double Trader::getClosePrice(const std::string& symbol, bool buy, int size)
 {
     return m_client->getClosePrice(symbol, buy, size);
+}
+
+double Trader::getClosePrice(const std::string& symbol)
+{
+    return m_client->getClosePrice(symbol);
 }
 
 double Trader::getLastPrice(const std::string& symbol)
