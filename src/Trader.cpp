@@ -1,55 +1,60 @@
 #include "Trader.h"
 
 PythonClient::PythonClient(Trader* t)
-    : trader(t)
+    : trader { t }
 {
 }
 
-PythonClient::PythonClient(const std::string& username, Trader* t)
-    : shift::CoreClient(username)
-    , trader(t)
+PythonClient::PythonClient(std::string username, Trader* t)
+    : shift::CoreClient { std::move(username) }
+    , trader { t }
 {
 }
 
 void PythonClient::receiveLastPrice(const std::string& symbol)
 {
-    if (lastPriceUpdatedCb)
+    if (lastPriceUpdatedCb) {
         lastPriceUpdatedCb(trader, symbol);
+    }
 }
 
 void PythonClient::receiveExecution(const std::string& orderID)
 {
-    if (executionUpdatedCb)
+    if (executionUpdatedCb) {
         executionUpdatedCb(trader, orderID);
+    }
 }
 
 void PythonClient::receivePortfolioSummary()
 {
-    if (portfolioSummaryUpdatedCb)
+    if (portfolioSummaryUpdatedCb) {
         portfolioSummaryUpdatedCb(trader);
+    }
 }
 
 void PythonClient::receivePortfolioItem(const std::string& symbol)
 {
-    if (portfolioItemUpdatedCb)
+    if (portfolioItemUpdatedCb) {
         portfolioItemUpdatedCb(trader, symbol);
+    }
 }
 
 void PythonClient::receiveWaitingList()
 {
-    if (waitingListUpdatedCb)
+    if (waitingListUpdatedCb) {
         waitingListUpdatedCb(trader);
+    }
 }
 
 Trader::Trader()
-    : m_initiator(shift::FIXInitiator::getInstance())
-    , m_client(new PythonClient(this))
+    : m_initiator { shift::FIXInitiator::getInstance() }
+    , m_client { new PythonClient(this) }
 {
 }
 
-Trader::Trader(const std::string& username)
-    : m_initiator(shift::FIXInitiator::getInstance())
-    , m_client(new PythonClient(username, this))
+Trader::Trader(std::string username)
+    : m_initiator { shift::FIXInitiator::getInstance() }
+    , m_client { new PythonClient(std::move(username), this) }
 {
 }
 
@@ -58,7 +63,7 @@ Trader::~Trader()
     delete m_client;
 }
 
-std::string Trader::getUsername()
+auto Trader::getUsername() const -> const std::string&
 {
     return m_client->getUsername();
 }
@@ -73,7 +78,7 @@ void Trader::setUsername(const std::string& username)
  * \param password Password
  * \return Success
  */
-bool Trader::connect(const std::string& cfgFile, const std::string& password)
+auto Trader::connect(const std::string& cfgFile, const std::string& password) -> bool
 {
     if (isConnected()) {
         Log(Log::WARNING) << "Already connected.";
@@ -94,7 +99,7 @@ bool Trader::connect(const std::string& cfgFile, const std::string& password)
     return true;
 }
 
-bool Trader::disconnect()
+auto Trader::disconnect() -> bool
 {
     if (!isConnected()) {
         Log(Log::ERROR) << "No connection established.";
@@ -107,7 +112,7 @@ bool Trader::disconnect()
     return true;
 }
 
-bool Trader::isConnected()
+auto Trader::isConnected() -> bool
 {
     return m_client->isConnected();
 }
@@ -122,52 +127,52 @@ void Trader::submitCancellation(shift::Order order)
     return m_client->submitCancellation(order);
 }
 
-shift::PortfolioSummary Trader::getPortfolioSummary()
+auto Trader::getPortfolioSummary() -> shift::PortfolioSummary
 {
     return m_client->getPortfolioSummary();
 }
 
-std::map<std::string, shift::PortfolioItem> Trader::getPortfolioItems()
+auto Trader::getPortfolioItems() -> std::map<std::string, shift::PortfolioItem>
 {
     return m_client->getPortfolioItems();
 }
 
-shift::PortfolioItem Trader::getPortfolioItem(const std::string& symbol)
+auto Trader::getPortfolioItem(const std::string& symbol) -> shift::PortfolioItem
 {
     return m_client->getPortfolioItem(symbol);
 }
 
-double Trader::getUnrealizedPL(const std::string& symbol)
+auto Trader::getUnrealizedPL(const std::string& symbol) -> double
 {
     return m_client->getUnrealizedPL(symbol);
 }
 
-int Trader::getSubmittedOrdersSize()
+auto Trader::getSubmittedOrdersSize() -> int
 {
     return m_client->getSubmittedOrdersSize();
 }
 
-std::vector<shift::Order> Trader::getSubmittedOrders()
+auto Trader::getSubmittedOrders() -> std::vector<shift::Order>
 {
     return m_client->getSubmittedOrders();
 }
 
-shift::Order Trader::getOrder(const std::string& orderID)
+auto Trader::getOrder(const std::string& orderID) -> shift::Order
 {
     return m_client->getOrder(orderID);
 }
 
-std::vector<shift::Order> Trader::getExecutedOrders(const std::string& orderID)
+auto Trader::getExecutedOrders(const std::string& orderID) -> std::vector<shift::Order>
 {
     return m_client->getExecutedOrders(orderID);
 }
 
-int Trader::getWaitingListSize()
+auto Trader::getWaitingListSize() -> int
 {
     return m_client->getWaitingListSize();
 }
 
-std::vector<shift::Order> Trader::getWaitingList()
+auto Trader::getWaitingList() -> std::vector<shift::Order>
 {
     return m_client->getWaitingList();
 }
@@ -177,47 +182,47 @@ void Trader::cancelAllPendingOrders()
     return m_client->cancelAllPendingOrders();
 }
 
-double Trader::getClosePrice(const std::string& symbol, bool buy, int size)
+auto Trader::getClosePrice(const std::string& symbol, bool buy, int size) -> double
 {
     return m_client->getClosePrice(symbol, buy, size);
 }
 
-double Trader::getClosePrice(const std::string& symbol)
+auto Trader::getClosePrice(const std::string& symbol) -> double
 {
     return m_client->getClosePrice(symbol);
 }
 
-double Trader::getLastPrice(const std::string& symbol)
+auto Trader::getLastPrice(const std::string& symbol) -> double
 {
     return m_client->getLastPrice(symbol);
 }
 
-int Trader::getLastSize(const std::string& symbol)
+auto Trader::getLastSize(const std::string& symbol) -> int
 {
     return m_client->getLastSize(symbol);
 }
 
-std::chrono::system_clock::time_point Trader::getLastTradeTime()
+auto Trader::getLastTradeTime() -> std::chrono::system_clock::time_point
 {
     return m_client->getLastTradeTime();
 }
 
-shift::BestPrice Trader::getBestPrice(const std::string& symbol)
+auto Trader::getBestPrice(const std::string& symbol) -> shift::BestPrice
 {
     return m_client->getBestPrice(symbol);
 }
 
-std::vector<shift::OrderBookEntry> Trader::getOrderBook(const std::string& symbol, shift::OrderBook::Type type, int maxLevel)
+auto Trader::getOrderBook(const std::string& symbol, shift::OrderBook::Type type, int maxLevel) -> std::vector<shift::OrderBookEntry>
 {
     return m_client->getOrderBook(symbol, type, maxLevel);
 }
 
-std::vector<shift::OrderBookEntry> Trader::getOrderBookWithDestination(const std::string& symbol, shift::OrderBook::Type type)
+auto Trader::getOrderBookWithDestination(const std::string& symbol, shift::OrderBook::Type type) -> std::vector<shift::OrderBookEntry>
 {
     return m_client->getOrderBookWithDestination(symbol, type);
 }
 
-std::vector<std::string> Trader::getStockList()
+auto Trader::getStockList() -> std::vector<std::string>
 {
     return m_client->getStockList();
 }
@@ -227,72 +232,72 @@ void Trader::requestCompanyNames()
     return m_client->requestCompanyNames();
 }
 
-std::map<std::string, std::string> Trader::getCompanyNames()
+auto Trader::getCompanyNames() -> std::map<std::string, std::string>
 {
     return m_client->getCompanyNames();
 }
 
-std::string Trader::getCompanyName(const std::string& symbol)
+auto Trader::getCompanyName(const std::string& symbol) -> std::string
 {
     return m_client->getCompanyName(symbol);
 }
 
-bool Trader::requestSamplePrices(std::vector<std::string> symbols, double samplingFrequency, unsigned int samplingWindow)
+auto Trader::requestSamplePrices(std::vector<std::string> symbols, double samplingFrequency, unsigned int samplingWindow) -> bool
 {
     return m_client->requestSamplePrices(symbols, samplingFrequency, samplingWindow);
 }
 
-bool Trader::cancelSamplePricesRequest(const std::vector<std::string>& symbols)
+auto Trader::cancelSamplePricesRequest(const std::vector<std::string>& symbols) -> bool
 {
     return m_client->cancelSamplePricesRequest(symbols);
 }
 
-bool Trader::cancelAllSamplePricesRequests()
+auto Trader::cancelAllSamplePricesRequests() -> bool
 {
     return m_client->cancelAllSamplePricesRequests();
 }
 
-int Trader::getSamplePricesSize(const std::string& symbol)
+auto Trader::getSamplePricesSize(const std::string& symbol) -> int
 {
     return m_client->getSamplePricesSize(symbol);
 }
 
-std::list<double> Trader::getSamplePrices(const std::string& symbol, bool midPrices)
+auto Trader::getSamplePrices(const std::string& symbol, bool midPrices) -> std::list<double>
 {
     return m_client->getSamplePrices(symbol, midPrices);
 }
 
-int Trader::getLogReturnsSize(const std::string& symbol)
+auto Trader::getLogReturnsSize(const std::string& symbol) -> int
 {
     return m_client->getLogReturnsSize(symbol);
 }
 
-std::list<double> Trader::getLogReturns(const std::string& symbol, bool midPrices)
+auto Trader::getLogReturns(const std::string& symbol, bool midPrices) -> std::list<double>
 {
     return m_client->getLogReturns(symbol, midPrices);
 }
 
-bool Trader::subOrderBook(const std::string& symbol)
+auto Trader::subOrderBook(const std::string& symbol) -> bool
 {
     return m_client->subOrderBook(symbol);
 }
 
-bool Trader::unsubOrderBook(const std::string& symbol)
+auto Trader::unsubOrderBook(const std::string& symbol) -> bool
 {
     return m_client->unsubOrderBook(symbol);
 }
 
-bool Trader::subAllOrderBook()
+auto Trader::subAllOrderBook() -> bool
 {
     return m_client->subAllOrderBook();
 }
 
-bool Trader::unsubAllOrderBook()
+auto Trader::unsubAllOrderBook() -> bool
 {
     return m_client->unsubAllOrderBook();
 }
 
-std::vector<std::string> Trader::getSubscribedOrderBookList()
+auto Trader::getSubscribedOrderBookList() -> std::vector<std::string>
 {
     return m_client->getSubscribedOrderBookList();
 }

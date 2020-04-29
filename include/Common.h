@@ -26,15 +26,18 @@ public:
         ERROR,
         FATAL
     };
+
     struct LogStruct {
         LogLevel level = WARNING;
     };
 
-    Log() {}
+    Log() = default;
+
     Log(LogLevel type)
     {
         operator<<("[" + getLabel(type) + "] ");
     }
+
     ~Log()
     {
         if (opened) {
@@ -42,6 +45,7 @@ public:
         }
         opened = false;
     }
+
     template <class T>
     Log& operator<<(const T& msg)
     {
