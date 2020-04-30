@@ -19,7 +19,7 @@ RUN conda install black
 RUN pip install keras==2.2.5 tensorflow==1.14.0
 
 # Install shift-python
-RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v1.7.5/shift_python-1.7.5-conda_linux.zip | bsdtar -xvf- && \
+RUN wget -qO- https://github.com/hanlonlab/shift-python/releases/download/v2.0.0/shift_python-2.0.0-conda_linux.zip | bsdtar -xvf- && \
     cd shift* && \
     conda install *.tar.bz2
 

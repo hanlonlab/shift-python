@@ -1,6 +1,6 @@
 package:
   name: shift-python
-  version: "1.7.5"
+  version: "2.0.0"
 
 source:
   git_url: https://github.com/hanlonlab/shift-python.git
