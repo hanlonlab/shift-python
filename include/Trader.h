@@ -59,7 +59,7 @@ public:
             .def("get_executed_orders", &Trader::getExecutedOrders, py::arg("order_id"))
             .def("get_waiting_list_size", &Trader::getWaitingListSize)
             .def("get_waiting_list", &Trader::getWaitingList)
-            .def("cancel_all_pending_orders", &Trader::cancelAllPendingOrders)
+            .def("cancel_all_pending_orders", &Trader::cancelAllPendingOrders, py::arg("timeout") = 10)
             .def("get_close_price", py::overload_cast<const std::string&, bool, int>(&Trader::getClosePrice), py::arg("symbol"), py::arg("buy"), py::arg("size"))
             .def("get_close_price", py::overload_cast<const std::string&>(&Trader::getClosePrice), py::arg("symbol"))
             .def("get_last_price", &Trader::getLastPrice, py::arg("symbol"))
@@ -117,7 +117,7 @@ private:
     auto getExecutedOrders(const std::string& orderID) -> std::vector<shift::Order>;
     auto getWaitingListSize() -> int;
     auto getWaitingList() -> std::vector<shift::Order>;
-    void cancelAllPendingOrders();
+    void cancelAllPendingOrders(int timeout);
 
     // price methods
     auto getClosePrice(const std::string& symbol, bool buy, int size) -> double;

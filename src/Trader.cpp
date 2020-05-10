@@ -177,9 +177,9 @@ auto Trader::getWaitingList() -> std::vector<shift::Order>
     return m_client->getWaitingList();
 }
 
-void Trader::cancelAllPendingOrders()
+void Trader::cancelAllPendingOrders(int timeout)
 {
-    return m_client->cancelAllPendingOrders();
+    return m_client->cancelAllPendingOrders(timeout);
 }
 
 auto Trader::getClosePrice(const std::string& symbol, bool buy, int size) -> double
