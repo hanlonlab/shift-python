@@ -242,7 +242,7 @@ auto Trader::getCompanyName(const std::string& symbol) -> std::string
     return m_client->getCompanyName(symbol);
 }
 
-auto Trader::requestSamplePrices(std::vector<std::string> symbols, double samplingFrequencyS, int samplingWindow) -> bool
+auto Trader::requestSamplePrices(std::vector<std::string> symbols, double samplingFrequencyS, unsigned int samplingWindow) -> bool
 {
     return m_client->requestSamplePrices(symbols, samplingFrequencyS, samplingWindow);
 }

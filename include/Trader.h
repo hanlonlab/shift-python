@@ -138,7 +138,7 @@ private:
     auto getCompanyName(const std::string& symbol) -> std::string;
 
     // sample prices
-    auto requestSamplePrices(std::vector<std::string> symbols, double samplingFrequencyS, int samplingWindow) -> bool;
+    auto requestSamplePrices(std::vector<std::string> symbols, double samplingFrequencyS, unsigned int samplingWindow) -> bool;
     auto cancelSamplePricesRequest(const std::vector<std::string>& symbols) -> bool;
     auto cancelAllSamplePricesRequests() -> bool;
     auto getSamplePricesSize(const std::string& symbol) -> int;
