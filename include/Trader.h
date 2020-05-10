@@ -72,7 +72,7 @@ public:
             .def("request_company_names", &Trader::requestCompanyNames)
             .def("get_company_names", &Trader::getCompanyNames)
             .def("get_company_name", &Trader::getCompanyName, py::arg("symbol"))
-            .def("request_sample_prices", &Trader::requestSamplePrices, py::arg("symbols"), py::arg("sampling_frequency") = 1, py::arg("sampling_window") = 31)
+            .def("request_sample_prices", &Trader::requestSamplePrices, py::arg("symbols"), py::arg("sampling_frequency") = 1.0, py::arg("sampling_window") = 31)
             .def("cancel_sample_prices_request", &Trader::cancelSamplePricesRequest, py::arg("symbols"))
             .def("cancel_all_sample_prices_requests", &Trader::cancelAllSamplePricesRequests)
             .def("get_sample_prices_size", &Trader::getSamplePricesSize, py::arg("symbol"))
@@ -138,7 +138,7 @@ private:
     auto getCompanyName(const std::string& symbol) -> std::string;
 
     // sample prices
-    auto requestSamplePrices(std::vector<std::string> symbols, double samplingFrequency, unsigned int samplingWindow) -> bool;
+    auto requestSamplePrices(std::vector<std::string> symbols, double samplingFrequencyS, int samplingWindow) -> bool;
     auto cancelSamplePricesRequest(const std::vector<std::string>& symbols) -> bool;
     auto cancelAllSamplePricesRequests() -> bool;
     auto getSamplePricesSize(const std::string& symbol) -> int;
