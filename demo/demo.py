@@ -24,11 +24,11 @@ def demo_02(trader: shift.Trader):
     :return:
     """
 
-    aapl_limit_buy = shift.Order(shift.Order.Type.LIMIT_BUY, "AAPL", 10, 10.00)
-    trader.submit_order(aapl_limit_buy)
+    aapl_lb = shift.Order(shift.Order.Type.LIMIT_BUY, "AAPL", 10, 10.00)
+    trader.submit_order(aapl_lb)
 
-    xom_limit_buy = shift.Order(shift.Order.Type.LIMIT_BUY, "XOM", 10, 10.00)
-    trader.submit_order(xom_limit_buy)
+    xom_lb = shift.Order(shift.Order.Type.LIMIT_BUY, "XOM", 10, 10.00)
+    trader.submit_order(xom_lb)
 
     return
 
@@ -42,21 +42,15 @@ def demo_03(trader: shift.Trader):
 
     print("AAPL:")
     print("  Price\t\tSize\t  Dest\t\tTime")
-    for order in trader.get_order_book("AAPL", shift.OrderBookType.LOCAL_BID):
-        print(
-            "%7.2f\t\t%4d\t%6s\t\t%19s"
-            % (order.price, order.size, order.destination, order.time)
-        )
+    for o in trader.get_order_book("AAPL", shift.OrderBookType.LOCAL_BID):
+        print("%7.2f\t\t%4d\t%6s\t\t%19s" % (o.price, o.size, o.destination, o.time))
 
     print()
 
     print("XOM:")
     print("  Price\t\tSize\t  Dest\t\tTime")
-    for order in trader.get_order_book("XOM", shift.OrderBookType.LOCAL_BID):
-        print(
-            "%7.2f\t\t%4d\t%6s\t\t%19s"
-            % (order.price, order.size, order.destination, order.time)
-        )
+    for o in trader.get_order_book("XOM", shift.OrderBookType.LOCAL_BID):
+        print("%7.2f\t\t%4d\t%6s\t\t%19s" % (o.price, o.size, o.destination, o.time))
 
 
 def demo_04(trader: shift.Trader):
@@ -69,18 +63,18 @@ def demo_04(trader: shift.Trader):
     print(
         "Symbol\t\t\t\tType\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t Status\t\tTimestamp"
     )
-    for order in trader.get_waiting_list():
+    for o in trader.get_waiting_list():
         print(
             "%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s"
             % (
-                order.symbol,
-                order.type,
-                order.price,
-                order.size,
-                order.executed_size,
-                order.id,
-                order.status,
-                order.timestamp,
+                o.symbol,
+                o.type,
+                o.price,
+                o.size,
+                o.executed_size,
+                o.id,
+                o.status,
+                o.timestamp,
             )
         )
 
@@ -97,18 +91,18 @@ def demo_05(trader: shift.Trader):
     print(
         "Symbol\t\t\t\tType\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t Status\t\tTimestamp"
     )
-    for order in trader.get_waiting_list():
+    for o in trader.get_waiting_list():
         print(
             "%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s"
             % (
-                order.symbol,
-                order.type,
-                order.price,
-                order.size,
-                order.executed_size,
-                order.id,
-                order.status,
-                order.timestamp,
+                o.symbol,
+                o.type,
+                o.price,
+                o.size,
+                o.executed_size,
+                o.id,
+                o.status,
+                o.timestamp,
             )
         )
 
@@ -119,8 +113,8 @@ def demo_05(trader: shift.Trader):
     print("Canceling all pending orders...", end=" ")
 
     # trader.cancel_all_pending_orders() also works
-    for order in trader.get_waiting_list():
-        trader.submit_cancellation(order)
+    for o in trader.get_waiting_list():
+        trader.submit_cancellation(o)
 
     i = 0
     while trader.get_waiting_list_size() > 0:
@@ -142,11 +136,11 @@ def demo_06(trader: shift.Trader):
     :return:
     """
 
-    aapl_market_buy = shift.Order(shift.Order.Type.MARKET_BUY, "AAPL", 1)
-    trader.submit_order(aapl_market_buy)
+    aapl_mb = shift.Order(shift.Order.Type.MARKET_BUY, "AAPL", 1)
+    trader.submit_order(aapl_mb)
 
-    xom_market_buy = shift.Order(shift.Order.Type.MARKET_BUY, "XOM", 1)
-    trader.submit_order(xom_market_buy)
+    xom_mb = shift.Order(shift.Order.Type.MARKET_BUY, "XOM", 1)
+    trader.submit_order(xom_mb)
 
     return
 
@@ -207,11 +201,11 @@ def demo_08(trader: shift.Trader):
     :return:
     """
 
-    aapl_market_sell = shift.Order(shift.Order.Type.MARKET_SELL, "AAPL", 1)
-    trader.submit_order(aapl_market_sell)
+    aapl_ms = shift.Order(shift.Order.Type.MARKET_SELL, "AAPL", 1)
+    trader.submit_order(aapl_ms)
 
-    xom_market_sell = shift.Order(shift.Order.Type.MARKET_SELL, "XOM", 1)
-    trader.submit_order(xom_market_sell)
+    xom_ms = shift.Order(shift.Order.Type.MARKET_SELL, "XOM", 1)
+    trader.submit_order(xom_ms)
 
     return
 
@@ -226,22 +220,22 @@ def demo_09(trader: shift.Trader):
     print(
         "Symbol\t\t\t\tType\t  Price\t\tSize\tExecuted\tID\t\t\t\t\t\t\t\t\t\t\t\t\t\t Status\t\tTimestamp"
     )
-    for order in trader.get_submitted_orders():
-        if order.status == shift.Order.Status.FILLED:
-            price = order.executed_price
+    for o in trader.get_submitted_orders():
+        if o.status == shift.Order.Status.FILLED:
+            price = o.executed_price
         else:
-            price = order.price
+            price = o.price
         print(
             "%6s\t%16s\t%7.2f\t\t%4d\t\t%4d\t%36s\t%23s\t\t%26s"
             % (
-                order.symbol,
-                order.type,
+                o.symbol,
+                o.type,
                 price,
-                order.size,
-                order.executed_size,
-                order.id,
-                order.status,
-                order.timestamp,
+                o.size,
+                o.executed_size,
+                o.id,
+                o.status,
+                o.timestamp,
             )
         )
 
@@ -256,11 +250,8 @@ def demo_10(trader: shift.Trader):
     """
 
     print("  Price\t\tSize\t  Dest\t\tTime")
-    for order in trader.get_order_book("AAPL", shift.OrderBookType.GLOBAL_BID, 5):
-        print(
-            "%7.2f\t\t%4d\t%6s\t\t%19s"
-            % (order.price, order.size, order.destination, order.time)
-        )
+    for o in trader.get_order_book("AAPL", shift.OrderBookType.GLOBAL_BID, 5):
+        print("%7.2f\t\t%4d\t%6s\t\t%19s" % (o.price, o.size, o.destination, o.time))
 
 
 def main(argv):
