@@ -5,7 +5,7 @@
 
 ## Requirements
 
-- Upgrade your operating system to the latest version:
+- Upgrade your operating system to the latest version, the installation instruction has been tested on the following systems:
     - macOS: macOS Catalina 10.15
     - Ubuntu: Ubuntu 18.04 LTS Bionic Beaver
     - Windows: Windows 10
