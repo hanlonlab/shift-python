@@ -5,9 +5,9 @@
 
 ## Requirements
 
-- Upgrade your operating system to the latest version, the installation instruction has been tested on the following systems:
-    - macOS: macOS Catalina 10.15
-    - Ubuntu: Ubuntu 18.04 LTS Bionic Beaver
+- Upgrade your operating system to the latest version. The installation instructions have been tested on the following systems:
+    - macOS: macOS 11 Big Sur
+    - Ubuntu: Ubuntu 20.04 LTS Focal Fossa
     - Windows: Windows 10
 
 - Install [PyCharm Pro](https://www.jetbrains.com/pycharm). Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).
