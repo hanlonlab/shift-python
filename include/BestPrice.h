@@ -10,6 +10,7 @@ void bindPython(py::module& m)
     py::class_<shift::BestPrice> BEST_PRICE(m, "BestPrice");
     BEST_PRICE //! bind constructor
         .def(py::init<double, int, double, int, double, int, double, int>(), py::arg("global_bid_price"), py::arg("global_bid_size"), py::arg("global_ask_price"), py::arg("global_ask_size"), py::arg("local_bid_price"), py::arg("local_bid_size"), py::arg("local_ask_price"), py::arg("local_ask_size"));
+        //find out what this ^ really does and add appropriate stuff for crypto
     BEST_PRICE //! bind function
         .def("get_bid_price", &shift::BestPrice::getBidPrice)
         .def("get_bid_size", &shift::BestPrice::getBidSize)
@@ -23,6 +24,8 @@ void bindPython(py::module& m)
         .def("get_local_bid_size", &shift::BestPrice::getLocalBidSize)
         .def("get_local_ask_price", &shift::BestPrice::getLocalAskPrice)
         .def("get_local_ask_size", &shift::BestPrice::getLocalAskSize);
+        // .def("get_best_price_crypto", &shift::BestPrice::getBestPriceCrypto)
+        // .def("get_price_from_exchange", &shift::BestPrice::getPriceFromExchange)
 }
 
 } // BestPrice
