@@ -88,7 +88,9 @@ public:
             .def("on_execution_updated", &Trader::onExecutionUpdated, py::arg("cb"))
             .def("on_portfolio_item_updated", &Trader::onPortfolioItemUpdated, py::arg("cb"))
             .def("on_portfolio_summary_updated", &Trader::onPortfolioSummaryUpdated, py::arg("cb"))
-            .def("on_waiting_list_updated", &Trader::onWaitingListUpdated, py::arg("cb"));
+            .def("on_waiting_list_updated", &Trader::onWaitingListUpdated, py::arg("cb"))
+            .def("__enter__", &Trader::enter, py::return_value_policy::reference)
+            .def("__exit__", &Trader::exit);
     }
 
     Trader();
@@ -159,6 +161,10 @@ private:
     void onPortfolioSummaryUpdated(const std::function<void(Trader*)>& cb);
     void onPortfolioItemUpdated(const std::function<void(Trader*, const std::string&)>& cb);
     void onWaitingListUpdated(const std::function<void(Trader*)>& cb);
+;
+    // context manager methods
+    auto enter() -> Trader*;
+    auto exit(py::args args, const py::kwargs& kwargs) -> bool;
 
 private:
     shift::FIXInitiator& m_initiator;

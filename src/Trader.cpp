@@ -326,3 +326,14 @@ void Trader::onWaitingListUpdated(const std::function<void(Trader*)>& cb)
 {
     m_client->waitingListUpdatedCb = cb;
 }
+
+auto Trader::enter() -> Trader*
+{
+    return this;
+}
+
+auto Trader::exit(py::args args, const py::kwargs& kwargs) -> bool
+{
+    this->disconnect();
+    return false;
+}
