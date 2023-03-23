@@ -46,7 +46,8 @@ class CMakeBuild(build_ext):
             self.build_extension(ext)
 
     def build_extension(self, ext):
-        extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
+        extdir = os.path.abspath(os.path.dirname(
+            self.get_ext_fullpath(ext.name)))
         cmake_args = [
             "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=" + extdir,
             "-DPYTHON_EXECUTABLE=" + sys.executable,
@@ -58,7 +59,8 @@ class CMakeBuild(build_ext):
 
         if platform.system() == "Windows":
             cmake_args += [
-                "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}".format(cfg.upper(), extdir)
+                "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}".format(
+                    cfg.upper(), extdir)
             ]
             if sys.maxsize > 2 ** 32:
                 cmake_args += ["-A", "x64"]
@@ -96,7 +98,7 @@ class CleanCommand(Command):
 
 setup(
     name="shift",
-    version="2.0.0",
+    version="2.0.1",
     author="SHIFT",
     author_email="",
     description="Stevens High Frequency Trading (SHIFT) Simulation System Python Client",
