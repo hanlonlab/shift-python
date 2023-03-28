@@ -31,6 +31,11 @@ cmake -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPYBIND11_PYTHO
 make
 sudo make install
 ```
+To make CMAKE find pybind11, this solution may work:
+
+``` bash
+pip install "pybind11[global]"
+```
 
 ---
 
