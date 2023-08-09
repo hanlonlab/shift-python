@@ -11,10 +11,12 @@ void bindPython(py::module& m)
     //! bind class
     py::class_<shift::Order> ORDER(m, "Order");
     ORDER //! bind constructor
-        .def(py::init<shift::Order::Type, std::string, int, double, std::string>(), py::arg("type"), py::arg("symbol"), py::arg("size"), py::arg("price") = 0.0, py::arg("id") = "");
+        .def(py::init<shift::Order::Type, std::string, int, double, std::string, std::string, std::string>(), py::arg("type"), py::arg("symbol"), py::arg("size"), py::arg("price") = 0.0, py::arg("id") = "", py::arg("S2") = "", py::arg("destination") = "");
     ORDER //! bind property
         .def_property("type", &shift::Order::getType, &shift::Order::setType, py::return_value_policy::reference)
         .def_property("symbol", &shift::Order::getSymbol, &shift::Order::setSymbol, py::return_value_policy::reference)
+        .def_property("S2", &shift::Order::getS2, &shift::Order::setS2, py::return_value_policy::reference)
+        .def_property("destination", &shift::Order::getDestination, &shift::Order::setDestination, py::return_value_policy::reference)
         .def_property("size", &shift::Order::getSize, &shift::Order::setSize, py::return_value_policy::reference)
         .def_property("executed_size", &shift::Order::getExecutedSize, &shift::Order::setExecutedSize, py::return_value_policy::reference)
         .def_property("price", &shift::Order::getPrice, &shift::Order::setPrice, py::return_value_policy::reference)
