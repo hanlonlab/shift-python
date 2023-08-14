@@ -61,3 +61,19 @@ To clean the build directories:
 ### [TODO] SHIFT Python Installation
 
 ---
+
+## 2023 Update:
+# Installing local changes:
+python3 setup.py clean
+python3 setup.py install
+
+You can now see your local changes (in shift-python):
+python3
+import shift
+....
+
+# Installing to conda environment
+python3 setup.py bdist_wheel
+pip install dist/shift-2.0.1-py3.7-*.whl
+
+You can now see these changes globally when conda env is active
