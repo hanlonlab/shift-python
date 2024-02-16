@@ -48,6 +48,7 @@ public:
             .def("disconnect", &Trader::disconnect)
             .def("is_connected", &Trader::isConnected)
             .def("submit_order", &Trader::submitOrder, py::arg("order"))
+            .def("submit_quote_request", &Trader::submitQuoteRequest, py::arg("quote_request"))
             .def("submit_cancellation", &Trader::submitCancellation, py::arg("order"))
             .def("get_portfolio_summary", &Trader::getPortfolioSummary)
             .def("get_portfolio_items", &Trader::getPortfolioItems)
@@ -56,6 +57,7 @@ public:
             .def("get_submitted_orders_size", &Trader::getSubmittedOrdersSize)
             .def("get_submitted_orders", &Trader::getSubmittedOrders)
             .def("get_order", &Trader::getOrder, py::arg("order_id"))
+            .def("get_quote", &Trader::getQuote, py::arg("quote_id"))
             .def("get_executed_orders", &Trader::getExecutedOrders, py::arg("order_id"))
             .def("get_waiting_list_size", &Trader::getWaitingListSize)
             .def("get_waiting_list", &Trader::getWaitingList)
@@ -104,6 +106,7 @@ private:
     auto isConnected() -> bool;
 
     void submitOrder(const shift::Order& order);
+    void submitQuoteRequest(const shift::QuoteRequest& qr); 
     void submitCancellation(shift::Order order);
 
     // portfolio methods
@@ -114,6 +117,7 @@ private:
     auto getSubmittedOrdersSize() -> int;
     auto getSubmittedOrders() -> std::vector<shift::Order>;
     auto getOrder(const std::string& orderID) -> shift::Order;
+    auto getQuote(const std::string& quoteID) -> shift::Quote;
     auto getExecutedOrders(const std::string& orderID) -> std::vector<shift::Order>;
     auto getWaitingListSize() -> int;
     auto getWaitingList() -> std::vector<shift::Order>;

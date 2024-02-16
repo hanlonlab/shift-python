@@ -121,6 +121,10 @@ void Trader::submitOrder(const shift::Order& order)
 {
     return m_client->submitOrder(order);
 }
+void Trader::submitQuoteRequest(const shift::QuoteRequest& qr)
+{
+    return m_client->submitQuoteRequest(qr); 
+}
 
 void Trader::submitCancellation(shift::Order order)
 {
@@ -160,6 +164,10 @@ auto Trader::getSubmittedOrders() -> std::vector<shift::Order>
 auto Trader::getOrder(const std::string& orderID) -> shift::Order
 {
     return m_client->getOrder(orderID);
+}
+auto Trader::getQuote(const std::string& quoteID) -> shift::Quote 
+{
+    return m_client->getQuote(quoteID); 
 }
 
 auto Trader::getExecutedOrders(const std::string& orderID) -> std::vector<shift::Order>

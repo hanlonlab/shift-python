@@ -29,6 +29,8 @@ set(INCLUDE
     ${PROJECT_SOURCE_DIR}/include/BestPrice.h
     ${PROJECT_SOURCE_DIR}/include/Common.h
     ${PROJECT_SOURCE_DIR}/include/Order.h
+    ${PROJECT_SOURCE_DIR}/include/QuoteRequest.h
+    ${PROJECT_SOURCE_DIR}/include/Quote.h
     ${PROJECT_SOURCE_DIR}/include/OrderBook.h
     ${PROJECT_SOURCE_DIR}/include/OrderBookEntry.h
     ${PROJECT_SOURCE_DIR}/include/PortfolioItem.h

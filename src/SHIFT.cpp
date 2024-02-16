@@ -1,5 +1,7 @@
 #include "BestPrice.h"
 #include "Order.h"
+#include "QuoteRequest.h"
+#include "Quote.h"
 #include "OrderBook.h"
 #include "OrderBookEntry.h"
 #include "PortfolioItem.h"
@@ -12,13 +14,15 @@
 PYBIND11_MODULE(shift, m)
 {
     m.doc() = "SHIFT-Python API";
-    m.attr("__version__") = "2.0.0";
+    m.attr("__version__") = "2.0.1";
 
     py::register_exception<shift::IncorrectPasswordError>(m, "IncorrectPasswordError");
     py::register_exception<shift::ConnectionTimeoutError>(m, "ConnectionTimeoutError");
 
     BestPrice::bindPython(m);
     Order::bindPython(m);
+    Quote::bindPython(m);
+    QuoteRequest::bindPython(m);
     OrderBook::bindPython(m);
     OrderBookEntry::bindPython(m);
     PortfolioItem::bindPython(m);
