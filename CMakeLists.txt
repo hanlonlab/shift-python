@@ -93,17 +93,20 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 ### Build Configuration ########################################################
 
+set(pybind11_DIR "${PROJECT_SOURCE_DIR}/pybind11/build/lib/pybind11/share/cmake/pybind11/")
 find_package(pybind11 REQUIRED)
 
 # Always enforce search for SHIFT LibCoreClient
 # (necessary when using the same name for Debug and Release)
-set (LIBCORECLIENT "LIBCORECLIENT-NOTFOUND")
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-    find_library(LIBCORECLIENT shift_coreclient-d)
-endif(CMAKE_BUILD_TYPE MATCHES Debug)
-if(CMAKE_BUILD_TYPE MATCHES Release)
-    find_library(LIBCORECLIENT shift_coreclient)
-endif(CMAKE_BUILD_TYPE MATCHES Release)
+	set (LIBCORECLIENT_VERSION "shift_coreclient-d")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+	set (LIBCORECLIENT_VERSION "shift_coreclient")
+else()
+	message(FATAL_ERROR "Build Type Invalid")
+endif()
+
+find_library(LIBCORECLIENT NAMES ${LIBCORECLIENT_VERSION} PATHS /usr/local/lib)
 if(NOT LIBCORECLIENT)
     message(FATAL_ERROR "SHIFT LibCoreClient was not found.")
 endif(NOT LIBCORECLIENT)

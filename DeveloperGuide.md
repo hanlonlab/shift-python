@@ -13,28 +13,34 @@
 
 Use the installer in the root folder of the SHIFT project:
 
-- In the Terminal: `sudo ./install -m LC`
+- In the Terminal: `sudo ./install.sh -m LC`
 
 #### pybind11:
 
 Choose a location to keep the pybind11 source files (for debugging purposes), e.g. a "C++" folder in your home directory, and then:
 
-``` bash
-git clone https://github.com/pybind/pybind11.git
-cd pybind11
-git checkout tags/v2.2.4 # v2.3.0 has a bug with char enums
+```sh
+git submodule update --init --recursive
+
+# setup environment
+uv venv --python python3.13
+source .venv/bin/activate
+uv pip install setuptools
+uv pip install ./pybind11
+
+# now make the build dir and build
 mkdir build
 cd build
-
-cmake -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPYBIND11_PYTHON_VERSION=3.7 ..
-
+cmake -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release -DPYBIND11_PYTHON_VERSION=3.13 ..
 make
-sudo make install
-```
-To make CMAKE find pybind11, this solution may work:
+cd ..
 
-``` bash
-pip install "pybind11[global]"
+# Choice:
+# 1) install into current environment
+python setup.py install
+
+# 2) build the package as a wheel
+python setup.py bdist_wheel
 ```
 
 ---
