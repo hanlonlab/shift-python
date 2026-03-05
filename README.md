@@ -14,7 +14,7 @@
 ### Ubuntu:
 
 - **Environment Installation:**
-    - Open the Terminal and run the following command: `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/refactor/scripts/setup-linux-x86.sh | bash`
+    - Open the Terminal and run the following command: `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash`
     - The script will automatically configure the Rosetta bridge and create the `shift` environment.
 - **Interpreter Configuration:**
     - If using an IDE (like PyCharm) inside the VM, the *Interpreter* path should be `/home/USERNAME/miniconda3/envs/shift/bin/python`.
@@ -35,7 +35,7 @@
        * *Note: This does not have to match your Windows login. Remember this password; you will need it for `sudo` commands.*
 - **Environment Installation:**
     - Open your **Ubuntu** terminal and run the following command:
-      `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/refactor/scripts/setup-linux-x86.sh | bash`
+      `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash`
     - The script will install Miniconda and create the `shift` environment.
 - **Interpreter Configuration:**
     - If using an IDE (like PyCharm or VS Code), use the **WSL Interpreter** setting.
@@ -59,7 +59,7 @@
 - **Environment Installation:**
     - Open the OrbStack terminal for your Ubuntu x86_64 machine (double-click the machine name in OrbStack).
     - Run the Linux installation command:
-      `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/refactor/scripts/setup-linux-x86.sh | bash`
+      `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash`
 - **Interpreter Configuration:**
     - Use the **SSH** or **OrbStack** interpreter setting in your IDE (PyCharm Pro or VS Code).
     - Path: `/home/USERNAME/miniconda3/envs/shift/bin/python`
