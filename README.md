@@ -25,7 +25,7 @@
       ```
     - The script will automatically configure the Rosetta bridge and create the `shift` environment.
 - **Interpreter Configuration:**
-    - If using an IDE (like PyCharm) inside the VM, the *Interpreter* path should be `/home/USERNAME/miniconda3/envs/shift/bin/python`.
+    - If using an IDE (like VS Code or PyCharm) inside the VM, the *Interpreter* path should be `/home/USERNAME/miniconda3/envs/shift/bin/python`.
 - **Validation:**
     - Run `conda activate shift` to begin.
     - You can verify the setup by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
@@ -51,9 +51,17 @@
       curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash
       ```
     - The script will install Miniconda and create the `shift` environment.
-- **Interpreter Configuration:**
-    - If using an IDE (like PyCharm or VS Code), use the **WSL Interpreter** setting.
-    - The path should be: `\\wsl$\Ubuntu\home\USERNAME\miniconda3\envs\shift\bin\python`
+- **IDE Configuration (VS Code):**
+    1. Install the **WSL** extension (by Microsoft) from the VS Code Marketplace.
+    2. Click the **Green Remote Button** in the bottom-left corner of VS Code and select **Connect to WSL**.
+    3. **Important:** Once connected, go to the Extensions tab and click **Install in WSL: Ubuntu** for the **Python** extension.
+    4. Press `Ctrl+Shift+P`, type **Python: Select Interpreter**, and choose the path:
+       `\\wsl.localhost\Ubuntu\home\USERNAME\miniconda3\envs\shift\bin\python`
+- **IDE Configuration (PyCharm):**
+    - Go to **Settings > Project > Python Interpreter**.
+    - Click **Add Interpreter > On WSL**. 
+    - Select your Ubuntu distribution and set the path to:
+      `\\wsl.localhost\Ubuntu\home\USERNAME\miniconda3\envs\shift\bin\python`
 - **Validation:**
     - Run `conda activate shift` to begin.
     - You can verify the setup by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
@@ -80,9 +88,18 @@
       ```{bash}
       curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash
       ```
-- **Interpreter Configuration:**
-    - Use the **SSH** or **OrbStack** interpreter setting in your IDE (PyCharm Pro or VS Code).
-    - Path: `/home/USERNAME/miniconda3/envs/shift/bin/python`
+- **IDE Configuration (VS Code):**
+    1. Install the **Remote - SSH** extension (by Microsoft) from the Marketplace.
+    2. Click the **Green Remote Button** (bottom-left) > **Connect to Host**.
+    3. Select your OrbStack machine (usually listed as `orb` or `machine-name@orb`).
+    4. **Important:** Once connected, go to the Extensions tab and click **Install in SSH: [Machine Name]** for the **Python** extension.
+    5. Press `Cmd+Shift+P`, type **Python: Select Interpreter**, and select:
+       `/home/USERNAME/miniconda3/envs/shift/bin/python`
+- **IDE Configuration (PyCharm Pro):**
+    - Go to **Settings > Project > Python Interpreter**.
+    - Click **Add Interpreter > On SSH**.
+    - OrbStack provides SSH access automatically. Set the Host to `localhost` and Port to `32222`. 
+    - Set the interpreter path to: `/home/USERNAME/miniconda3/envs/shift/bin/python`
 - **Validation:**
     - Run `conda activate shift` to begin.
     - Verify by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
@@ -108,6 +125,8 @@ import shift
 - If you see `(shift)` in the beginning of your command line, that means you are in the right environment to run SHIFT.
 - Don't forget to `import shift` when you use Python with SHIFT.
 
+---
+---
 
 ### (Deprecated) Docker Image:
 
