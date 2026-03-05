@@ -48,7 +48,8 @@
 
 - **System Requirement:** Ensure your Mac is updated to **macOS Ventura (13.0)** or newer.
 - **Virtualization Setup:**
-    - Download and install [UTM](https://getutm.app/).
+    - Download and install **UTM**. Use the [GitHub link on the official installation page](https://docs.getutm.app/installation/macos/#github) to download the installer for free. 
+    - *Note: You do not need to purchase the App Store version; the GitHub version is identical and free.*
     - Download the **Ubuntu Desktop ARM64** ISO (Important: do not use the AMD64/Intel version).
     - In UTM, go to **Settings > Sharing**, click the **+** icon, and select **Rosetta**. Ensure the VirtioFS tag is named `rosetta`.
 - **Environment Installation:**
@@ -67,7 +68,8 @@
 
 - **System Requirement:** Ensure you are running **macOS Big Sur (11.0)** or newer.
 - **Virtualization Setup:**
-    - Download and install [UTM](https://getutm.app/).
+    - Download and install **UTM**. Use the [GitHub link on the official installation page](https://docs.getutm.app/installation/macos/#github) to download the installer for free. 
+    - *Note: You do not need to purchase the App Store version; the GitHub version is identical and free.*
     - Download the **Ubuntu Desktop AMD64** ISO (this is the standard x86_64 version).
     - When creating the VM, select **Virtualize**. Since your Mac is Intel-based, you do not need to enable Rosetta sharing.
 - **Environment Installation:**
