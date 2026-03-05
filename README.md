@@ -73,7 +73,8 @@
 - **System Requirement:** macOS Ventura (13.0) or newer.
 - **Virtualization Setup:**
     - Download and install **OrbStack** (Free for personal use) from [orbstack.dev](https://orbstack.dev/).
-    - **Create a New Machine:** 1. Open OrbStack and go to the **Machines** tab.
+    - **Create a New Machine:** 
+        1. Open OrbStack and go to the **Machines** tab.
         2. Click the **+** icon to create a new machine.
         3. Select **Ubuntu** as the image.
         4. **Important for Apple Silicon (M1/M2/M3/M4):** Change the **Architecture** setting to **x86_64**. This allows you to use the standard Linux setup script via Rosetta emulation.
