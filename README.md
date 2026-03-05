@@ -1,57 +1,133 @@
 [header]: # "To generate a html version of this document:"
 [pandoc]: # "pandoc README.md -c ../shift-main/Templates/github.css -o README.html -s --self-contained"
 
-# SHIFT Python
+# SHIFT Python Setup Guide
 
-## Requirements
+## Supported Platforms
+- macOS (Ventura or newer)
+- Ubuntu 20.04+
+- Windows 10/11 (via WSL2)
 
-- Upgrade your operating system to the latest version. The installation instructions have been tested on the following systems:
-    - macOS: macOS 11 Big Sur
-    - Ubuntu: Ubuntu 20.04 LTS Focal Fossa
-    - Windows: Windows 10
 
-- Install [PyCharm Pro](https://www.jetbrains.com/pycharm). Use your Stevens email address to request a free student license (https://www.jetbrains.com/student).
-
-## Installation
-
-### macOS:
-
-- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
-- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
-- Create a new project in PyCharm Pro:
-    - Click **PyCharm** -> **Preferences...** -> **Project: *Project Name*** -> **Project Interpreter**.
-    - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
-    - Select **Existing environment**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/Users/USERNAME/anaconda3/envs/shift/bin/python`.
-- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+## Setup on Different Operating Systems
 
 ### Ubuntu:
 
-- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/).
-- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages.
-- Create a new project in PyCharm Pro:
-    - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
-    - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **Conda Environment**.
-    - Select **Existing environment**. If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/USERNAME/anaconda3/envs/shift/bin/python`.
+- **Prerequisite: Install curl**
+    - Ensure `curl` is installed by running:
+      ```bash
+      sudo apt update && sudo apt install -y curl
+      ```
+- **Environment Installation:**
+    - Open the Terminal and run the following command: 
+      ```bash
+      curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash
+      ```
+    - The script will automatically configure the Rosetta bridge and create the `shift` environment.
+- **Interpreter Configuration:**
+    - If using an IDE (like VS Code or PyCharm) inside the VM, the *Interpreter* path should be `/home/USERNAME/miniconda3/envs/shift/bin/python`.
+- **Validation:**
+    - Run `conda activate shift` to begin.
+    - You can verify the setup by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+
 
 ### Windows:
 
-- Install the Ubuntu subsystem using the [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10). After installation, you will find an Ubuntu icon in the Start menu. You can open an Ubuntu terminal by simply running this app.
-- Download and install the latest version of [Anaconda](https://www.anaconda.com/distribution/):
-    - Please make sure you choose the Linux distribution.
-    - You can browse files stored in Windows in the Ubuntu app under the `/mnt` folder. Thus, if you downloaded the Anaconda installation file to your desktop (`C:/Users/USERNAME/Desktop`), you will be able to find it in Ubuntu under `/mnt/c/Users/USERNAME/Desktop`.
-    - Install Anaconda by opening the Ubuntu app and executing:
-```bash
-cd /mnt/c/Users/USERNAME/Desktop
-./Anaconda3-yyyy.xx-Linux-x86_64.sh
+- **System Requirement:** Ensure you are running **Windows 10 (Version 2004+)** or **Windows 11**.
+- **WSL Setup:**
+    1. Open **PowerShell** as Administrator and run: `wsl --install`
+    2. **Restart your computer** when prompted. 
+    3. After restarting, a terminal will automatically open to finish the Ubuntu installation. 
+    4. **Create a Linux Username & Password:** You will be prompted to enter a new username and password. 
+       * *Note: This does not have to match your Windows login. Remember this password; you will need it for `sudo` commands.*
+- **Environment Installation:**
+    - Open your **Ubuntu** terminal and install `curl`:
+      ```bash
+      sudo apt update && sudo apt install -y curl
+      ```
+    - Then, run the following command:
+      ```{bash}
+      curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash
+      ```
+    - The script will install Miniconda and create the `shift` environment.
+- **IDE Configuration (VS Code):**
+    1. Install the **WSL** extension (by Microsoft) from the VS Code Marketplace.
+    2. Click the **Green Remote Button** in the bottom-left corner of VS Code and select **Connect to WSL**.
+    3. **Important:** Once connected, go to the Extensions tab and click **Install in WSL: Ubuntu** for the **Python** extension.
+    4. Press `Ctrl+Shift+P`, type **Python: Select Interpreter**, and choose the path:
+       `\\wsl.localhost\Ubuntu\home\USERNAME\miniconda3\envs\shift\bin\python`
+- **IDE Configuration (PyCharm):**
+    - Go to **Settings > Project > Python Interpreter**.
+    - Click **Add Interpreter > On WSL**. 
+    - Select your Ubuntu distribution and set the path to:
+      `\\wsl.localhost\Ubuntu\home\USERNAME\miniconda3\envs\shift\bin\python`
+- **Validation:**
+    - Run `conda activate shift` to begin.
+    - You can verify the setup by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
+- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+
+
+### macOS (Intel & Apple Silicon):
+
+- **System Requirement:** macOS Ventura (13.0) or newer.
+- **Virtualization Setup:**
+    - Download and install **OrbStack** (Free for personal use) from [orbstack.dev](https://orbstack.dev/).
+    - **Create a New Machine:** 
+        1. Open OrbStack and go to the **Machines** tab.
+        2. Click the **+** icon to create a new machine.
+        3. Select **Ubuntu** as the image.
+        4. **Important for Apple Silicon (M1/M2/M3/M4):** Change the **Architecture** setting to **x86_64**. This allows you to use the standard Linux setup script via Rosetta emulation.
+        5. Click **Create**.
+- **Environment Installation:**
+    - Open the OrbStack terminal for your Ubuntu x86_64 machine (double-click the machine name in OrbStack).
+    - Install `curl` within the machine:
+      ```bash
+      sudo apt update && sudo apt install -y curl
+      ```
+    - Run the Linux installation command:
+      ```{bash}
+      curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/master/scripts/setup-linux-x86.sh | bash
+      ```
+- **IDE Configuration (VS Code):**
+    1. Install the **Remote - SSH** extension (by Microsoft) from the Marketplace.
+    2. Click the **Green Remote Button** (bottom-left) > **Connect to Host**.
+    3. Select your OrbStack machine (usually listed as `orb` or `machine-name@orb`).
+    4. **Important:** Once connected, go to the Extensions tab and click **Install in SSH: [Machine Name]** for the **Python** extension.
+    5. Press `Cmd+Shift+P`, type **Python: Select Interpreter**, and select:
+       `/home/USERNAME/miniconda3/envs/shift/bin/python`
+- **IDE Configuration (PyCharm Pro):**
+    - Go to **Settings > Project > Python Interpreter**.
+    - Click **Add Interpreter > On SSH**.
+    - OrbStack provides SSH access automatically. Set the Host to `localhost` and Port to `32222`. 
+    - Set the interpreter path to: `/home/USERNAME/miniconda3/envs/shift/bin/python`
+- **Validation:**
+    - Run `conda activate shift` to begin.
+    - Verify by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
+
+---
+
+## Next Steps
+Once you have the `shift` environment activated, you can begin exploring the API.
+
+- **[Explore the SHIFT-Python API Wiki](../../wiki)**: Detailed documentation on classes and methods.
+
+
+## Python Module Importing:
+
+```python
+import shift
 ```
-- Follow the instructions in [SHIFT Python API](https://github.com/hanlonlab/shift-python/wiki/SHIFT-Python-API) to create a new environment and install all SHIFT packages:
-    - The last step ("In the Terminal") must also be run from the Ubuntu app.
-- Create a new project in PyCharm Pro:
-    - Click **File** -> **Settings...** -> **Project: *Project Name*** -> **Project Interpreter**.
-    - Click in the **Project Interpreter** bar and select **Show All** -> ***Plus Icon* (+)** -> **WSL**.
-    - If you installed Anaconda with default settings, the *Interpreter* path should look something like `/home/USERNAME/anaconda3/envs/shift/bin/python`.
-- You are good to go!
+
+
+## Get Started with Command Line
+
+- Run `conda activate shift` to get into the `shift` environment. You need to do this every time you open a new shell (or you can add this command onto your `.bashrc` or `.bash_profile` file).
+- If you see `(shift)` in the beginning of your command line, that means you are in the right environment to run SHIFT.
+- Don't forget to `import shift` when you use Python with SHIFT.
+
+---
+---
 
 ### (Deprecated) Docker Image:
 
@@ -97,9 +173,3 @@ docker-compose up
     - Follow the steps in the `Configuring Docker as a remote interpreter` session of this [guide](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html).
 
 - Installation finished!
-
-## Get Started with Command Line
-
-- Run `conda activate shift` to get into the `shift` environment. You need to do this every time you open a new shell (or you can add this command onto your `.bashrc` or `.bash_profile` file).
-- If you see `(shift)` in the beginning of your command line, that means you are in the right environment to run SHIFT.
-- Don't forget to `import shift` when you use Python with SHIFT.

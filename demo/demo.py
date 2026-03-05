@@ -276,16 +276,16 @@ def main(argv):
         except shift.ConnectionTimeoutError as e:
             print(e)
 
-        # demo_01(trader)
-        # demo_02(trader)
-        # demo_03(trader)
-        # demo_04(trader)
-        # demo_05(trader)
-        # demo_06(trader)
-        # demo_07(trader)
-        # demo_08(trader)
-        # demo_09(trader)
-        # demo_10(trader)
+        demo_01(trader)
+        demo_02(trader)
+        demo_03(trader)
+        demo_04(trader)
+        demo_05(trader)
+        demo_06(trader)
+        demo_07(trader)
+        demo_08(trader)
+        demo_09(trader)
+        demo_10(trader)
         demo_11(trader)
 
 
