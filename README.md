@@ -28,9 +28,11 @@
 
 - **System Requirement:** Ensure you are running **Windows 10 (Version 2004+)** or **Windows 11**.
 - **WSL Setup:**
-    - Open **PowerShell** as Administrator and run: `wsl --install`
-    - Restart your computer when prompted.
-    - Once restarted, a terminal will open to finish the Ubuntu installation. Create your username and password.
+    1. Open **PowerShell** as Administrator and run: `wsl --install`
+    2. **Restart your computer** when prompted. 
+    3. After restarting, a terminal will automatically open to finish the Ubuntu installation. 
+    4. **Create a Linux Username & Password:** You will be prompted to enter a new username and password. 
+       * *Note: This does not have to match your Windows login. Remember this password; you will need it for `sudo` commands.*
 - **Environment Installation:**
     - Open your **Ubuntu** terminal and run the following command:
       `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/refactor/scripts/setup-linux-x86.sh | bash`
@@ -44,45 +46,28 @@
 - You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
 
 
-### macOS (Apple Silicon: M1, M2, M3, M4):
+### macOS (Intel & Apple Silicon):
 
-- **System Requirement:** Ensure your Mac is updated to **macOS Ventura (13.0)** or newer.
+- **System Requirement:** macOS Ventura (13.0) or newer.
 - **Virtualization Setup:**
-    - Download and install **UTM**. Use the [GitHub link on the official installation page](https://docs.getutm.app/installation/macos/#github) to download the installer for free. 
-    - *Note: You do not need to purchase the App Store version; the GitHub version is identical and free.*
-    - Download the **Ubuntu Desktop ARM64** ISO (Important: do not use the AMD64/Intel version).
-    - In UTM, go to **Settings > Sharing**, click the **+** icon, and select **Rosetta**. Ensure the VirtioFS tag is named `rosetta`.
+    - Download and install **OrbStack** (Free for personal use) from [orbstack.dev](https://orbstack.dev/).
+    - **Create a New Machine:** 1. Open OrbStack and go to the **Machines** tab.
+        2. Click the **+** icon to create a new machine.
+        3. Select **Ubuntu** as the image.
+        4. **Important for Apple Silicon (M1/M2/M3/M4):** Change the **Architecture** setting to **x86_64**. This allows you to use the standard Linux setup script via Rosetta emulation.
+        5. Click **Create**.
 - **Environment Installation:**
-    - Start the Ubuntu VM and open the Terminal (`Ctrl + Alt + T`).
-    - Run the following command: `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/refactor/scripts/setup-mac-arm.sh | bash`
-    - The script will automatically configure the Rosetta bridge and create the `shift` environment.
-- **Interpreter Configuration:**
-    - If using an IDE (like PyCharm) inside the VM, the *Interpreter* path should be `/home/USERNAME/miniconda3/envs/shift/bin/python`.
-- **Validation:**
-    - Run `conda activate shift` to begin.
-    - You can verify the setup by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
-- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
-
-
-### macOS (Intel-based):
-
-- **System Requirement:** Ensure you are running **macOS Big Sur (11.0)** or newer.
-- **Virtualization Setup:**
-    - Download and install **UTM**. Use the [GitHub link on the official installation page](https://docs.getutm.app/installation/macos/#github) to download the installer for free. 
-    - *Note: You do not need to purchase the App Store version; the GitHub version is identical and free.*
-    - Download the **Ubuntu Desktop AMD64** ISO (this is the standard x86_64 version).
-    - When creating the VM, select **Virtualize**. Since your Mac is Intel-based, you do not need to enable Rosetta sharing.
-- **Environment Installation:**
-    - Start your Ubuntu VM and open the Terminal (`Ctrl + Alt + T`).
-    - Run the following command to install the environment:
+    - Open the OrbStack terminal for your Ubuntu x86_64 machine (double-click the machine name in OrbStack).
+    - Run the Linux installation command:
       `curl -sSL https://raw.githubusercontent.com/hanlonlab/shift-python/refs/heads/refactor/scripts/setup-linux-x86.sh | bash`
 - **Interpreter Configuration:**
-    - If using an IDE (like PyCharm) inside the VM, the *Interpreter* path should be `/home/USERNAME/miniconda3/envs/shift/bin/python`.
+    - Use the **SSH** or **OrbStack** interpreter setting in your IDE (PyCharm Pro or VS Code).
+    - Path: `/home/USERNAME/miniconda3/envs/shift/bin/python`
 - **Validation:**
     - Run `conda activate shift` to begin.
-    - You can verify the setup by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
-- You are good to go! (You may also get started with [Command Line](#get-started-with-command-line).)
+    - Verify by running `python3 -c "import shift; print('Success')"`. It should return **Success**.
 
+---
 
 ## Next Steps
 Once you have the `shift` environment activated, you can begin exploring the API.
