@@ -74,7 +74,7 @@
 - **Virtualization Setup:**
     - Download and install **OrbStack** (Free for personal use) from [orbstack.dev](https://orbstack.dev/).
     - **Create a New Machine:** 
-        1. Open OrbStack and go to the **Machines** tab.
+        1. Open OrbStack, click the **Linux** tab on the left, and go to the **Machines** tab.
         2. Click the **+** icon to create a new machine.
         3. Select **Ubuntu** as the image.
         4. **Important for Apple Silicon (M1/M2/M3/M4):** Change the **Architecture** setting to **x86_64**. This allows you to use the standard Linux setup script via Rosetta emulation.
@@ -92,7 +92,7 @@
 - **IDE Configuration (VS Code):**
     1. Install the **Remote - SSH** extension (by Microsoft) from the Marketplace.
     2. Click the **Green Remote Button** (bottom-left) > **Connect to Host**.
-    3. Select your OrbStack machine (usually listed as `orb` or `machine-name@orb`).
+    3. Select your OrbStack machine (usually listed as `orb`, `ubuntu-name@orb`, or `machine-name@orb`).
     4. **Important:** Once connected, go to the Extensions tab and click **Install in SSH: [Machine Name]** for the **Python** extension.
     5. Press `Cmd+Shift+P`, type **Python: Select Interpreter**, and select:
        `/home/USERNAME/miniconda3/envs/shift/bin/python`
