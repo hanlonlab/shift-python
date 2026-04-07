@@ -105,8 +105,8 @@ private:
     auto disconnect() -> bool;
     auto isConnected() -> bool;
 
-    void submitOrder(const shift::Order& order);
-    void submitCancellation(shift::Order order);
+    auto submitOrder(const shift::Order& order) -> bool;
+    auto submitCancellation(shift::Order order) -> bool;
 
     // portfolio methods
     auto getPortfolioSummary() -> shift::PortfolioSummary;

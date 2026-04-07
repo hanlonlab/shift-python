@@ -117,12 +117,12 @@ auto Trader::isConnected() -> bool
     return m_client->isConnected();
 }
 
-void Trader::submitOrder(const shift::Order& order)
+auto Trader::submitOrder(const shift::Order& order) -> bool
 {
     return m_client->submitOrder(order);
 }
 
-void Trader::submitCancellation(shift::Order order)
+auto Trader::submitCancellation(shift::Order order) -> bool
 {
     return m_client->submitCancellation(order);
 }
