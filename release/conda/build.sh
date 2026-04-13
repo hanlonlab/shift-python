@@ -20,15 +20,15 @@ function log.info()  { echo -e "${GRN}SHIFT: $1${CLR}"; }
 function log.warn()  { echo -e "${YEL}SHIFT: $1${CLR}"; }
 function log.err()   { echo -e "${RED}SHIFT: $1${CLR}"; }
 
-test -e "${HOME}/Miniconda/etc/profile.d/conda.sh"  && source "${HOME}/Miniconda/etc/profile.d/conda.sh"
-test -e "${HOME}/miniconda/etc/profile.d/conda.sh"  && source "${HOME}/miniconda/etc/profile.d/conda.sh"
-test -e "${HOME}/miniconda3/etc/profile.d/conda.sh" && source "${HOME}/miniconda3/etc/profile.d/conda.sh"
+test -e "${HOME}/Miniconda/etc/profile.d/conda.sh"  && source "${HOME}/Miniconda/etc/profile.d/conda.sh" && CONDA_HOME="${HOME}/Miniconda"
+test -e "${HOME}/miniconda/etc/profile.d/conda.sh"  && source "${HOME}/miniconda/etc/profile.d/conda.sh" && CONDA_HOME="${HOME}/miniconda"
+test -e "${HOME}/miniconda3/etc/profile.d/conda.sh" && source "${HOME}/miniconda3/etc/profile.d/conda.sh" && CONDA_HOME="${HOME}/miniconda3"
 
 log.info "Activating shift conda environment..."
 conda activate shift
 
 log.info "Installing conda-build (if not already installed)..."
-conda install -y -q conda-build
+conda install -n base -y -q conda-build
 
 log.info "Preparing environment variables..."
 case ${OSTYPE} in
@@ -39,13 +39,13 @@ log.plain "    USER (user name): ${USER}"
 log.plain "    bld_path (conda pkg build path): ${bld_path}"
 
 log.info "Cleaning previous builds and installs..."
-rm -rf ${bld_path}/quickfix* >/dev/null 2>&1
-rm -rf ${bld_path}/shift* >/dev/null 2>&1
+# rm -rf ${bld_path}/quickfix* 2>&1
+rm -rf ${bld_path}/shift* 2>&1
 conda build purge
-conda remove -y -q quickfix >/dev/null 2>&1
-conda remove -y -q shift-miscutils >/dev/null 2>&1
-conda remove -y -q shift-coreclient >/dev/null 2>&1
-conda remove -y -q shift-python >/dev/null 2>&1
+# conda remove -y -q quickfix 2>&1
+conda remove -y -q shift-miscutils 2>&1
+conda remove -y -q shift-coreclient 2>&1
+conda remove -y -q shift-python 2>&1
 
 sleep 2
 
@@ -53,13 +53,14 @@ function install() {
     log.info "Building $2..."
     if conda build $1 ; then
         log.info "Built $2."
+        cp $(conda build $1 --output) ./build
     else
         log.err "Failed to build $2."
         exit 1
     fi
 
     log.info "Installing $2..."
-    if conda install -y ${bld_path}/$1* ; then
+    if conda install -y ${CONDA_HOME}/${bld_path}/$1* ; then
         log.info "Installed $2."
     else
         log.err "Failed to install $2."
@@ -67,7 +68,7 @@ function install() {
     fi
 }
 
-install quickfix QuickFIX
+# install quickfix QuickFIX
 install shift-miscutils SHIFT-MiscUtils
 install shift-coreclient SHIFT-CoreClient
 install shift-python SHIFT-Python

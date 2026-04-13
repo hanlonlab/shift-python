@@ -1,10 +1,10 @@
 package:
   name: quickfix
-  version: "1.16.0"
+  version: "1.15.2"
 
 source:
   git_url: git@github.com:hanlonlab/quickfix.git
-  git_rev: shift-foundry
+  git_rev: old-code
 
 build:
   include_recipe: False
