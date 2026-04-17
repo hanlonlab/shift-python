@@ -27,7 +27,7 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/ma
 conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r    2>/dev/null || true
 
 echo -e "${GRN}Updating 'shift' environment packages...${NC}"
-conda remove -y -q quickfix shift-miscutils shift-coreclient shift-python 2>/dev/null || true
+conda remove -y quickfix shift-miscutils shift-coreclient shift-python
 
 mkdir -p temp_shift && cd temp_shift || exit
 
