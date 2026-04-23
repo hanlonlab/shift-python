@@ -51,6 +51,7 @@ class CMakeBuild(build_ext):
             "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=" + extdir,
             "-DPYTHON_EXECUTABLE=" + sys.executable,
             "-DCMAKE_INSTALL_PREFIX:PATH=" + self.prefix,
+            "-DCMAKE_PREFIX_PATH=" + self.prefix,
         ]
 
         cfg = "Debug" if self.debug else "Release"

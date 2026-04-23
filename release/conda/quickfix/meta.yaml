@@ -4,7 +4,7 @@ package:
 
 source:
   git_url: git@github.com:hanlonlab/quickfix.git
-  git_rev: old-code
+  git_rev: shift-foundry
 
 build:
   include_recipe: False

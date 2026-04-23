@@ -39,10 +39,9 @@ log.plain "    USER (user name): ${USER}"
 log.plain "    bld_path (conda pkg build path): ${bld_path}"
 
 log.info "Cleaning previous builds and installs..."
-# rm -rf ${bld_path}/quickfix* 2>&1
-rm -rf ${bld_path}/shift* 2>&1
+rm -rf ${CONDA_HOME}/${bld_path} 2>&1
 conda build purge
-# conda remove -y -q quickfix 2>&1
+conda remove -y -q quickfix 2>&1
 conda remove -y -q shift-miscutils 2>&1
 conda remove -y -q shift-coreclient 2>&1
 conda remove -y -q shift-python 2>&1
@@ -68,7 +67,7 @@ function install() {
     fi
 }
 
-# install quickfix QuickFIX
+install quickfix QuickFIX
 install shift-miscutils SHIFT-MiscUtils
 install shift-coreclient SHIFT-CoreClient
 install shift-python SHIFT-Python

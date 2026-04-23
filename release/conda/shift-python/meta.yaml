@@ -10,6 +10,8 @@ requirements:
   build:
     - python=3.11
     - shift-coreclient
+    - setuptools 
+    - pip
   run:
     - python=3.11
     - shift-coreclient
